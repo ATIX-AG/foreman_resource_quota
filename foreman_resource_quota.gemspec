@@ -1,20 +1,18 @@
-require File.expand_path('../lib/foreman_resource_quota/version', __FILE__)
+# frozen_string_literal: true
+
+require File.expand_path('lib/foreman_resource_quota/version', __dir__)
 
 Gem::Specification.new do |s|
   s.name        = 'foreman_resource_quota'
-  s.version     = ForemanPluginTemplate::VERSION
-  s.metadata    = { "is_foreman_plugin" => "true" }
+  s.version     = ForemanResourceQuota::VERSION
+  s.metadata    = { 'is_foreman_plugin' => 'true' }
   s.license     = 'GPL-3.0'
-  s.authors     = ['TODO: Your name']
-  s.email       = ['TODO: Your email']
-  s.homepage    = 'TODO'
-  s.summary     = 'TODO: Summary of ForemanPluginTemplate.'
+  s.authors     = ['Bastian Schmidt']
+  s.email       = ['schmidt@atix.de']
+  s.homepage    = 'https://github.com/ATIX-AG/foreman_resource_quota'
+  s.summary     = 'Foreman Plug-in for resource quota'
   # also update locale/gemspec.rb
-  s.description = 'TODO: Description of ForemanPluginTemplate.'
+  s.description = 'Foreman Plug-in to manage resource usage among users.'
 
   s.files = Dir['{app,config,db,lib,locale,webpack}/**/*'] + ['LICENSE', 'Rakefile', 'README.md', 'package.json']
-  s.test_files = Dir['test/**/*'] + Dir['webpack/**/__tests__/*.js']
-
-  s.add_development_dependency 'rubocop'
-  s.add_development_dependency 'rdoc'
 end

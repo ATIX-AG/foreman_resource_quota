@@ -1,25 +1,29 @@
 # Foreman Resource Quota
 
-When several users share a compute resource or infrastructure, there is a concern that some users could use more than its fair share of resources. Resource quotas are a tool for administrators to address this concern. They limit access to the shared resource in order to guarantee a fair collaboration.
-
-Talking about Foreman, multiple users or groups usually share a fixed number of resources (limitation of compute resources like RAM, disk storage, and CPU power). As of now, a user cannot be limited when allocating resources. They can create hosts with as many resources as they want. This could lead to over-usage or unequal balancing of resources under the users. In order to prevent this, we want to introduce a new plugin: Foreman Resource Quota.
-
-This plugin introduces the configuration of quotas. A quota limits specific resources and can be applied to a user or a user group. If a user belongs to a user group, the group’s quota is automatically applied to the user as well.
-
-A user is hindered from deploying new hosts, if the new host would exceed the corresponding quota limits. In case, a user belongs to multiple user group with quota, the user can determine which quota new hosts belong to. 
+Foreman plugin to allow resource management with resource quotas among users and usergroups.
 
 ## Installation
 
-See [How_to_Install_a_Plugin](http://projects.theforeman.org/projects/foreman/wiki/How_to_Install_a_Plugin)
-for how to install Foreman plugins
+_TODO_ Still under development: Will be updated as soon as the Ruby gem,  foreman-installer, or rpm is available.
+
+## Compatibility
+
+| Foreman Version | Plugin Version |
+| --------------- | -------------- |
+| 3.5             |    0.0.1       |
 
 ## Usage
 
-*Usage here*
+_TODO_ Still under development: Official documentation will be added soon.
 
-## TODO
+When several users share a compute resource or infrastructure, there is a concern that some users could use more than its fair share of resources. Resource quotas are a tool for administrators to address this concern. They limit access to the shared resource in order to guarantee a fair collaboration.
 
-*Todo list here*
+In the context of Foreman, multiple users or groups usually share a fixed number of resources (limitation of compute resources like RAM, disk space, and CPU cores). As of now, a user cannot be limited when allocating resources. They can create hosts with as many resources as they want. This could lead to over-usage or unequal balancing of resources under the users.
+
+This plugin introduces the configuration of resource quotas. A quota limits specific resources and can be applied to a user or a user group. If a user belongs to a user group, the group’s quota is automatically applied to the user as well. When deploying a new host, a user has to choose a resource quota that the host counts to.
+
+A user is hindered from deploying new hosts, if the new host would exceed the corresponding quota limits. In case, a user belongs to multiple user group with quota, the user can determine which quota new hosts belong to. 
+
 
 ## Contributing
 
@@ -27,7 +31,7 @@ Fork and send a Pull Request. Thanks!
 
 ## Copyright
 
-Copyright (c) *year* *your name*
+Copyright (c) 2023 ATIX AG - https://atix.de
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

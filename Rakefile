@@ -1,4 +1,6 @@
 #!/usr/bin/env rake
+# frozen_string_literal: true
+
 begin
   require 'bundler/setup'
 rescue LoadError
@@ -14,13 +16,13 @@ end
 
 RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title    = 'ForemanPluginTemplate'
+  rdoc.title    = 'ForemanResourceQuota'
   rdoc.options << '--line-numbers'
   rdoc.rdoc_files.include('README.rdoc')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
-APP_RAKEFILE = File.expand_path('../test/dummy/Rakefile', __FILE__)
+APP_RAKEFILE = File.expand_path('test/dummy/Rakefile', __dir__)
 
 Bundler::GemHelper.install_tasks
 
@@ -38,7 +40,7 @@ task default: :test
 begin
   require 'rubocop/rake_task'
   RuboCop::RakeTask.new
-rescue => _
+rescue StandardError => _e
   puts 'Rubocop not loaded.'
 end
 

@@ -1,0 +1,21 @@
+<%
+  if @resource_quota.new_record?
+    react_data = {
+      "isNewQuota": true,
+    }
+  else
+    react_data = {
+      "isNewQuota": false,
+      "initialProperties": {
+        "id": @resource_quota.id,
+        "name": @resource_quota.name,
+        "description": @resource_quota.description,
+        "cpu_cores": @resource_quota.cpu_cores,
+        "memory_mb": @resource_quota.memory_mb,
+        "disk_gb": @resource_quota.disk_gb,
+      },
+    }
+  end
+%>
+
+<%=  react_component('ResourceQuotaForm', react_data) %>

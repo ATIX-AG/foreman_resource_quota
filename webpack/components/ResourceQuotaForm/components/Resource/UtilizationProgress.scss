@@ -1,0 +1,10 @@
+.progress-disabled {
+  background-color: transparent;
+  .pf-c-progress .pf-c-progress__bar::before {
+    background-color: var(--pf-global--disabled-color--100);
+  }
+}
+
+.progress-disabled .pf-c-progress.pf-m-inside .pf-c-progress__indicator {
+  background-color: var(--pf-global--palette--black-500);
+}

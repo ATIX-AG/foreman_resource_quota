@@ -1,38 +1,31 @@
-require:
-  - rubocop-performance
-  - rubocop-rails
-  - rubocop-minitest
+inherit_gem:
+  theforeman-rubocop:
+    - strictest.yml
 
-AllCops:
-  TargetRubyVersion: 2.5
-  TargetRailsVersion: 6.0
-  Exclude:
-    - 'node_modules/**/*'
+inherit_mode:
+  merge:
+    - Exclude
 
 Layout/ArgumentAlignment:
   EnforcedStyle: with_fixed_indentation
   IndentationWidth: 2
 
-Layout/EmptyLineAfterGuardClause:
+Gemspec/RequiredRubyVersion:
   Enabled: false
 
-Layout/LineLength:
-  Enabled: 111 # TODO: discuss and set this
-
-Rails:
-  Enabled: true
-
-Style/Alias:
-  EnforcedStyle: prefer_alias_method
-
-# Don't enforce documentation
-Style/Documentation:
+Metrics/MethodLength:
   Enabled: false
 
-# Don't enforce frozen string literals
-Style/FrozenStringLiteralComment:
+Metrics/PerceivedComplexity:
   Enabled: false
 
-# Support both ruby19 and hash_rockets
-Style/HashSyntax:
+Naming/VariableNumber:
+  Exclude:
+    - 'test/**/*.rb'
+
+Rails/SkipsModelValidations:
+  Exclude:
+    - 'db/migrate/**/*'
+
+Style/FormatStringToken:
   Enabled: false

@@ -1,0 +1,45 @@
+<% resource_type ||= pagelet.opts[:resource_type] %>
+<% if resource_type == :user %>
+  <% resource = @user %>
+<% elsif resource_type == :usergroup %>
+  <% resource = @usergroup %>
+<% end %>
+
+<% if resource_type == :user %>
+  <%= checkbox_f form, :"resource_quota_is_optional", :label => _("Optional Assignment"),
+    :label_help => _("It is optional for a user to assign a quota when creating new hosts") %>
+<% end %>
+
+<%= multiple_checkboxes(form, :resource_quotas, resource, ForemanResourceQuota::ResourceQuota, :label => _("Resource Quotas")) %>
+
+<% if resource_type == :user %>
+  <% usergroups = @user.cached_usergroups.includes(:resource_quotas).distinct %>
+  <% if usergroups.any? %>
+    <div class="form-group" id="inherited-quotas">
+      <label class="col-md-2 control-label" for="quotas"><%= _("Quotas from user groups") %></label>
+      <div class="col-md-5">
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="usergroupsDropdownMenuBtn" data-toggle="dropdown">
+            <%= usergroups.first %>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" quota="menu" aria-labelledby="usergroupsDropdownMenuBtn">
+            <% usergroups.each do |usergroup| %>
+                <li quota="presentation"><a quota="menuitem" tabindex="-1" data-id="<%=usergroup.id %>"><%= usergroup %></a></li>
+            <% end %>
+          </ul>
+        </div>
+        <ul class="list-group" id='quotas_tab'>
+          <% usergroups.each do |usergroup|  %>
+            <% unless usergroup.resource_quotas.map(&:name).any? %>
+                <li data-id="<%= usergroup.id %>" class="list-group-item"><%= _('This group has no quotas') %></li>
+            <%end %>
+            <% usergroup.resource_quotas.map(&:name).each do |quota_name| %>
+              <li data-id="<%= usergroup.id %>" class="list-group-item"><%= quota_name %></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end  %>
+<% end %>

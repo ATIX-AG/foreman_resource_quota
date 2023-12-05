@@ -1,0 +1,12 @@
+<% title(_('Edit Resource Quota %s') % @resource_quota) %>
+<%= breadcrumbs(resource_url: api_resource_quotas_path,
+                switcher_item_url: edit_resource_quota_path(':id')) %>
+
+<% content_for(:javascripts) do %>
+  <%= webpacked_plugins_js_for :foreman_resource_quota %>
+<% end %>
+<% content_for(:stylesheets) do %>
+  <%= webpacked_plugins_css_for :foreman_resource_quota %>
+<% end %>
+
+<%= render :partial => 'form' %>

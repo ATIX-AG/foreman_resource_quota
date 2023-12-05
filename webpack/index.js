@@ -1,8 +1,23 @@
 import componentRegistry from 'foremanReact/components/componentRegistry';
-import ExtendedEmptyState from './src/Components/EmptyState/ExtendedEmptyState';
+import ResourceQuotaEmptyState from './components/ResourceQuotaEmptyState';
+import ResourceQuotaForm from './components/ResourceQuotaForm';
+import CreateResourceQuotaModal from './components/CreateResourceQuotaModal';
+import UpdateResourceQuotaModal from './components/UpdateResourceQuotaModal';
 
-// register components for erb mounting
+/* register React components for erb mounting */
 componentRegistry.register({
-    name: 'ExtendedEmptyState',
-    type: ExtendedEmptyState,
+  name: 'ResourceQuotaEmptyState',
+  type: ResourceQuotaEmptyState,
+});
+componentRegistry.register({
+  name: 'ResourceQuotaForm',
+  type: ResourceQuotaForm,
+});
+componentRegistry.register({
+  name: 'UpdateResourceQuotaModal',
+  type: UpdateResourceQuotaModal,
+});
+componentRegistry.register({
+  name: 'CreateResourceQuotaModal',
+  type: CreateResourceQuotaModal,
 });

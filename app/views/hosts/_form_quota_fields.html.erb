@@ -1,0 +1,4 @@
+<%
+  user_quotas = User.current&.admin? ? ForemanResourceQuota::ResourceQuota.all : User.current.resource_quotas
+%>
+<%= resource_quota_select form, user_quotas %>

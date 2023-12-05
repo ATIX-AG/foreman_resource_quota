@@ -1,0 +1,13 @@
+//@import '~@theforeman/vendor/scss/variables';
+
+.pf-c-card__body:first-child {
+  padding-top: 1rem;
+}
+
+.pf-c-form__label {
+    font-size: var(--pf-global--FontSize--sm);
+}
+
+.pf-c-form__group-label-help {
+  font-size: var(--pf-global--FontSize--sm);
+}
