@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'test_plugin_helper'
-require 'byebug'
 
 module ForemanResourceQuota
   module Api
