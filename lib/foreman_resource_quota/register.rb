@@ -10,8 +10,9 @@ Foreman::Plugin.register :foreman_resource_quota do
   # Add permissions
   security_block :foreman_resource_quota do
     permission 'view_foreman_resource_quota/resource_quotas',
-      { 'foreman_resource_quota/resource_quotas': %i[index auto_complete_search],
-        'foreman_resource_quota/api/v2/resource_quotas': %i[index show utilization hosts users usergroups],
+      { 'foreman_resource_quota/resource_quotas': %i[index welcome auto_complete_search],
+        'foreman_resource_quota/api/v2/resource_quotas': %i[index show utilization hosts users usergroups
+                                                            auto_complete_search],
         'foreman_resource_quota/api/v2/resource_quotas/:resource_quota_id/': %i[utilization hosts users usergroups] },
       resource_type: 'ForemanResourceQuota::ResourceQuota'
     permission 'create_foreman_resource_quota/resource_quotas',
