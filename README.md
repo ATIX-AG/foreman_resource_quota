@@ -1,3 +1,6 @@
+![Ruby Lint & Tests](https://github.com/ATIX-AG/foreman_resource_quota/actions/workflows/ruby_tests.yml/badge.svg)
+![Javascript Lint & Tests](https://github.com/ATIX-AG/foreman_resource_quota/actions/workflows/js_tests.yml/badge.svg)
+
 # Foreman Resource Quota
 
 Foreman plugin to allow resource management with resource quotas among users and usergroups.
