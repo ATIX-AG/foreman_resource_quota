@@ -34,7 +34,7 @@
     "@theforeman/eslint-plugin-foreman": "6.0.0",
     "@theforeman/find-foreman": "^4.8.0",
     "@theforeman/stories": "^12.2.3",
-    "@theforeman/test": "^8.0.0",
+    "@theforeman/test": "^12.2.3",
     "@theforeman/vendor-dev": "^12.2.3",
     "babel-eslint": "^10.0.3",
     "eslint": "^6.7.2",
