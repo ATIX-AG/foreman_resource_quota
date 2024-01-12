@@ -49,24 +49,22 @@ const areReactElementsEqual = (element1, element2) => {
 
 /**
  * Recursively copies values from the source hash (`src`) to the destination hash (`dest`).
+ * Only keys that are a member of dest will copied from src.
  *
  * @param {Object} dest - The destination hash to copy values into.
  * @param {Object} src - The source hash from which values are copied.
  * @returns {void} - The function modifies the destination hash in place.
  */
 function deepCopy(dest, src) {
-  // eslint-disable-next-line no-unused-vars
-  for (const key in dest) {
-    if (dest.hasOwnProperty(key)) {
-      if (src.hasOwnProperty(key)) {
-        if (typeof dest[key] === 'object' && typeof src[key] === 'object') {
-          deepCopy(dest[key], src[key]);
-        } else if (dest[key] !== src[key]) {
-          dest[key] = src[key];
-        }
+  Object.keys(dest).forEach(key => {
+    if (src.hasOwnProperty(key)) {
+      if (typeof dest[key] === 'object' && typeof src[key] === 'object') {
+        deepCopy(dest[key], src[key]);
+      } else if (dest[key] !== src[key]) {
+        dest[key] = src[key];
       }
     }
-  }
+  });
 }
 
 /**
