@@ -56,15 +56,17 @@ const areReactElementsEqual = (element1, element2) => {
  * @returns {void} - The function modifies the destination hash in place.
  */
 function deepCopy(dest, src) {
-  Object.keys(dest).forEach(key => {
-    if (src.hasOwnProperty(key)) {
-      if (typeof dest[key] === 'object' && typeof src[key] === 'object') {
-        deepCopy(dest[key], src[key]);
-      } else if (dest[key] !== src[key]) {
-        dest[key] = src[key];
+  if (dest) {
+    Object.keys(dest).forEach(key => {
+      if (src.hasOwnProperty(key)) {
+        if (typeof dest[key] === 'object' && typeof src[key] === 'object') {
+          deepCopy(dest[key], src[key]);
+        } else if (dest[key] !== src[key]) {
+          dest[key] = src[key];
+        }
       }
-    }
-  });
+    });
+  }
 }
 
 /**

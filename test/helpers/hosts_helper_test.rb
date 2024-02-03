@@ -7,22 +7,28 @@ module ForemanResourceQuota
     include ::FormHelper
     include ForemanResourceQuota::HostsHelper
 
-    test 'host edit page form' do
-      @host = FactoryBot.create :host
-      quotas = []
-      quotas << (FactoryBot.create :resource_quota)
-      quotas << (FactoryBot.create :resource_quota)
-      quotas << (FactoryBot.create :resource_quota)
-      as_admin { quotas.each(&:save!) }
-
-      form = ''
-      as_admin do
-        form = form_for(@host) do |f|
-          resource_quota_select(f, ResourceQuota.all)
-        end
+    context 'optional quota assignment at host creation' do
+      def setup
+        Setting[:resource_quota_optional_assignment] = true
       end
-      quotas.each do |quota|
-        assert form[quota.name]
+
+      test 'host edit page form' do
+        @host = FactoryBot.create :host
+        quotas = []
+        quotas << (FactoryBot.create :resource_quota)
+        quotas << (FactoryBot.create :resource_quota)
+        quotas << (FactoryBot.create :resource_quota)
+        as_admin { quotas.each(&:save!) }
+
+        form = ''
+        as_admin do
+          form = form_for(@host) do |f|
+            resource_quota_select(f, ResourceQuota.all)
+          end
+        end
+        quotas.each do |quota|
+          assert form[quota.name]
+        end
       end
     end
   end

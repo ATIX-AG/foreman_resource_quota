@@ -38,7 +38,7 @@ module ForemanResourceQuota
       usergroups.size
     end
 
-    def determine_utilization(additional_hosts: [])
+    def determine_utilization(additional_hosts = [])
       quota_hosts = (hosts | (additional_hosts))
       self.utilization, self.missing_hosts = call_utilization_helper(quota_hosts)
 
@@ -52,13 +52,6 @@ module ForemanResourceQuota
       name
     end
 
-    private
-
-    # Wrap into a function for better testing
-    def call_utilization_helper(quota_hosts)
-      utilization_from_resource_origins(active_resources, quota_hosts)
-    end
-
     def active_resources
       resources = []
       %i[cpu_cores memory_mb disk_gb].each do |res|
@@ -67,11 +60,18 @@ module ForemanResourceQuota
       resources
     end
 
+    private
+
+    # Wrap into a function for easier testing
+    def call_utilization_helper(quota_hosts)
+      utilization_from_resource_origins(active_resources, quota_hosts)
+    end
+
     def print_warning(missing_hosts, hosts)
-      warn_text = "Could not determines resources for #{utilization_hash.missing_hosts.size} hosts:"
+      warn_text = "Could not determines resources for #{missing_hosts.size} hosts:"
       missing_hosts.each do |host_id, missing_resources|
         missing_host = hosts.find { |obj| obj.id == host_id }
-        warn_text << "  '#{missing_host.name}': '#{missing_resources}'\n"
+        warn_text << "  '#{missing_host.name}': '#{missing_resources}'\n" unless missing_host.nil?
       end
       Rails.logger.warn warn_text
     end

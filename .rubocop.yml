@@ -24,9 +24,14 @@ Naming/VariableNumber:
   Exclude:
     - 'test/**/*.rb'
 
+Naming/FileName:
+  Exclude:
+    - 'db/seeds.d/**/*'
+
 Rails/SkipsModelValidations:
   Exclude:
     - 'db/migrate/**/*'
+    - 'db/seeds.d/**/*'
 
 Style/FormatStringToken:
   Enabled: false
