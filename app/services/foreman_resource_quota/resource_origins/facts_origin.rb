@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ForemanResourceQuota
-  module ResourceOrigin
+  module ResourceOrigins
     class FactsOrigin < ResourceOrigin
       FACTS_KEYS_CPU_CORES = [
         'ansible_processor_cores',
@@ -21,7 +21,7 @@ module ForemanResourceQuota
         /^facter_disks::(\w+)::size_bytes$/,
       ].freeze
 
-      def host_eager_name
+      def host_attribute_eager_name
         :fact_values
       end
 
@@ -39,7 +39,7 @@ module ForemanResourceQuota
 
       def extract_memory_mb(param)
         common_keys = param.keys & FACTS_KEYS_MEMORY_B
-        return (param[common_keys.first].to_i / FACTOR_B_TO_MB).to_i if common_keys.any?
+        return (param[common_keys.first].to_i / ResourceQuotaHelper::FACTOR_B_TO_MB).to_i if common_keys.any?
         nil
       rescue StandardError
         nil
@@ -61,7 +61,7 @@ module ForemanResourceQuota
       end
 
       def sum_disk_space(facts, keys)
-        keys.map { |key| facts[key].to_i }.sum / FACTOR_B_TO_GB unless keys.empty?
+        keys.map { |key| facts[key].to_i }.sum / ResourceQuotaHelper::FACTOR_B_TO_GB unless keys.empty?
       end
     end
   end

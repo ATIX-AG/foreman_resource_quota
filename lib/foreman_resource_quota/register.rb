@@ -65,14 +65,14 @@ Foreman::Plugin.register :foreman_resource_quota do
 
   # add UI user/usergroup/hosts extension
   extend_page 'users/_form' do |cx|
-    cx.add_pagelet :user_tabs,
+    cx.add_pagelet :main_tabs,
       id: :quota_user_tab,
       name: N_('Resource Quota'),
       resource_type: :user,
       partial: 'users/form_quota_tab'
   end
   extend_page 'usergroups/_form' do |cx|
-    cx.add_pagelet :usergroup_tabs,
+    cx.add_pagelet :main_tabs,
       id: :quota_usergroup_tab,
       name: N_('Resource Quota'),
       resource_type: :usergroup,
@@ -88,12 +88,12 @@ Foreman::Plugin.register :foreman_resource_quota do
   # Add global Foreman settings
   settings do
     category :provisioning do
-      setting 'resource_quota_global_optional_user_assignment',
+      setting 'resource_quota_optional_assignment',
         type: :boolean,
-        default: true,
-        full_name: N_('Global Resource Quota optional assignment'),
-        description: N_('Overwrite user-specific configurations and make the Resource Quota assignment
-                        during host deployment optional for everyone.')
+        default: false,
+        full_name: N_('Resource Quota optional assignment'),
+        description: N_('Make the assignment of a Resource quota, during the host creation process, optional for
+                        everyone. If this is true, user-specific "optional assignment" configurations are neglected.')
       setting 'resource_quota_global_no_action',
         type: :boolean,
         default: true,

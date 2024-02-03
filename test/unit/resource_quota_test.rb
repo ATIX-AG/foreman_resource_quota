@@ -4,6 +4,6 @@ require 'test_plugin_helper'
 
 module ForemanResourceQuota
   class ResourceQuotaTest < ActiveSupport::TestCase
-    # TODO: Add tests here
+    # TODO: Remove test/unit folder (https://guides.rubyonrails.org/testing.html#rails-sets-up-for-testing-from-the-word-go)
   end
 end
