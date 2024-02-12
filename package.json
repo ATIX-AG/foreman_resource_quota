@@ -32,7 +32,7 @@
     "@theforeman/eslint-plugin-foreman": "12.2.3",
     "@theforeman/find-foreman": "^12.2.3",
     "@theforeman/stories": "^12.2.3",
-    "@theforeman/test": "^12.2.3",
+    "@theforeman/test": "^13.0.0",
     "@theforeman/vendor-dev": "^12.2.3",
     "babel-eslint": "^10.0.3",
     "eslint": "^6.7.2",
