@@ -33,7 +33,7 @@
     "@theforeman/find-foreman": "^13.0.0",
     "@theforeman/stories": "^12.2.3",
     "@theforeman/test": "^13.0.0",
-    "@theforeman/vendor-dev": "^12.2.3",
+    "@theforeman/vendor-dev": "^13.0.0",
     "babel-eslint": "^10.0.3",
     "eslint": "^6.7.2",
     "prettier": "^1.19.1",
