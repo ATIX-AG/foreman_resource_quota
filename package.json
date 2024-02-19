@@ -29,7 +29,7 @@
     "@sheerun/mutationobserver-shim": "^0.3.3",
     "@testing-library/react": "^10.4.9",
     "@theforeman/builder": "^10.1.3",
-    "@theforeman/eslint-plugin-foreman": "12.2.3",
+    "@theforeman/eslint-plugin-foreman": "13.0.0",
     "@theforeman/find-foreman": "^13.0.0",
     "@theforeman/stories": "^12.2.3",
     "@theforeman/test": "^13.0.0",
