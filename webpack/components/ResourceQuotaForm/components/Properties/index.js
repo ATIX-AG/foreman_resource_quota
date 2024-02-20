@@ -22,7 +22,7 @@ import ClusterIcon from '@patternfly/react-icons/dist/esm/icons/cluster-icon';
 import SyncAltIcon from '@patternfly/react-icons/dist/esm/icons/sync-alt-icon';
 
 import { translate as __ } from 'foremanReact/common/I18n';
-import { addToast } from 'foremanReact/components/ToastsList';
+import dispatchAPICallbackToast from '../../../../api_helper';
 
 import './Properties.scss';
 import StatusPropertiesLabel from './StatusPropertiesLabel';
@@ -58,23 +58,13 @@ const Properties = ({
 
   const callbackFetch = (success, response) => {
     setIsFetchLoading(false);
-    if (success) {
-      dispatch(
-        addToast({
-          type: 'success',
-          message: __(`Sucessfully fetched latest data.`),
-        })
-      );
-    } else {
-      dispatch(
-        addToast({
-          type: 'warning',
-          message: __(
-            `An error occurred fetching quota information: ${response.response.data.error.full_messages}`
-          ),
-        })
-      );
-    }
+    dispatchAPICallbackToast(
+      dispatch,
+      success,
+      response,
+      `Sucessfully fetched latest data.`,
+      `An error occurred fetching quota information.`
+    );
   };
 
   return (

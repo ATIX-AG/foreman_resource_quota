@@ -4,7 +4,8 @@ import { useDispatch } from 'react-redux';
 import { Button, Flex, FlexItem } from '@patternfly/react-core';
 
 import { translate as __ } from 'foremanReact/common/I18n';
-import { addToast } from 'foremanReact/components/ToastsList';
+
+import dispatchAPICallbackToast from '../../../api_helper';
 
 import {
   RESOURCE_IDENTIFIER_ID,
@@ -26,23 +27,13 @@ const Submit = ({ isValid, onCreate, onSubmit }) => {
 
   const onCreateCallback = (success, response) => {
     setIsSubmitLoading(false);
-    if (success) {
-      dispatch(
-        addToast({
-          type: 'success',
-          message: __(`Sucessfully created new Resource Quota`),
-        })
-      );
-    } else {
-      dispatch(
-        addToast({
-          type: 'danger',
-          message: __(
-            `An error occurred while creating new Resource Quota: ${response.response.data.error.full_messages}`
-          ),
-        })
-      );
-    }
+    dispatchAPICallbackToast(
+      dispatch,
+      success,
+      response,
+      `Sucessfully created new Resource Quota`,
+      `An error occurred while creating new Resource Quota.`
+    );
     if (onSubmit) onSubmit(success);
   };
 

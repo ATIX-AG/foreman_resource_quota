@@ -17,7 +17,6 @@ import {
   FormGroup,
 } from '@patternfly/react-core';
 
-import { addToast } from 'foremanReact/components/ToastsList';
 import LabelIcon from 'foremanReact/components/common/LabelIcon';
 import { translate as __ } from 'foremanReact/common/I18n';
 
@@ -26,6 +25,7 @@ import UnitInputField from './UnitInputField';
 import UtilizationProgress from './UtilizationProgress';
 
 import { resourceAttributesByIdentifier } from '../../ResourceQuotaFormConstants';
+import dispatchAPICallbackToast from '../../../../api_helper';
 
 // TODO: Visualize maximum resource (tooltip?)
 // TODO: Add error message if given quota limit exceeds present quota utilization (consumed resources)
@@ -70,23 +70,13 @@ const Resource = ({
       setInputValue(response.data[resourceIdentifier]);
       setIsEnabled(response.data[resourceIdentifier] !== null);
     }
-    if (success) {
-      dispatch(
-        addToast({
-          type: 'success',
-          message: __(`Sucessfully applied ${resourceTitle}`),
-        })
-      );
-    } else {
-      dispatch(
-        addToast({
-          type: 'warning',
-          message: __(
-            `An error occurred appyling ${resourceTitle}: ${response.response.data.error.full_messages}`
-          ),
-        })
-      );
-    }
+    dispatchAPICallbackToast(
+      dispatch,
+      success,
+      response,
+      `Sucessfully applied ${resourceTitle}.`,
+      `An error occurred appyling ${resourceTitle}.`
+    );
   };
 
   /* apply user input changes to state variables */
