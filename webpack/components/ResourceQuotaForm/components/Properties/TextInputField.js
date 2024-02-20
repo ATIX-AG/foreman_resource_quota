@@ -3,10 +3,10 @@ import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { translate as __ } from 'foremanReact/common/I18n';
-import { addToast } from 'foremanReact/components/ToastsList';
 
 import ActionableDetail from '../../../../lib/ActionableDetail';
 import StaticDetail from './StaticDetail';
+import dispatchAPICallbackToast from '../../../../api_helper';
 
 const TextInputField = ({
   initialValue,
@@ -36,23 +36,13 @@ const TextInputField = ({
 
   const callback = (success, response) => {
     setIsLoading(false);
-    if (success) {
-      dispatch(
-        addToast({
-          type: 'success',
-          message: __(`Sucessfully applied ${label}`),
-        })
-      );
-    } else {
-      dispatch(
-        addToast({
-          type: 'warning',
-          message: __(
-            `An error occurred appyling ${label}: ${response.response.data.error.full_messages}`
-          ),
-        })
-      );
-    }
+    dispatchAPICallbackToast(
+      dispatch,
+      success,
+      response,
+      `Sucessfully applied ${label}.`,
+      `An error occurred appyling ${label}.`
+    );
   };
 
   /* Guard setting of isInputValid to prevent re-render reace condition */
