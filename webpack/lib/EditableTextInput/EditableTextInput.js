@@ -58,16 +58,14 @@ const EditableTextInput = ({
       setCurrentAttribute(attribute);
   };
 
-  const onSubmit = async event => {
-    if (!event.shiftKey) {
-      setEditing(false);
-      if (isPassword) {
-        if (inputValue?.length > 0) {
-          setPasswordPlaceholder(PASSWORD_MASK);
-        }
+  const onSubmit = async () => {
+    setEditing(false);
+    if (isPassword) {
+      if (inputValue?.length > 0) {
+        setPasswordPlaceholder(PASSWORD_MASK);
       }
-      await onEdit(inputValue, attribute);
     }
+    await onEdit(inputValue, attribute);
   };
 
   const onClear = () => {

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "tfm-lint --plugin -d /webpack",
-    "test": "tfm-test --config jest.config.js",
+    "test": "tfm-test --plugin --config jest.config.js",
     "test:watch": "tfm-test --plugin --watchAll",
     "test:current": "tfm-test --plugin --watch",
     "publish-coverage": "tfm-publish-coverage",
@@ -27,6 +27,7 @@
   "devDependencies": {
     "@babel/core": "^7.7.0",
     "@sheerun/mutationobserver-shim": "^0.3.3",
+    "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^10.4.9",
     "@theforeman/builder": "^10.1.3",
     "@theforeman/eslint-plugin-foreman": "13.0.0",
