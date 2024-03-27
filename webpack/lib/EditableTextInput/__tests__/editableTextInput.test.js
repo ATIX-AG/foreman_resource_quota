@@ -5,7 +5,7 @@ import {
   render,
   patientlyWaitFor,
   fireEvent,
-} from './react-testing-lib-wrapper';
+} from '../../react-testing-lib-wrapper';
 import EditableTextInput from '../EditableTextInput';
 
 const actualValue = 'burger';
@@ -38,15 +38,14 @@ test('Passed function is called after editing and hitting enter', async () => {
   );
 
   getByLabelText(`edit ${attribute}`).click();
-  const textInputLabel = `${attribute} text input`;
-  fireEvent.change(getByLabelText(textInputLabel), {
+  const textInputLabel = getByLabelText(`${attribute} text input`);
+  fireEvent.change(textInputLabel, {
     target: { value: actualValue },
   });
-  fireEvent.keyUp(getByLabelText(textInputLabel), {
+  fireEvent.keyUp(textInputLabel, {
     key: 'Enter',
     code: 'Enter',
   });
-
   await patientlyWaitFor(() => expect(mockEdit.mock.calls).toHaveLength(1));
   expect(head(mockEdit.mock.calls)).toContain(actualValue); // first arg
 });
