@@ -14,7 +14,7 @@ module ForemanResourceQuota
         end
 
         before_action :find_resource, only: %i[show update destroy]
-        before_action :custom_find_resource, only: %i[utilization hosts users usergroups]
+        before_action :custom_find_resource, only: %i[utilization missing_hosts hosts users usergroups]
 
         api :GET, '/resource_quotas', N_('List all resource quotas')
         param_group :search_and_pagination, ::Api::V2::BaseController
@@ -31,6 +31,14 @@ module ForemanResourceQuota
         api :GET, '/resource_quotas/:id/utilization', N_('Show used resources of assigned hosts')
         param :id, :identifier, required: true
         def utilization
+          @resource_quota.determine_utilization
+          process_response @resource_quota
+        end
+
+        api :GET, '/resource_quotas/:id/missing_hosts',
+          N_('Show resources could not be determined when calculating utilization')
+        param :id, :identifier, required: true
+        def missing_hosts
           @resource_quota.determine_utilization
           process_response @resource_quota
         end

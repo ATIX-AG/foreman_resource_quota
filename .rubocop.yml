@@ -14,6 +14,10 @@ Layout/ArgumentAlignment:
 Gemspec/RequiredRubyVersion:
   Enabled: false
 
+Metrics/ClassLength:
+  Exclude:
+    - 'app/models/foreman_resource_quota/resource_quota.rb'
+
 Metrics/MethodLength:
   Enabled: false
 
