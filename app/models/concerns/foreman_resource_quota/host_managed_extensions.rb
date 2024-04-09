@@ -10,6 +10,8 @@ module ForemanResourceQuota
       validate :check_resource_quota_capacity
 
       belongs_to :resource_quota, class_name: '::ForemanResourceQuota::ResourceQuota'
+      has_one :resource_quota_missing_resources, class_name: '::ForemanResourceQuota::ResourceQuotaMissingHost',
+        inverse_of: :missing_host, foreign_key: :missing_host_id, dependent: :destroy
       scoped_search relation: :resource_quota, on: :name, complete_value: true, rename: :resource_quota
     end
 

@@ -29,3 +29,21 @@ module ActionController
     end
   end
 end
+
+def stub_quota_utilization(return_utilization, return_missing_hosts)
+  ForemanResourceQuota::ResourceQuota.any_instance.stubs(:call_utilization_helper)
+                                     .returns([return_utilization, return_missing_hosts])
+  ForemanResourceQuota::ResourceQuota.any_instance.stubs(:missing_hosts)
+                                     .returns(return_missing_hosts)
+  ForemanResourceQuota::ResourceQuota.any_instance.stubs(:missing_hosts=)
+                                     .returns
+  ForemanResourceQuota::ResourceQuota.any_instance.stubs(:utilization)
+                                     .returns(return_utilization)
+  ForemanResourceQuota::ResourceQuota.any_instance.stubs(:utilization=)
+                                     .returns
+end
+
+def stub_host_utilization(return_utilization, return_missing_hosts)
+  Host::Managed.any_instance.stubs(:call_utilization_helper)
+               .returns([return_utilization, return_missing_hosts])
+end

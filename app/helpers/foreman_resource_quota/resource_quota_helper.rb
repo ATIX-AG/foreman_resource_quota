@@ -74,12 +74,8 @@ module ForemanResourceQuota
     # { <host name>: [<list of to be determined resources>] }
     #     for example:
     #     {
-    #       "host_a": {
-    #         [ :cpu_cores, :disk_gb ]
-    #       },
-    #       "host_b": {
-    #         [ :cpu_cores, :disk_gb ]
-    #       },
+    #       "host_a": [ :cpu_cores, :disk_gb ],
+    #       "host_b": [ :cpu_cores, :disk_gb ],
     # Parameters:
     #   - hosts: Array of host objects.
     #   - resources: Array of resources (as symbol, e.g. [:cpu_cores, :disk_gb]).

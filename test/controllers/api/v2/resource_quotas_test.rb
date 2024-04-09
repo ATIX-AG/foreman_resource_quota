@@ -13,12 +13,6 @@ module ForemanResourceQuota
           as_admin { @quota.save! }
         end
 
-        def add_quota
-          quota = FactoryBot.create :resource_quota
-          as_admin { @quota.save! }
-          quota
-        end
-
         test 'should get index with quotas' do
           get :index, session: set_session_user
           assert_response :success
@@ -125,6 +119,30 @@ module ForemanResourceQuota
           put :destroy, params: { id: invalid_id }, session: set_session_user
           assert_response :not_found
           assert_equal nof_quota_before, ResourceQuota.all.size
+        end
+
+        test 'should show utilization' do
+          exp_utilization = { cpu_cores: 10, memory_mb: 20 }
+          stub_quota_utilization(exp_utilization, {})
+          get :utilization, params: { resource_quota_id: @quota.id }, session: set_session_user
+          assert_response :success
+          show_response = ActiveSupport::JSON.decode(@response.body)
+          assert_not show_response.empty?
+          assert_equal @quota.id, show_response['id']
+          assert_equal exp_utilization, show_response['utilization'].transform_keys(&:to_sym)
+        end
+
+        test 'should show missing_hosts' do
+          exp_missing_hosts = { 'some_host' => %i[cpu_cores memory_mb] }
+          stub_quota_utilization({}, exp_missing_hosts)
+          get :missing_hosts, params: { resource_quota_id: @quota.id }, session: set_session_user
+          assert_response :success
+          show_response = ActiveSupport::JSON.decode(@response.body)
+          assert_not show_response.empty?
+          assert_equal @quota.id, show_response['id']
+          # JSON.decode makes everything strings -> convert 'some_host' value to symbols:
+          assert_equal(exp_missing_hosts,
+            show_response['missing_hosts'].transform_values { |value| value.map(&:to_sym) })
         end
       end
     end

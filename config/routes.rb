@@ -31,6 +31,7 @@ Rails.application.routes.draw do
           end
           constraints(id: %r{[^/]+}) do
             get 'utilization'
+            get 'missing_hosts'
             get 'hosts'
             get 'users'
             get 'usergroups'

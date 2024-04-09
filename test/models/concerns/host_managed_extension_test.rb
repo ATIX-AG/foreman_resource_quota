@@ -47,20 +47,9 @@ module ForemanResourceQuota
         User.current.resource_quota_is_optional = false
       end
 
-      def stub_quota_utilization(return_utilization, return_missing_hosts)
-        ResourceQuota.any_instance.stubs(:call_utilization_helper)
-                     .returns([return_utilization, return_missing_hosts])
-      end
-
-      def stub_host_utilization(return_utilization, return_missing_hosts)
-        Host::Managed.any_instance.stubs(:call_utilization_helper)
-                     .returns([return_utilization, return_missing_hosts])
-      end
-
       test 'should fail at determine utilization' do
         stub_quota_utilization({}, { 'my.missing.host': [:cpu_cores] }) # fail on quota utilization
         stub_host_utilization({ cpu_cores: 5 }, {}) # pass host utilization
-
         host = FactoryBot.create(:host, :with_resource_quota)
         host.resource_quota.update!(cpu_cores: 10)
 
@@ -168,9 +157,10 @@ module ForemanResourceQuota
 
         assert host.save
         # TODO: Test must be adapted, when host resources are added to resource quota
-        # assert_equal nil, host.resource_quota.utilization[:cpu_cores]
         # assert_equal 10 * 1024, host.resource_quota.utilization[:memory_mb]
-        # assert_equal nil, host.resource_quota.utilization[:disk_gb]
+        assert_nil host.resource_quota.utilization[:cpu_cores]
+        assert_equal 0, host.resource_quota.utilization[:memory_mb]
+        assert_nil host.resource_quota.utilization[:disk_gb]
       end
 
       test 'should validate multi limit capacity (host only)' do
@@ -187,6 +177,9 @@ module ForemanResourceQuota
         # assert_equal 5, host.resource_quota.utilization[:cpu_cores]
         # assert_equal 10 * 1024, host.resource_quota.utilization[:memory_mb]
         # assert_equal 0, host.resource_quota.utilization[:disk_gb]
+        assert_equal 0, host.resource_quota.utilization[:cpu_cores]
+        assert_equal 0, host.resource_quota.utilization[:memory_mb]
+        assert_equal 0, host.resource_quota.utilization[:disk_gb]
       end
 
       test 'should validate multi limit capacity (with quota utilization)' do
@@ -203,6 +196,9 @@ module ForemanResourceQuota
         # assert_equal 7, host.resource_quota.utilization[:cpu_cores]
         # assert_equal 9 * 1024, host.resource_quota.utilization[:memory_mb]
         # assert_equal 30, host.resource_quota.utilization[:disk_gb]
+        assert_equal 5, host.resource_quota.utilization[:cpu_cores]
+        assert_equal 5 * 1024, host.resource_quota.utilization[:memory_mb]
+        assert_equal 10, host.resource_quota.utilization[:disk_gb]
       end
     end
   end
