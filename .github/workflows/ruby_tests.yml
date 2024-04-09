@@ -1,6 +1,7 @@
 ---
 name: Ruby Tests
-"on":
+# yamllint disable-line rule:truthy
+on:
   push:
     branches:
       - main
