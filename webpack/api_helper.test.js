@@ -21,13 +21,13 @@ describe('dispatchAPICallbackToast', () => {
     const successMessage = 'Success message';
     const errorMessage = 'Error message';
 
-    dispatchAPICallbackToast(
-      dispatch,
+    const dispatcher = dispatchAPICallbackToast(
       isSuccess,
       response,
       successMessage,
       errorMessage
     );
+    dispatcher(dispatch);
 
     expect(dispatch).toHaveBeenCalledTimes(1);
     expect(dispatch).toHaveBeenCalledWith({
@@ -50,13 +50,13 @@ describe('dispatchAPICallbackToast', () => {
     const successMessage = 'Success message';
     const errorMessage = 'Error message';
 
-    dispatchAPICallbackToast(
-      dispatch,
+    const dispatcher = dispatchAPICallbackToast(
       isSuccess,
       response,
       successMessage,
       errorMessage
     );
+    dispatcher(dispatch);
 
     expect(dispatch).toHaveBeenCalledTimes(1);
     expect(dispatch).toHaveBeenCalledWith({
@@ -79,13 +79,13 @@ describe('dispatchAPICallbackToast', () => {
     const successMessage = 'Success message';
     const errorMessage = 'Error message';
 
-    dispatchAPICallbackToast(
-      dispatch,
+    const dispatcher = dispatchAPICallbackToast(
       isSuccess,
       response,
       successMessage,
       errorMessage
     );
+    dispatcher(dispatch);
 
     expect(dispatch).toHaveBeenCalledTimes(1);
     expect(dispatch).toHaveBeenCalledWith({
