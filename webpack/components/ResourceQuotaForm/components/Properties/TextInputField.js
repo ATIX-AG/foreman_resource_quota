@@ -6,7 +6,7 @@ import { translate as __ } from 'foremanReact/common/I18n';
 
 import ActionableDetail from '../../../../lib/ActionableDetail';
 import StaticDetail from './StaticDetail';
-import dispatchAPICallbackToast from '../../../../api_helper';
+import { dispatchAPICallbackToast } from '../../../../api_helper';
 
 const TextInputField = ({
   initialValue,
@@ -36,12 +36,13 @@ const TextInputField = ({
 
   const callback = (success, response) => {
     setIsLoading(false);
-    dispatchAPICallbackToast(
-      dispatch,
-      success,
-      response,
-      `Sucessfully applied ${label}.`,
-      `An error occurred appyling ${label}.`
+    dispatch(
+      dispatchAPICallbackToast(
+        success,
+        response,
+        `Sucessfully applied ${label}.`,
+        `An error occurred appyling ${label}.`
+      )
     );
   };
 

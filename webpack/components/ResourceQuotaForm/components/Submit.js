@@ -5,7 +5,7 @@ import { Button, Flex, FlexItem } from '@patternfly/react-core';
 
 import { translate as __ } from 'foremanReact/common/I18n';
 
-import dispatchAPICallbackToast from '../../../api_helper';
+import { dispatchAPICallbackToast } from '../../../api_helper';
 
 import {
   RESOURCE_IDENTIFIER_ID,
@@ -27,12 +27,13 @@ const Submit = ({ isValid, onCreate, onSubmit }) => {
 
   const onCreateCallback = (success, response) => {
     setIsSubmitLoading(false);
-    dispatchAPICallbackToast(
-      dispatch,
-      success,
-      response,
-      `Sucessfully created new Resource Quota`,
-      `An error occurred while creating new Resource Quota.`
+    dispatch(
+      dispatchAPICallbackToast(
+        success,
+        response,
+        `Sucessfully created new Resource Quota`,
+        `An error occurred while creating new Resource Quota.`
+      )
     );
     if (onSubmit) onSubmit(success);
   };

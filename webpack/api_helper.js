@@ -68,19 +68,17 @@ const apiUpdateResourceQuota = (
 
 /**
  * Handles the callback response from an asynchronous operation, displaying a toast message accordingly.
- * @param {function} dispatcher - The dispatcher function to dispatch actions.
  * @param {boolean} isSuccess - Indicates whether the operation was successful or not.
  * @param {object} response - The response object returned from the operation.
  * @param {string} successMessage - The success message to display in case of success.
  * @param {string} errorMessage - The error message to display in case of failure.
  */
 const dispatchAPICallbackToast = (
-  dispatch,
   isSuccess,
   response,
   successMessage,
   errorMessage
-) => {
+) => dispatch => {
   if (isSuccess) {
     dispatch(
       addToast({

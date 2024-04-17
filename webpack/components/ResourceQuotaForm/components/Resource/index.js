@@ -25,7 +25,7 @@ import UnitInputField from './UnitInputField';
 import UtilizationProgress from './UtilizationProgress';
 
 import { resourceAttributesByIdentifier } from '../../ResourceQuotaFormConstants';
-import dispatchAPICallbackToast from '../../../../api_helper';
+import { dispatchAPICallbackToast } from '../../../../api_helper';
 
 // TODO: Visualize maximum resource (tooltip?)
 // TODO: Add error message if given quota limit exceeds present quota utilization (consumed resources)
@@ -70,12 +70,13 @@ const Resource = ({
       setInputValue(response.data[resourceIdentifier]);
       setIsEnabled(response.data[resourceIdentifier] !== null);
     }
-    dispatchAPICallbackToast(
-      dispatch,
-      success,
-      response,
-      `Sucessfully applied ${resourceTitle}.`,
-      `An error occurred appyling ${resourceTitle}.`
+    dispatch(
+      dispatchAPICallbackToast(
+        success,
+        response,
+        `Sucessfully applied ${resourceTitle}.`,
+        `An error occurred appyling ${resourceTitle}.`
+      )
     );
   };
 
