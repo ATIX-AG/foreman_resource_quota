@@ -11,11 +11,11 @@ module ForemanResourceQuota
 
     self.table_name = 'resource_quotas'
 
-    has_many :resource_quota_users, class_name: 'ResourceQuotaUser', inverse_of: :resource_quota, dependent: :destroy
-    has_many :users, class_name: '::User', through: :resource_quota_users
-    has_many :resource_quota_usergroups, class_name: 'ResourceQuotaUsergroup', inverse_of: :resource_quota,
+    has_many :resource_quotas_users, class_name: 'ResourceQuotaUser', inverse_of: :resource_quota, dependent: :destroy
+    has_many :users, class_name: '::User', through: :resource_quotas_users
+    has_many :resource_quotas_usergroups, class_name: 'ResourceQuotaUsergroup', inverse_of: :resource_quota,
       dependent: :destroy
-    has_many :usergroups, class_name: '::Usergroup', through: :resource_quota_usergroups
+    has_many :usergroups, class_name: '::Usergroup', through: :resource_quotas_usergroups
     has_many :hosts, class_name: '::Host::Managed', dependent: :nullify
 
     validates :name, presence: true, uniqueness: true
