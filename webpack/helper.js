@@ -1,5 +1,3 @@
-import ReactDOMServer from 'react-dom/server';
-
 /**
  * Performs a deep equality comparison between two objects, including nested objects and arrays.
  * @param {Object} obj1 - The first object to compare.
@@ -35,16 +33,6 @@ const deepEqual = (obj1, obj2) => {
   }
 
   return true;
-};
-
-const areReactElementsEqual = (element1, element2) => {
-  const elementToStr = element =>
-    element && ReactDOMServer.renderToStaticMarkup(element);
-
-  const element1Str = elementToStr(element1);
-  const element2Str = elementToStr(element2);
-
-  return element1Str === element2Str;
 };
 
 /**
@@ -83,4 +71,4 @@ const findLargestFittingUnit = (value, unitList) => {
   return unitList[0];
 };
 
-export { deepEqual, deepCopy, findLargestFittingUnit, areReactElementsEqual };
+export { deepEqual, deepCopy, findLargestFittingUnit };
