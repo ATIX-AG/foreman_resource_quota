@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import {
   Progress,
@@ -12,10 +12,7 @@ import SyncAltIcon from '@patternfly/react-icons/dist/esm/icons/sync-alt-icon';
 import { translate as __ } from 'foremanReact/common/I18n';
 
 import './UtilizationProgress.scss';
-import {
-  findLargestFittingUnit,
-  areReactElementsEqual,
-} from '../../../../helper';
+import { findLargestFittingUnit } from '../../../../helper';
 
 const UtilizationProgress = ({
   cardId,
@@ -40,7 +37,8 @@ const UtilizationProgress = ({
     else if (resourceUtilizationPercent < 100) return ProgressVariant.warning;
     return ProgressVariant.danger;
   };
-  const updateResourceUtilizationView = () => {
+
+  const updateResourceUtilizationView = useCallback(() => {
     let newPercent;
     let newTooltipText;
 
@@ -93,13 +91,14 @@ const UtilizationProgress = ({
         </div>
       );
     }
-    if (resourceUtilizationPercent !== newPercent)
-      setResourceUtilizationPercent(newPercent);
-    if (!areReactElementsEqual(resourceUtilizationTooltipText, newTooltipText))
-      setResourceUtilizationTooltipText(newTooltipText);
-  };
+    setResourceUtilizationPercent(newPercent);
+    setResourceUtilizationTooltipText(newTooltipText);
+  }, [isNewQuota, resourceUnits, resourceUtilization, resourceValue]);
+
   // call it once
-  updateResourceUtilizationView();
+  useEffect(() => {
+    updateResourceUtilizationView();
+  }, [updateResourceUtilizationView]);
 
   return (
     <div>
