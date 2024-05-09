@@ -16,10 +16,12 @@ import {
   Tooltip,
 } from '@patternfly/react-core';
 
-import UserIcon from '@patternfly/react-icons/dist/esm/icons/user-icon';
-import UsersIcon from '@patternfly/react-icons/dist/esm/icons/users-icon';
-import ClusterIcon from '@patternfly/react-icons/dist/esm/icons/cluster-icon';
-import SyncAltIcon from '@patternfly/react-icons/dist/esm/icons/sync-alt-icon';
+import {
+  UserIcon,
+  UsersIcon,
+  ClusterIcon,
+  SyncAltIcon,
+} from '@patternfly/react-icons';
 
 import { translate as __ } from 'foremanReact/common/I18n';
 import { dispatchAPICallbackToast } from '../../../../api_helper';
