@@ -6,7 +6,7 @@ module ForemanResourceQuota
       blank_opt = { include_blank: true }
       select_items = user_quotas.order(:name)
       select_f form,
-        :resource_quota_id,
+        :resource_quota,
         select_items,
         :id,
         :to_label,
