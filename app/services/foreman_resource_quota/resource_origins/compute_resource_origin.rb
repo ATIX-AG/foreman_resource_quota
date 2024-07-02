@@ -20,7 +20,7 @@ module ForemanResourceQuota
         nil
       end
 
-      def collect_resources!(resources_sum, missing_hosts_resources, _host_objects)
+      def collect_resources!(hosts_resources, missing_hosts_resources, _host_objects)
         compute_resource_to_hosts = group_hosts_by_compute_resource(missing_hosts_resources.keys)
 
         compute_resource_to_hosts.each do |compute_resource_id, hosts|
@@ -32,7 +32,7 @@ module ForemanResourceQuota
           hosts.each do |host|
             vm = host_vms.find { |obj| obj.send(vm_id_attr) == host.uuid }
             next unless vm
-            process_host_vm!(resources_sum, missing_hosts_resources, host.name, vm)
+            process_host_vm!(hosts_resources, missing_hosts_resources, host.name, vm)
           end
         end
       end
@@ -63,16 +63,16 @@ module ForemanResourceQuota
 
       # Processes a host's virtual machines and updates resource allocation.
       # Parameters:
-      #   - resources_sum: Hash containing total resources sum.
+      #   - hosts_resources: Hash containing successfully determined resources per host.
       #   - missing_hosts_resources: Hash containing missing resources per host.
-      #   - host_name: Name of the host.
+      #   - host: Host object
       #   - vm: Compute resource VM object of given host.
       # Returns: None.
-      def process_host_vm!(resources_sum, missing_hosts_resources, host_name, host_vm)
+      def process_host_vm!(hosts_resources, missing_hosts_resources, host_name, host_vm)
         missing_hosts_resources[host_name].reverse_each do |resource_name|
           resource_value = process_resource(resource_name, host_vm)
           next unless resource_value
-          resources_sum[resource_name] += resource_value
+          hosts_resources[host_name][resource_name] = resource_value
           missing_hosts_resources[host_name].delete(resource_name)
         end
         missing_hosts_resources.delete(host_name) if missing_hosts_resources[host_name].empty?
