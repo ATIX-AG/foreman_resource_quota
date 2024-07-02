@@ -5,7 +5,10 @@ module ForemanResourceQuota
     self.table_name = 'hosts_resources'
 
     belongs_to :resource_quota, class_name: 'ResourceQuota'
-    belongs_to :host, class_name: '::Host::Managed'
+    belongs_to :host, class_name: '::Host::Managed', unqiue: true
+    // Talk to Manisha regarding mico-service SQL relation
+    -> For some reasion, when adding a host like my_quota.hosts << [some_host_a, some_host_b] results in NEW HostResources entries
+    -> See the test on the right
 
     def resources
       {
@@ -17,7 +20,7 @@ module ForemanResourceQuota
 
     def resources=(val)
       allowed_attributes = val.slice(:cpu_cores, :memory_mb, :disk_gb)
-      update(allowed_attributes)
+      assign_attributes(allowed_attributes) # Set multiple attributes at once (given a hash)
     end
 
     # Return a Array of unknown host resources (returns an empty Array if all are known)

@@ -22,6 +22,8 @@ module ForemanResourceQuota
 
     validates :name, presence: true, uniqueness: true
 
+    after_save :save_hosts_resources
+
     scoped_search on: :name, complete_value: true
     scoped_search on: :id, complete_enabled: false, only_explicit: true, validator: ScopedSearch::Validators::INTEGER
 
@@ -52,12 +54,13 @@ module ForemanResourceQuota
     #   - exclude: an Array of host names to exclude from the utilization
     def missing_hosts(exclude: [])
       missing_hosts = {}
-      query = active_resources.map { |col| [col, nil] }.to_h
-      hosts_resources.where(query).each do |host_resources_item|
-        host_name = host_resources_item.host.name
-        next if exclude.include?(host_name)
-        missing_resources = host_resources_item.missing_resources(use_active_resources: true)
-        missing_hosts[host_name] = missing_resources
+      active_resources.each do |single_resource|
+        hosts_resources.where(single_resource => nil).find_each do |host_resources_item|
+          host_name = host_resources_item.host.name
+          next if exclude.include?(host_name)
+          missing_hosts[host_name] ||= []
+          missing_hosts[host_name] << single_resource
+        end
       end
       missing_hosts
     end
@@ -73,7 +76,11 @@ module ForemanResourceQuota
     # Parameters:
     #   - exclude: an Array of host names to exclude from the utilization
     def utilization(exclude: [])
-      current_utilization = {}
+      current_utilization = {
+        cpu_cores: nil,
+        memory_mb: nil,
+        disk_gb: nil,
+      }
 
       self.active_resources.each do |resource|
         current_utilization[resource] = 0
@@ -105,9 +112,11 @@ module ForemanResourceQuota
       update_hosts = hosts.where(name: hosts_resources_hash.keys)
       update_hosts_ids = update_hosts.pluck(:name, :id).to_h
       hosts_resources_hash.each do |host_name, resources|
+        # Update the host_resources without loading the whole host object
         host_resources_item = self.hosts_resources.find_by(host_id: update_hosts_ids[host_name])
         if host_resources_item
           host_resources_item.resources = resources
+          host_resources_item.save
         else
           Rails.logger.warn "HostResources not found for host_name: #{host_name}"
         end
@@ -119,7 +128,6 @@ module ForemanResourceQuota
       all_host_resources, missing_hosts_resources = call_utilization_helper(quota_hosts)
       self.update_hosts_resources(all_host_resources)
 
-      # TODO: Set the host_resources accordingly?
       Rails.logger.warn create_hosts_resources_warning(missing_hosts_resources) unless missing_hosts.empty?
     rescue StandardError => e
       Rails.logger.error("An error occured while determining resources for quota '#{name}': #{e}")
@@ -150,6 +158,10 @@ module ForemanResourceQuota
       missing_hosts_resources.each do |host_name, missing_resources|
         warn_text << "  '#{host_name}': '#{missing_resources}'\n" unless missing_resources.empty?
       end
+    end
+
+    def save_hosts_resources
+      hosts_resources.each { |host_resource| host_resource.save if host_resource.changed? }
     end
   end
 end
