@@ -50,7 +50,7 @@ Foreman::Plugin.register :foreman_resource_quota do
   # add controller parameter extension
   parameter_filter User, { resource_quotas: [], resource_quota_ids: [] }, :resource_quota_is_optional
   parameter_filter Usergroup, { resource_quotas: [], resource_quota_ids: [] }
-  parameter_filter Host::Managed, :resource_quota_id
+  parameter_filter Host::Managed, :resource_quota
 
   # add UI menu extension
   add_menu_item :top_menu, :resource_quotas,
