@@ -4,13 +4,6 @@ module ForemanResourceQuota
   class Engine < ::Rails::Engine
     engine_name 'foreman_resource_quota'
 
-    config.autoload_paths += Dir["#{config.root}/app/models/"]
-    config.autoload_paths += Dir["#{config.root}/app/controllers/"]
-    config.autoload_paths += Dir["#{config.root}/app/views/"]
-    config.autoload_paths += Dir["#{config.root}/app/services/foreman_resource_quota/"]
-    config.autoload_paths += Dir["#{config.root}/app/helpers/foreman_resource_quota/"]
-    config.autoload_paths += Dir["#{config.root}/lib/"]
-
     # Add db migrations
     initializer 'foreman_resource_quota.load_app_instance_data' do |app|
       ForemanResourceQuota::Engine.paths['db/migrate'].existent.each do |path|
@@ -34,8 +27,10 @@ module ForemanResourceQuota
     end
 
     # Plugin extensions
-    initializer 'foreman_resource_quota.register_plugin', before: :finisher_hook do |_app|
-      require 'foreman_resource_quota/register'
+    initializer 'foreman_resource_quota.register_plugin', before: :finisher_hook do |app|
+      app.reloader.to_prepare do
+        require 'foreman_resource_quota/register'
+      end
     end
 
     # Include concerns in this config.to_prepare block

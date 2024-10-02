@@ -2,7 +2,7 @@
 
 # rubocop: disable Metrics/BlockLength
 Foreman::Plugin.register :foreman_resource_quota do
-  requires_foreman '>= 3.5.0'
+  requires_foreman '>= 3.13'
   # Apipie
   apipie_documented_controllers ["#{ForemanResourceQuota::Engine.root}" \
                                  '/app/controllers/foreman_resource_quot/api/v2/*.rb']
