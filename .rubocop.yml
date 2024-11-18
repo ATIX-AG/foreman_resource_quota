@@ -18,6 +18,10 @@ Metrics/ClassLength:
   Exclude:
     - 'app/models/foreman_resource_quota/resource_quota.rb'
 
+Metrics/ModuleLength:
+  Exclude:
+    - 'app/models/concerns/foreman_resource_quota/host_managed_extensions.rb'
+
 Metrics/MethodLength:
   Enabled: false
 
