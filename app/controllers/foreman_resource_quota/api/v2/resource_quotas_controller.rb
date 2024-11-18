@@ -64,7 +64,6 @@ module ForemanResourceQuota
         def_param_group :resource_quota do
           param :resource_quota, Hash, required: true, action_aware: true do
             param :name, String, required: true
-            # param :operatingsystem_ids, Array, :desc => N_("Operating system IDs")
           end
         end
 
