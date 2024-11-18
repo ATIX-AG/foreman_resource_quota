@@ -16,49 +16,43 @@ module ForemanResourceQuota
 
       test 'hosts relation' do
         @quota.hosts << @host
-        as_admin { @quota.save! }
         assert_equal @host.id, @quota.hosts[0].id
-        assert_equal @quota.id, @host.resource_quota.id
+        assert_equal @quota.id, @host.reload.resource_quota.id
       end
 
       test 'users relation' do
         @quota.users << @user
-        as_admin { @quota.save! }
         assert_equal @user.id, @quota.users[0].id
         assert_equal @quota.id, @user.resource_quotas[0].id
       end
 
       test 'users relation delete user' do
         @quota.users << @user
-        as_admin { @quota.save! }
         assert_equal @user.id, @quota.users[0].id
         assert_equal @quota.id, @user.resource_quotas[0].id
-        as_admin { @user.destroy! }
+        @user.destroy
         assert_empty @quota.reload.users
       end
 
       test 'users relation delete quota' do
         @user.resource_quotas << @quota
-        as_admin { @user.save! }
         assert_equal @quota.users[0].id, @user.id
         assert_equal @user.resource_quotas[0].id, @quota.id
-        as_admin { @quota.destroy! }
+        @quota.destroy
         assert_empty @user.reload.resource_quotas
       end
 
       test 'usergroups relation' do
         @quota.usergroups << @usergroup
-        as_admin { @quota.save! }
         assert_equal @usergroup.id, @quota.usergroups[0].id
         assert_equal @quota.id, @usergroup.resource_quotas[0].id
       end
 
       test 'usergroup delete' do
         @quota.usergroups << @usergroup
-        as_admin { @quota.save! }
         assert_equal @usergroup.id, @quota.usergroups[0].id
         assert_equal @quota.id, @usergroup.resource_quotas[0].id
-        as_admin { @usergroup.destroy! }
+        @usergroup.destroy
         assert_empty @quota.reload.usergroups
       end
 
