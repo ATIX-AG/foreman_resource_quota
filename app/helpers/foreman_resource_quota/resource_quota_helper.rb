@@ -52,20 +52,29 @@ module ForemanResourceQuota
       format(format_text, unit_applied_value, symbol)
     end
 
+    # Use different resource origins to determine host resource utilization.
+    #  - iterates all given hosts and tries do determine their resources utilization
+    # Returns:
+    #   [ <hosts_resources>, <missing_hosts_resources> ]
+    #   for example:
+    #     [
+    #       { "host_a": { cpu_cores: 20, memory_mb: 8196 }, "host_b": { cpu_cores: 15, memory_mb: nil } },
+    #       { "host_c": [ :memory_mb ] },
+    #     ]
     def utilization_from_resource_origins(resources, hosts, custom_resource_origins: nil)
-      utilization_sum = resources.each.with_object({}) { |key, hash| hash[key] = 0 }
+      hosts_resources = create_hosts_resources_hash(hosts, resources)
       missing_hosts_resources = create_missing_hosts_resources_hash(hosts, resources)
       hosts_hash = hosts.index_by(&:name)
       resource_classes = custom_resource_origins || default_resource_origin_classes
       resource_classes.each do |origin_class|
         origin_class.new.collect_resources!(
-          utilization_sum,
+          hosts_resources,
           missing_hosts_resources,
           hosts_hash
         )
       end
 
-      [utilization_sum, missing_hosts_resources]
+      [hosts_resources, missing_hosts_resources]
     end
 
     private
@@ -87,6 +96,25 @@ module ForemanResourceQuota
       return {} if resources_to_determine.empty?
 
       hosts.map(&:name).index_with { resources_to_determine.clone }
+    end
+
+    # Create a Hash that maps resources and a value to host names.
+    # { <host name>: {<hash of resource values>} }
+    #     for example:
+    #     {
+    #       "host_a": { cpu_cores: nil, disk_gb: nil },
+    #       "host_b": { cpu_cores: nil, disk_gb: nil },
+    #     }
+    # Parameters:
+    #   - hosts: Array of host objects.
+    #   - resources: Array of resources (as symbol, e.g. [:cpu_cores, :disk_gb]).
+    # Returns: Hash with host names as keys and resource-hashs as values.
+    def create_hosts_resources_hash(hosts, resources)
+      return {} if hosts.empty? || resources.empty?
+
+      # Create a hash template with resources mapped to nil
+      resources_to_determine = resources.index_with { |_resource| nil }
+      hosts.map(&:name).index_with { resources_to_determine.dup }
     end
 
     # Default classes that are used to determine host resources. Determines

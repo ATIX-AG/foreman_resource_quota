@@ -8,12 +8,12 @@ module ForemanResourceQuota
       disk_gb: :extract_disk_gb,
     }.freeze
 
-    def collect_resources!(resources_sum, missing_hosts_resources, host_objects)
+    def collect_resources!(hosts_resources, missing_hosts_resources, host_objects)
       return if missing_hosts_resources.empty?
 
       relevant_hosts = load_hosts_eagerly(missing_hosts_resources, host_objects, host_attribute_eager_name)
       host_values = collect_attribute_from_hosts(relevant_hosts, host_attribute_name)
-      sum_resources_and_delete_missing_hosts!(resources_sum, missing_hosts_resources, host_values)
+      process_resources_and_delete_missing_hosts!(hosts_resources, missing_hosts_resources, host_values)
     end
 
     def host_attribute_eager_name
@@ -65,12 +65,12 @@ module ForemanResourceQuota
       host_values
     end
 
-    def sum_resources_and_delete_missing_hosts!(resources_sum, missing_hosts_resources, host_values)
+    def process_resources_and_delete_missing_hosts!(hosts_resources, missing_hosts_resources, host_values)
       host_values.each do |host_name, attribute_content|
         missing_hosts_resources[host_name].reverse_each do |resource_name|
           resource_value = process_resource(resource_name, attribute_content)
           next unless resource_value
-          resources_sum[resource_name] += resource_value
+          hosts_resources[host_name][resource_name] = resource_value
           missing_hosts_resources[host_name].delete(resource_name)
         end
         missing_hosts_resources.delete(host_name) if missing_hosts_resources[host_name].empty?

@@ -27,7 +27,7 @@ module ForemanResourceQuota
     scoped_search on: :id, complete_enabled: false, only_explicit: true, validator: ScopedSearch::Validators::INTEGER
 
     def number_of_hosts
-      hosts.size
+      hosts_resources.size
     end
 
     def number_of_users
@@ -49,54 +49,84 @@ module ForemanResourceQuota
     #       "host_a": [ :cpu_cores, :disk_gb ],
     #       "host_b": [ :memory_mb ],
     #     }
-    def missing_hosts
-      # Initialize default value as an empty array
-      missing_hosts_list = Hash.new { |hash, key| hash[key] = [] }
-      resource_quotas_missing_hosts.each do |missing_host_rel|
-        host_name = missing_host_rel.missing_host.name
-        missing_hosts_list[host_name] << :cpu_cores if missing_host_rel.no_cpu_cores
-        missing_hosts_list[host_name] << :memory_mb if missing_host_rel.no_memory_mb
-        missing_hosts_list[host_name] << :disk_gb if missing_host_rel.no_disk_gb
-      end
-      missing_hosts_list
-    end
-
-    # Set the hosts that are listed in resource_quotas_missing_hosts
     # Parameters:
-    #   - val: Hash of host names and list of missing resources
-    #     { <host name>: [<list of missing resources>] }
-    #     for example:
-    #     {
-    #       "host_a": [ :cpu_cores, :disk_gb ],
-    #       "host_b": [ :memory_mb ],
-    #     }
-    def missing_hosts=(val)
-      # Delete all entries and write new ones
-      resource_quotas_missing_hosts.delete_all
-      val.each do |host_name, missing_resources|
-        add_missing_host(host_name, missing_resources)
+    #   - exclude: an Array of host names to exclude from the utilization
+    def missing_hosts(exclude: [])
+      missing_hosts = {}
+      active_resources.each do |single_resource|
+        hosts_resources.where(single_resource => nil).find_each do |host_resources_item|
+          host_name = host_resources_item.host.name
+          next if exclude.include?(host_name)
+          missing_hosts[host_name] ||= []
+          missing_hosts[host_name] << single_resource
+        end
       end
+      missing_hosts
     end
 
-    def utilization
-      {
-        cpu_cores: utilization_cpu_cores,
-        memory_mb: utilization_memory_mb,
-        disk_gb: utilization_disk_gb,
+    # Returns a Hash with the quota resources and their utilization as key-value pair
+    # It returns always all resources, even if they are not used (nil in that case).
+    # For example:
+    #   {
+    #     cpu_cores: 10,
+    #     memory_mb: nil,
+    #     disk_gb: 20,
+    #   }
+    # Parameters:
+    #   - exclude: an Array of host names to exclude from the utilization
+    def utilization(exclude: [])
+      current_utilization = {
+        cpu_cores: nil,
+        memory_mb: nil,
+        disk_gb: nil,
       }
+
+      active_resources.each do |resource|
+        current_utilization[resource] = 0
+      end
+
+      hosts_resources.each do |host_resources_item|
+        next if exclude.include?(host_resources_item.host.name)
+
+        active_resources.each do |resource|
+          current_utilization[resource] += host_resources_item.send(resource).to_i
+        end
+      end
+
+      current_utilization
     end
 
-    def utilization=(val)
-      update_single_utilization(:cpu_cores, val)
-      update_single_utilization(:memory_mb, val)
-      update_single_utilization(:disk_gb, val)
+    def hosts_resources_as_hash
+      resources_hash = hosts.map(&:name).index_with { {} }
+      hosts_resources.each do |host_resources_item|
+        active_resources do |resource_name|
+          resources_hash[host_resources_item.host.name][resource_name] = host_resources_item.send(resource_name)
+        end
+      end
+      resources_hash
+    end
+
+    def update_hosts_resources(hosts_resources_hash)
+      # Only update hosts that are associated with this quota
+      update_hosts = hosts.where(name: hosts_resources_hash.keys)
+      update_hosts_ids = update_hosts.pluck(:name, :id).to_h
+      hosts_resources_hash.each do |host_name, resources|
+        # Update the host_resources without loading the whole host object
+        host_resources_item = hosts_resources.find_by(host_id: update_hosts_ids[host_name])
+        if host_resources_item
+          host_resources_item.resources = resources
+          host_resources_item.save
+        else
+          Rails.logger.warn "HostResources not found for host_name: #{host_name}"
+        end
+      end
     end
 
     def determine_utilization(additional_hosts = [])
       quota_hosts = (hosts | (additional_hosts))
-      quota_utilization, missing_hosts_resources = call_utilization_helper(quota_hosts)
-      update(utilization: quota_utilization)
-      update(missing_hosts: missing_hosts_resources)
+      all_host_resources, missing_hosts_resources = call_utilization_helper(quota_hosts)
+      update_hosts_resources(all_host_resources)
+
       Rails.logger.warn create_hosts_resources_warning(missing_hosts_resources) unless missing_hosts.empty?
     rescue StandardError => e
       Rails.logger.error("An error occured while determining resources for quota '#{name}': #{e}")
@@ -127,26 +157,6 @@ module ForemanResourceQuota
       missing_hosts_resources.each do |host_name, missing_resources|
         warn_text << "  '#{host_name}': '#{missing_resources}'\n" unless missing_resources.empty?
       end
-    end
-
-    def update_single_utilization(attribute, val)
-      return unless val.key?(attribute.to_sym) || val.key?(attribute.to_s)
-      update("utilization_#{attribute}": val[attribute.to_sym] || val[attribute.to_s])
-    end
-
-    def add_missing_host(host_name, missing_resources)
-      return if missing_resources.empty?
-
-      host = Host::Managed.find_by(name: host_name)
-      raise HostNotFoundException if host.nil?
-
-      resource_quotas_missing_hosts << ResourceQuotaMissingHost.new(
-        missing_host: host,
-        resource_quota: self,
-        no_cpu_cores: missing_resources.include?(:cpu_cores),
-        no_memory_mb: missing_resources.include?(:memory_mb),
-        no_disk_gb: missing_resources.include?(:disk_gb)
-      )
     end
   end
 end
