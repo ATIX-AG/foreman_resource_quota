@@ -77,50 +77,62 @@ module ForemanResourceQuota
         assert_equal 3, @quota.number_of_usergroups
       end
 
+      test 'utilization is empty' do
+        @quota.cpu_cores = 50
+        exp_utilization = { cpu_cores: 0, memory_mb: nil, disk_gb: nil }
+
+        assert_equal exp_utilization, @quota.utilization
+      end
+
+      test 'utilization is nil' do
+        exp_utilization = { cpu_cores: nil, memory_mb: nil, disk_gb: nil }
+
+        assert_equal exp_utilization, @quota.utilization
+      end
+
       test 'utilization is set (cpu_cores)' do
-        @quota.utilization_cpu_cores = 13
+        @quota.cpu_cores = 50
+        @quota.hosts << @host
+        @quota.update_hosts_resources({ @host.name => { cpu_cores: 13 } })
+
         assert_equal 13, @quota.utilization[:cpu_cores]
       end
 
       test 'utilization is set (memory_mb)' do
-        @quota.utilization_memory_mb = 14
+        @quota.memory_mb = 50
+        @quota.hosts << @host
+        @quota.update_hosts_resources({ @host.name => { memory_mb: 14 } })
+
         assert_equal 14, @quota.utilization[:memory_mb]
       end
 
       test 'utilization is set (disk_gb)' do
-        @quota.utilization_disk_gb = 15
+        @quota.disk_gb = 50
+        @quota.hosts << @host
+        @quota.update_hosts_resources({ @host.name => { disk_gb: 15 } })
+
         assert_equal 15, @quota.utilization[:disk_gb]
       end
 
       test 'utilization is set (all parameters)' do
         exp_utilization = { cpu_cores: 3, memory_mb: 4, disk_gb: 5 }
-        @quota.utilization_cpu_cores = exp_utilization[:cpu_cores]
-        @quota.utilization_memory_mb = exp_utilization[:memory_mb]
-        @quota.utilization_disk_gb = exp_utilization[:disk_gb]
-        assert_equal exp_utilization, @quota.utilization
-      end
+        @quota.update(cpu_cores: 50, memory_mb: 50, disk_gb: 50)
+        @quota.hosts << @host
+        @quota.update_hosts_resources({ @host.name => exp_utilization })
 
-      test 'utilization_<resource> is set by utilization' do
-        exp_utilization = { cpu_cores: 6, memory_mb: 7, disk_gb: 8 }
-        @quota.utilization = exp_utilization
         assert_equal exp_utilization, @quota.utilization
-      end
-
-      test 'utilization sets attributes' do
-        second_usergroup = FactoryBot.create :usergroup
-        third_usergroup = FactoryBot.create :usergroup
-        @quota.usergroups << [@usergroup, second_usergroup, third_usergroup]
-        assert_equal 3, @quota.number_of_usergroups
       end
 
       test 'determine utilization' do
         exp_utilization = { cpu_cores: 1, memory_mb: 1, disk_gb: 2 }
         exp_missing_hosts = {}
+        host_utilization = {
+          @host.name => exp_utilization,
+        }
         @quota.hosts << @host
         @quota.update(cpu_cores: 10, memory_mb: 10, disk_gb: 10)
-        as_admin { @quota.save! }
 
-        @quota.stub(:call_utilization_helper, [exp_utilization, exp_missing_hosts]) do
+        @quota.stub(:call_utilization_helper, [host_utilization, exp_missing_hosts]) do
           @quota.determine_utilization
         end
         assert_equal exp_utilization, @quota.utilization
@@ -131,90 +143,72 @@ module ForemanResourceQuota
         host_a = FactoryBot.create :host
         host_b = FactoryBot.create :host
         exp_utilization = { cpu_cores: 1, memory_mb: 1, disk_gb: 2 }
+        host_utilization = {
+          host_a.name => { memory_mb: 1, disk_gb: 1 },
+          host_b.name => { cpu_cores: 1, disk_gb: 1 },
+        }
         exp_missing_hosts = { host_a.name => [:cpu_cores], host_b.name => [:memory_mb] }
+
         @quota.hosts << [host_a, host_b]
         @quota.update(cpu_cores: 10, memory_mb: 10, disk_gb: 10)
-        as_admin { @quota.save! }
 
-        @quota.stub(:call_utilization_helper, [exp_utilization, exp_missing_hosts]) do
+        @quota.stub(:call_utilization_helper, [host_utilization, exp_missing_hosts]) do
           @quota.determine_utilization
         end
         assert_equal exp_utilization, @quota.utilization
         assert_equal exp_missing_hosts, @quota.missing_hosts
-      end
-
-      test 'utilization uses quota utilization_ fields' do
-        exp_utilization = { cpu_cores: 1, memory_mb: 1, disk_gb: 2 }
-        @quota.utilization_cpu_cores = exp_utilization[:cpu_cores]
-        @quota.utilization_memory_mb = exp_utilization[:memory_mb]
-        @quota.utilization_disk_gb = exp_utilization[:disk_gb]
-
-        assert_equal exp_utilization, @quota.utilization
-      end
-
-      test 'missing_hosts are constructed' do
-        host_a = FactoryBot.create :host
-        host_b = FactoryBot.create :host
-        exp_utilization = { cpu_cores: 1, memory_mb: 1, disk_gb: 2 }
-        exp_missing_hosts = { host_a.name => [:cpu_cores], host_b.name => [:memory_mb] }
-        @quota.hosts << [host_a, host_b]
-        @quota.update(cpu_cores: 10, memory_mb: 10, disk_gb: 10)
-        as_admin { @quota.save! }
-
-        @quota.stub(:call_utilization_helper, [exp_utilization, exp_missing_hosts]) do
-          @quota.determine_utilization
-        end
-        @quota.reload
-        assert_equal exp_missing_hosts, @quota.missing_hosts
-        assert_equal 2, @quota.resource_quotas_missing_hosts.size
-        assert_equal host_a.id, @quota.resource_quotas_missing_hosts.find_by(missing_host_id: host_a.id).missing_host_id
-        assert_equal host_b.id, @quota.resource_quotas_missing_hosts.find_by(missing_host_id: host_b.id).missing_host_id
-        assert_equal host_a.resource_quota_missing_resources.resource_quota.id, @quota.id
       end
 
       test 'missing_hosts are destroyed on host destroy' do
         host_a = FactoryBot.create :host
         host_b = FactoryBot.create :host
-        exp_utilization = { cpu_cores: 1, memory_mb: 1, disk_gb: 2 }
+        host_utilization = {
+          host_a.name => { memory_mb: 1, disk_gb: 1 },
+          host_b.name => { cpu_cores: 1, disk_gb: 1 },
+        }
         exp_missing_hosts = { host_a.name => [:cpu_cores], host_b.name => [:memory_mb] }
         @quota.hosts << [host_a, host_b]
         @quota.update(cpu_cores: 10, memory_mb: 10, disk_gb: 10)
-        as_admin { @quota.save! }
+        @quota.save!
 
-        @quota.stub(:call_utilization_helper, [exp_utilization, exp_missing_hosts]) do
+        @quota.stub(:call_utilization_helper, [host_utilization, exp_missing_hosts]) do
           @quota.determine_utilization
         end
-        assert_equal 2, @quota.resource_quotas_missing_hosts.size
-        host_a.destroy!
-        @quota.reload
-        assert_equal 1, @quota.resource_quotas_missing_hosts.size
-        assert_equal host_b.id, @quota.resource_quotas_missing_hosts[0].missing_host.id
-        host_b.destroy!
-        @quota.reload
-        assert_equal 0, @quota.resource_quotas_missing_hosts.size
+        assert_equal @quota.number_of_missing_hosts, @quota.number_of_hosts
+        host_a.destroy
+        assert_equal 1, @quota.number_of_missing_hosts
+        assert_equal host_b.name, @quota.missing_hosts.keys.first
+        host_b.destroy
+        assert_equal 0, @quota.number_of_missing_hosts
       end
 
       test 'missing_hosts are destroyed on re-computing utilization' do
+        @quota.update(cpu_cores: 10, memory_mb: 10)
         host_a = FactoryBot.create :host
         host_b = FactoryBot.create :host
-        exp_utilization = { cpu_cores: 1, memory_mb: 1, disk_gb: 2 }
-        exp_missing_hosts_two = { host_a.name => [:cpu_cores], host_b.name => [:memory_mb] }
-        exp_missing_hosts_one = { host_b.name => [:memory_mb] }
-        @quota.hosts << [host_a, host_b]
-        @quota.update(cpu_cores: 10, memory_mb: 10, disk_gb: 10)
-        as_admin { @quota.save! }
+        host_utilization_two = {
+          host_a.name => { cpu_cores: 1, memory_mb: nil },
+          host_b.name => { cpu_cores: nil, memory_mb: 1 },
+        }
+        host_utilization_one = {
+          host_a.name => { cpu_cores: 1, memory_mb: 1 },
+          host_b.name => { cpu_cores: nil, memory_mb: 1 },
+        }
+        exp_missing_hosts_two = { host_a.name => [:memory_mb], host_b.name => [:cpu_cores] }
+        exp_missing_hosts_one = { host_b.name => [:cpu_cores] }
 
-        @quota.stub(:call_utilization_helper, [exp_utilization, exp_missing_hosts_two]) do
+        @quota.hosts << [host_a, host_b]
+
+        @quota.stub(:call_utilization_helper, [host_utilization_two, exp_missing_hosts_two]) do
           @quota.determine_utilization
         end
-        assert_equal 2, @quota.resource_quotas_missing_hosts.size
-        @quota.stub(:call_utilization_helper, [exp_utilization, exp_missing_hosts_one]) do
+        assert_equal 2, @quota.number_of_missing_hosts
+        @quota.stub(:call_utilization_helper, [host_utilization_one, exp_missing_hosts_one]) do
           @quota.determine_utilization
         end
         @quota.reload
-        assert_equal 1, @quota.resource_quotas_missing_hosts.size
-        assert_equal host_b.id, @quota.resource_quotas_missing_hosts
-                                      .find_by(missing_host_id: host_b.id).missing_host_id
+        assert_equal 1, @quota.number_of_missing_hosts
+        assert_equal [host_b.name], @quota.missing_hosts.keys
       end
     end
   end
