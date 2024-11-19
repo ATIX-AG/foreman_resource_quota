@@ -123,7 +123,7 @@ module ForemanResourceQuota
 
         test 'should show utilization' do
           exp_utilization = { cpu_cores: 10, memory_mb: 20 }
-          stub_quota_utilization(exp_utilization, {})
+          stub_quota_utilization(exp_utilization)
           get :utilization, params: { resource_quota_id: @quota.id }, session: set_session_user
           assert_response :success
           show_response = ActiveSupport::JSON.decode(@response.body)
@@ -134,7 +134,7 @@ module ForemanResourceQuota
 
         test 'should show missing_hosts' do
           exp_missing_hosts = { 'some_host' => %i[cpu_cores memory_mb] }
-          stub_quota_utilization({}, exp_missing_hosts)
+          stub_quota_missing_hosts(exp_missing_hosts)
           get :missing_hosts, params: { resource_quota_id: @quota.id }, session: set_session_user
           assert_response :success
           show_response = ActiveSupport::JSON.decode(@response.body)
