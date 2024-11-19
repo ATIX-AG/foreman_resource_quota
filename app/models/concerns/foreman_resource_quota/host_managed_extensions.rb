@@ -7,16 +7,22 @@ module ForemanResourceQuota
     include ForemanResourceQuota::Exceptions
 
     included do
-      validate :check_resource_quota_capacity
+      validate :verify_resource_quota
 
-      belongs_to :resource_quota, class_name: '::ForemanResourceQuota::ResourceQuota'
-      has_one :resource_quota_missing_resources, class_name: '::ForemanResourceQuota::ResourceQuotaMissingHost',
-        inverse_of: :missing_host, foreign_key: :missing_host_id, dependent: :destroy
+      has_one :host_resources, class_name: '::ForemanResourceQuota::HostResources',
+        inverse_of: :host, foreign_key: :host_id, dependent: :destroy
+      has_one :resource_quota_host, class_name: '::ForemanResourceQuota::ResourceQuotaHost',
+        inverse_of: :host, foreign_key: :host_id, dependent: :destroy
+      has_one :resource_quota, class_name: '::ForemanResourceQuota::ResourceQuota',
+        through: :resource_quota_host
       scoped_search relation: :resource_quota, on: :name, complete_value: true, rename: :resource_quota
+
+      # A host shall always have a .host_resources attribute
+      before_validation :build_host_resources, unless: -> { host_resources.present? }
     end
 
-    def check_resource_quota_capacity
-      handle_quota_check
+    def verify_resource_quota
+      handle_quota_check(resource_quota)
       true
     rescue ResourceQuotaException => e
       handle_error('resource_quota_id',
@@ -32,13 +38,27 @@ module ForemanResourceQuota
         format('An unknown error occured while checking the resource quota capacity: %s', e))
     end
 
+    def resource_quota_id
+      resource_quota&.id
+    end
+
+    def resource_quota_id=(val)
+      if val.blank?
+        resource_quota_host&.destroy
+      else
+        quota = ForemanResourceQuota::ResourceQuota.find_by(id: val)
+        raise ActiveRecord::RecordNotFound, "ResourceQuota with ID \"#{val}\" not found" unless quota
+        self.resource_quota = quota
+      end
+    end
+
     private
 
-    def handle_quota_check
-      return if early_return?
-      quota_utilization = determine_quota_utilization
-      host_resources = determine_host_resources
-      verify_resource_quota_limits(quota_utilization, host_resources)
+    def handle_quota_check(quota)
+      return if early_return?(quota)
+      quota_utilization = determine_quota_utilization(quota)
+      current_host_resources = determine_host_resources(quota.active_resources)
+      check_resource_quota_limits(quota, quota_utilization, current_host_resources)
     end
 
     def handle_error(error_module, error_message, log_message)

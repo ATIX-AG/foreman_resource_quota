@@ -12,12 +12,12 @@ module ForemanResourceQuota
 
     self.table_name = 'resource_quotas'
 
+    has_many :resource_quotas_hosts, class_name: 'ResourceQuotaHost', inverse_of: :resource_quota, dependent: :destroy
     has_many :resource_quotas_users, class_name: 'ResourceQuotaUser', inverse_of: :resource_quota, dependent: :destroy
     has_many :resource_quotas_usergroups, class_name: 'ResourceQuotaUsergroup', inverse_of: :resource_quota,
       dependent: :destroy
-    has_many :resource_quotas_missing_hosts, class_name: 'ResourceQuotaMissingHost', inverse_of: :resource_quota,
-      dependent: :destroy
-    has_many :hosts, class_name: '::Host::Managed', dependent: :nullify
+    has_many :hosts, -> { distinct }, class_name: '::Host::Managed', through: :resource_quotas_hosts
+    has_many :hosts_resources, class_name: 'HostResources', through: :hosts
     has_many :users, class_name: '::User', through: :resource_quotas_users
     has_many :usergroups, class_name: '::Usergroup', through: :resource_quotas_usergroups
 
@@ -54,7 +54,7 @@ module ForemanResourceQuota
     def missing_hosts(exclude: [])
       missing_hosts = {}
       active_resources.each do |single_resource|
-        hosts_resources.where(single_resource => nil).find_each do |host_resources_item|
+        hosts_resources.where(single_resource => nil).includes([:host]).find_each do |host_resources_item|
           host_name = host_resources_item.host.name
           next if exclude.include?(host_name)
           missing_hosts[host_name] ||= []
