@@ -43,3 +43,7 @@ Rails/SkipsModelValidations:
 
 Style/FormatStringToken:
   Enabled: false
+
+Rails/DynamicFindBy:
+  Exclude:
+    - "lib/foreman_resource_quota/engine.rb"
