@@ -26,6 +26,10 @@ module ForemanResourceQuota
     scoped_search on: :name, complete_value: true
     scoped_search on: :id, complete_enabled: false, only_explicit: true, validator: ScopedSearch::Validators::INTEGER
 
+    def self.permission_name
+      'resource_quotas'
+    end
+
     def number_of_hosts
       hosts_resources.size
     end

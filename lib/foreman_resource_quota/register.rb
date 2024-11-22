@@ -9,22 +9,22 @@ Foreman::Plugin.register :foreman_resource_quota do
 
   # Add permissions
   security_block :foreman_resource_quota do
-    permission 'view_foreman_resource_quota/resource_quotas',
+    permission :view_resource_quotas,
       { 'foreman_resource_quota/resource_quotas': %i[index welcome auto_complete_search],
         'foreman_resource_quota/api/v2/resource_quotas': %i[index show utilization missing_hosts hosts users usergroups
                                                             auto_complete_search],
         'foreman_resource_quota/api/v2/resource_quotas/:resource_quota_id/': %i[utilization missing_hosts hosts users
                                                                                 usergroups] },
       resource_type: 'ForemanResourceQuota::ResourceQuota'
-    permission 'create_foreman_resource_quota/resource_quotas',
+    permission :create_resource_quotas,
       { 'foreman_resource_quota/resource_quotas': %i[new create],
         'foreman_resource_quota/api/v2/resource_quotas': %i[create] },
       resource_type: 'ForemanResourceQuota::ResourceQuota'
-    permission 'edit_foreman_resource_quota/resource_quotas',
+    permission :edit_resource_quotas,
       { 'foreman_resource_quota/resource_quotas': %i[edit update],
         'foreman_resource_quota/api/v2/resource_quotas': %i[update] },
       resource_type: 'ForemanResourceQuota::ResourceQuota'
-    permission 'destroy_foreman_resource_quota/resource_quotas',
+    permission :destroy_resource_quotas,
       { 'foreman_resource_quota/resource_quotas': %i[destroy],
         'foreman_resource_quota/api/v2/resource_quotas': %i[destroy] },
       resource_type: 'ForemanResourceQuota::ResourceQuota'
@@ -33,18 +33,18 @@ Foreman::Plugin.register :foreman_resource_quota do
   end
 
   # Add a permissions to default roles (Viewer and Manager)
-  role 'Resource Quota Manager', ['view_foreman_resource_quota/resource_quotas',
-                                  'create_foreman_resource_quota/resource_quotas',
-                                  'edit_foreman_resource_quota/resource_quotas',
-                                  'destroy_foreman_resource_quota/resource_quotas',
-                                  'view_hosts',
-                                  'edit_hosts',
-                                  'view_users',
-                                  'edit_users']
-  role 'Resource Quota User', ['view_foreman_resource_quota/resource_quotas',
-                               'view_hosts',
-                               'view_users',
-                               'view_usergroups']
+  role 'Resource Quota Manager', %i[view_resource_quotas
+                                    create_resource_quotas
+                                    edit_resource_quotas
+                                    destroy_resource_quotas
+                                    view_hosts
+                                    edit_hosts
+                                    view_users
+                                    edit_users]
+  role 'Resource Quota User', %i[view_resource_quotas
+                                 view_hosts
+                                 view_users
+                                 view_usergroups]
   add_all_permissions_to_default_roles
 
   # add controller parameter extension
