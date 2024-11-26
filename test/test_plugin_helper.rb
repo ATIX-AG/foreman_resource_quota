@@ -40,6 +40,11 @@ def stub_quota_missing_hosts(return_missing_hosts)
                                      .returns(return_missing_hosts)
 end
 
+def stub_quota_utilization_helper(return_hosts_resources, return_missing_hosts)
+  ForemanResourceQuota::ResourceQuota.any_instance.stubs(:call_utilization_helper)
+                                     .returns([return_hosts_resources, return_missing_hosts])
+end
+
 def stub_host_utilization(return_utilization, return_missing_hosts)
   Host::Managed.any_instance.stubs(:call_utilization_helper).returns([return_utilization, return_missing_hosts])
 end

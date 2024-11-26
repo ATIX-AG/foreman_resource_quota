@@ -51,7 +51,7 @@ module ForemanResourceQuota
 
       # Skip object creation if the admin user is not present
       # skip database manipulations while tables do not exist, like in migrations
-      if ActiveRecord::Base.connection.data_source_exists?(ForemanTasks::Task.table_name) &&
+      if ActiveRecord::Base.connection.data_source_exists?(::ForemanTasks::Task.table_name) &&
          User.unscoped.find_by_login(User::ANONYMOUS_ADMIN).present?
         # Register the scheduled tasks
         ::ForemanTasks.dynflow.config.on_init(false) do |_world|
