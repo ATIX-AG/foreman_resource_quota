@@ -32,6 +32,12 @@ A user is hindered from deploying new hosts, if the new host would exceed the co
 
 Fork and send a Pull Request. Thanks!
 
+## Version Update
+
+1. Create a feature branch `bump/version_x.y.z` and add a version bump commit
+2. If all checks are fine, merge the commit and pull the latest `main` locally
+3. Add a version tag afterwards on `main` and push it
+
 ## Copyright
 
 Copyright (c) 2023 ATIX AG - https://atix.de
