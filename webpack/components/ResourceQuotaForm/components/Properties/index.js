@@ -64,7 +64,7 @@ const Properties = ({
       dispatchAPICallbackToast(
         success,
         response,
-        `Sucessfully fetched latest data.`,
+        `Successfully fetched latest data.`,
         `An error occurred fetching quota information.`
       )
     );

@@ -31,7 +31,7 @@ const Submit = ({ isValid, onCreate, onSubmit }) => {
       dispatchAPICallbackToast(
         success,
         response,
-        `Sucessfully created new Resource Quota`,
+        `Successfully created new Resource Quota`,
         `An error occurred while creating new Resource Quota.`
       )
     );
