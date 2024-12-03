@@ -40,7 +40,7 @@ const TextInputField = ({
       dispatchAPICallbackToast(
         success,
         response,
-        `Sucessfully applied ${label}.`,
+        `Successfully applied ${label}.`,
         `An error occurred appyling ${label}.`
       )
     );

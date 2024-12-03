@@ -74,7 +74,7 @@ const Resource = ({
       dispatchAPICallbackToast(
         success,
         response,
-        `Sucessfully applied ${resourceTitle}.`,
+        `Successfully applied ${resourceTitle}.`,
         `An error occurred appyling ${resourceTitle}.`
       )
     );
