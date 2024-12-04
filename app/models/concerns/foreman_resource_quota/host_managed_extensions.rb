@@ -19,7 +19,7 @@ module ForemanResourceQuota
 
       # A host shall always have a .host_resources attribute
       before_validation :build_host_resources, unless: -> { host_resources.present? }
-      after_save :save_host_resources, if: -> { host_resources.changed? }
+      after_save :save_host_resources, if: -> { host_resources&.changed? }
     end
 
     def verify_resource_quota
