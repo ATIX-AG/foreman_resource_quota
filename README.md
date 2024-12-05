@@ -4,10 +4,11 @@
 # Foreman Resource Quota
 
 Foreman plugin to allow resource management with resource quotas among users and usergroups.
+For more information, see [Limiting host resources](https://docs.theforeman.org/nightly/Administering_Project/index-katello.html#limiting-host-resources).
 
 ## Installation
 
-_TODO_ Still under development: Will be updated as soon as the Ruby gem, foreman-installer, or rpm is available.
+[Installing the Resource Quota plugin](https://docs.theforeman.org/nightly/Administering_Project/index-katello.html#installing-the-resource-quota-plugin)
 
 ## Compatibility
 
