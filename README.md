@@ -7,7 +7,7 @@ Foreman plugin to allow resource management with resource quotas among users and
 
 ## Installation
 
-_TODO_ Still under development: Will be updated as soon as the Ruby gem,  foreman-installer, or rpm is available.
+_TODO_ Still under development: Will be updated as soon as the Ruby gem, foreman-installer, or rpm is available.
 
 ## Compatibility
 
@@ -55,4 +55,3 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
