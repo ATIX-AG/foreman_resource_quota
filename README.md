@@ -13,6 +13,7 @@ _TODO_ Still under development: Will be updated as soon as the Ruby gem,  forema
 
 | Foreman Version | Plugin Version |
 | --------------- | -------------- |
+| 3.11            |    0.3.1       |
 | 3.5             |    0.0.1       |
 
 ## Usage
