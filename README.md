@@ -21,7 +21,7 @@ _TODO_ Still under development: Official documentation will be added soon.
 
 When several users share a compute resource or infrastructure, there is a concern that some users could use more than its fair share of resources. Resource quotas are a tool for administrators to address this concern. They limit access to the shared resource in order to guarantee a fair collaboration.
 
-In the context of Foreman, multiple users or groups usually share a fixed number of resources (limitation of compute resources like RAM, disk space, and CPU cores). As of now, a user cannot be limited when allocating resources. They can create hosts with as many resources as they want. This could lead to over-usage or unequal balancing of resources under the users.
+In the context of Foreman, multiple users or groups usually share a fixed number of resources (limitation of compute resources like CPU cores, memory, and disk space). As of now, a user cannot be limited when allocating resources. They can create hosts with as many resources as they want. This could lead to over-usage or unequal balancing of resources under the users.
 
 This plugin introduces the configuration of resource quotas. A quota limits specific resources and can be applied to a user or a user group. If a user belongs to a user group, the group’s quota is automatically applied to the user as well. When deploying a new host, a user has to choose a resource quota that the host counts to.
 
