@@ -35,7 +35,7 @@ const ResourceQuotaEmptyState = () => {
         iconType="pf"
         header={__('Resource Quotas')}
         description={__(
-          'Resource Quotas help admins to manage hardware resources (like CPUs, RAM, and disk space) among users or usergroups. \n\rDefine a Resource Quota here and apply it to users in order to guarantee a free share of your resources.'
+          'Resource Quotas help admins to manage hardware resources including CPUs, memory, and disk space among users or usergroups. \n\rDefine a Resource Quota here and apply it to users in order to guarantee a free share of your resources.'
         )}
         action={ActionButton}
       />
