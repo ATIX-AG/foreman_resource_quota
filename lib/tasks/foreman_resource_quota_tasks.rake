@@ -16,10 +16,10 @@ end
 namespace :test do
   desc 'Test ForemanResourceQuota'
   Rake::TestTask.new(:foreman_resource_quota) do |t|
-    test_dir = File.expand_path('../../test', __dir__)
-    t.libs << 'test'
-    t.libs << test_dir
+    test_dir = File.join(__dir__, '..', '..', 'test')
+    t.libs << ['test', test_dir]
     t.pattern = "#{test_dir}/**/*_test.rb"
+    t.test_files = [Rails.root.join('test/unit/foreman/access_permissions_test.rb')]
     t.verbose = true
     t.warning = false
   end
