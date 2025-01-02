@@ -63,7 +63,11 @@ module ForemanResourceQuota
 
         def_param_group :resource_quota do
           param :resource_quota, Hash, required: true, action_aware: true do
-            param :name, String, required: true
+            param :name, String, required: true, desc: N_('Name of the resource quota')
+            param :description, String, required: false, desc: N_('Description of the resource quota')
+            param :cpu_cores, Integer, required: false, desc: N_('Maximum number of CPU cores')
+            param :memory_mb, Integer, required: false, desc: N_('Maximum memory in MiB')
+            param :disk_gb, Integer, required: false, desc: N_('Maximum disk space in GiB')
           end
         end
 
