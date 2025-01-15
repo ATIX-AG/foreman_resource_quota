@@ -45,7 +45,9 @@ module ForemanResourceQuota
     end
 
     # Register ForemanTasks-based recurring logic/scheduled tasks
-    initializer 'foreman_resource_quota.register_scheduled_tasks', before: :finisher_hook do |_app|
+    initializer 'foreman_resource_quota.register_scheduled_tasks',
+      before: :finisher_hook,
+      after: :build_middleware_stack do |_app| # ForemanTasks::Task becomes only available after this hook
       action_paths = [ForemanResourceQuota::Engine.root.join('lib/foreman_resource_quota/async')]
       ::ForemanTasks.dynflow.config.eager_load_paths.concat(action_paths)
 
