@@ -13,6 +13,13 @@ module ForemanResourceQuota
           api_base_url '/foreman_resource_quota/api'
         end
 
+        begin
+          # add backwords compatibility here, the method is only available for Foreman 3.14
+          hide_taxonomy_options
+        rescue NameError
+          # we can ignore the error
+        end
+
         before_action :find_resource, only: %i[show update destroy]
         before_action :custom_find_resource, only: %i[utilization missing_hosts hosts users usergroups]
 
