@@ -40,6 +40,11 @@ module ForemanResourceQuota
       ::User.include ForemanResourceQuota::UserExtensions
       ::Usergroup.include ForemanResourceQuota::UsergroupExtensions
       ::Host::Managed.include ForemanResourceQuota::HostManagedExtensions
+
+      # Api controller extensions
+      ::Api::V2::HostsController.include ForemanResourceQuota::Concerns::Api::V2::HostsControllerExtensions
+      ::Api::V2::UsersController.include ForemanResourceQuota::Concerns::Api::V2::UsersControllerExtensions
+      ::Api::V2::UsergroupsController.include ForemanResourceQuota::Concerns::Api::V2::UsergroupsControllerExtensions
     rescue StandardError => e
       Rails.logger.warn "ForemanResourceQuota: skipping engine hook (#{e})"
     end
