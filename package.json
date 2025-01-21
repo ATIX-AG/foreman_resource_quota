@@ -1,6 +1,10 @@
 {
   "name": "foreman_resource_quota",
   "version": "1.0.0",
+  "engines": {
+    "node": ">= 18.0.0 < 21.0.0",
+    "npm": ">= 10.0.0"
+  },
   "description": "DESCRIPTION",
   "main": "index.js",
   "scripts": {
