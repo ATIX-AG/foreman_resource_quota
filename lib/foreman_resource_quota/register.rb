@@ -7,6 +7,8 @@ Foreman::Plugin.register :foreman_resource_quota do
   apipie_documented_controllers ["#{ForemanResourceQuota::Engine.root}" \
                                  '/app/controllers/foreman_resource_quot/api/v2/*.rb']
 
+  register_gettext
+
   # Add permissions
   security_block :foreman_resource_quota do
     permission :view_resource_quotas,
