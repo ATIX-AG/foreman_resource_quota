@@ -46,7 +46,6 @@ module ForemanResourceQuota
           N_('Show resources could not be determined when calculating utilization')
         param :id, :identifier, required: true
         def missing_hosts
-          @resource_quota.determine_utilization
           process_response @resource_quota
         end
 
