@@ -11,13 +11,10 @@ module ForemanResourceQuota
           resource_id 'resource_quota'
           api_version 'v2'
           api_base_url '/foreman_resource_quota/api'
-        end
-
-        begin
-          # add backwords compatibility here, the method is only available for Foreman 3.14
-          hide_taxonomy_options
-        rescue NameError
-          # we can ignore the error
+          # resource quota are not bound to org/loc - so we remove the parameters from api here
+          # loc/org are inherited from the ::Api::V2::BaseController in Foreman
+          param :location_id, Integer, show: false
+          param :organization_id, Integer, show: false
         end
 
         before_action :find_resource, only: %i[show update destroy]
