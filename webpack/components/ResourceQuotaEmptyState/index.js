@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Modal, ModalVariant } from '@patternfly/react-core';
 
 import { translate as __ } from 'foremanReact/common/I18n';
+import { getDocsURL } from 'foremanReact/common/helpers';
 import EmptyStatePattern from 'foremanReact/components/common/EmptyState/EmptyStatePattern';
 
 import ResourceQuotaForm from '../ResourceQuotaForm';
@@ -28,16 +29,32 @@ const ResourceQuotaEmptyState = () => {
       {__('Create resource quota')}
     </Button>
   );
+
+  const description = (
+    <span>
+      {__(
+        'Resource Quotas help admins to manage resources including CPUs, memory, and disk space among users or user groups.'
+      )}
+      <br />
+      {__(
+        'Define a Resource Quota here and apply it to users to guarantee a fair share of your resources.'
+      )}
+      <br />
+    </span>
+  );
+  const documentation = {
+    url: getDocsURL('Administering_Project', 'limiting-host-resources'),
+  };
+
   return (
     <div>
       <EmptyStatePattern
         icon="pficon pficon-cluster"
         iconType="pf"
         header={__('Resource Quotas')}
-        description={__(
-          'Resource Quotas help admins to manage hardware resources including CPUs, memory, and disk space among users or usergroups. \n\rDefine a Resource Quota here and apply it to users in order to guarantee a free share of your resources.'
-        )}
+        description={description}
         action={ActionButton}
+        documentation={documentation}
       />
       <Modal
         ouiaId={MODAL_ID_CREATE_RESOURCE_QUOTA}

@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResourceQuotaEmptyState should render 1`] = `
+<div>
+  <EmptyStatePattern
+    action={
+      <Button
+        id="foreman-resource-quota-welcome-create-modal-button"
+        onClick={[Function]}
+        variant="primary"
+      >
+        Create resource quota
+      </Button>
+    }
+    description={
+      <span>
+        Resource Quotas help admins to manage resources including CPUs, memory, and disk space among users or user groups.
+        <br />
+        Define a Resource Quota here and apply it to users to guarantee a fair share of your resources.
+        <br />
+      </span>
+    }
+    documentation={
+      Object {
+        "url": "/links/docs/Administering_Project?chapter=limiting-host-resources",
+      }
+    }
+    header="Resource Quotas"
+    icon="pficon pficon-cluster"
+    iconType="pf"
+    secondaryActions={Array []}
+  />
+  <Modal
+    actions={Array []}
+    appendTo={<body />}
+    aria-describedby=""
+    aria-label=""
+    aria-labelledby=""
+    className=""
+    hasNoBodyWrapper={false}
+    isOpen={false}
+    onClose={[Function]}
+    ouiaId="foreman-resource-quota-create-modal"
+    ouiaSafe={true}
+    showClose={true}
+    title="Create resource quota"
+    titleIconVariant={null}
+    titleLabel=""
+    variant="small"
+  >
+    <ResourceQuotaForm
+      initialProperties={
+        Object {
+          "cpu_cores": null,
+          "description": "",
+          "disk_gb": null,
+          "memory_mb": null,
+          "name": "",
+        }
+      }
+      initialStatus={
+        Object {
+          "missing_hosts": null,
+          "number_of_hosts": null,
+          "number_of_usergroups": null,
+          "number_of_users": null,
+          "utilization": Object {
+            "cpu_cores": null,
+            "disk_gb": null,
+            "memory_mb": null,
+          },
+        }
+      }
+      isNewQuota={true}
+      onSubmit={[Function]}
+      quotaChangesCallback={null}
+    />
+  </Modal>
+</div>
+`;
