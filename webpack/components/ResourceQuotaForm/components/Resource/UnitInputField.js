@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import {
   FormGroup,
+  FormHelperText,
   TextInput,
   InputGroup,
   InputGroupText,
@@ -65,10 +66,15 @@ const UnitInputField = ({
     []
   );
 
-  /* text for float errors */
-  const errorTextFloating = useCallback(
-    () => __(`No floating point for smallest unit (${units[0].symbol}).`),
+  /* text for float inputs (rounding) */
+  const warningTextRounded = useCallback(
+    roundedValue => __(`Rounding to: ${roundedValue} (${units[0].symbol}).`),
     [units]
+  );
+
+  /* warning text displayed beneath value input field (built-in is used for errors) */
+  const helperTextWarning = (text, isHidden) => (
+    <FormHelperText isHidden={isHidden}>{text}</FormHelperText>
   );
 
   /* applies the selected unit and checks the bounds */
@@ -83,20 +89,9 @@ const UnitInputField = ({
         setErrorText(errorTextBounds());
         return false;
       }
-      if (baseValue !== Math.floor(baseValue)) {
-        setErrorText(errorTextFloating());
-        return false;
-      }
       return true;
     },
-    [
-      minValue,
-      maxValue,
-      valueToBaseUnit,
-      errorTextNatural,
-      errorTextBounds,
-      errorTextFloating,
-    ]
+    [minValue, maxValue, valueToBaseUnit, errorTextNatural, errorTextBounds]
   );
 
   /* applies the selected unit and returns the base-unit value */
@@ -116,9 +111,17 @@ const UnitInputField = ({
       setValidated('default');
     } else if (isValid(inputValue)) {
       const baseValue = valueToBaseUnit(inputValue);
-      onChange(baseValue);
+      let validatedValue = baseValue;
+      if (baseValue !== Math.floor(baseValue)) {
+        validatedValue = Math.floor(baseValue);
+        setErrorText(warningTextRounded(validatedValue));
+        setValidated('warning');
+      } else {
+        // Keep baseValue as validatedValue
+        setValidated('default');
+      }
+      onChange(validatedValue);
       handleInputValidation(true);
-      setValidated('default');
     } else {
       handleInputValidation(false);
       setValidated('error');
@@ -131,6 +134,7 @@ const UnitInputField = ({
     onChange,
     isValid,
     valueToBaseUnit,
+    warningTextRounded,
   ]);
 
   /* set the selected unit */
@@ -181,6 +185,7 @@ const UnitInputField = ({
       label={__('Quota Limit')}
       validated={validated}
       helperTextInvalid={errorText}
+      helperText={helperTextWarning(errorText, validated !== 'warning')}
       fieldId="quota-limit-resource-quota-form-group"
       labelIcon={labelIcon || {}}
     >
