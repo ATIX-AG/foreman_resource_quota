@@ -34,7 +34,7 @@
     "@theforeman/test": ">= 12.0.1",
     "@theforeman/vendor-dev": ">= 12.0.1",
     "babel-eslint": "^10.0.3",
-    "eslint": "^6.7.2",
+    "eslint": "^9.19.0",
     "prettier": "^1.19.1",
     "react-redux-test-utils": "^0.2.0",
     "stylelint": "^16.14.1",
