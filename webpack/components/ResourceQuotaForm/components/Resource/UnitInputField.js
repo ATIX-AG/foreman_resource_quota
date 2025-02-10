@@ -61,10 +61,7 @@ const UnitInputField = ({
   }, [minValue, maxValue, selectedUnit]);
 
   /* text for float errors */
-  const errorTextNatural = useCallback(
-    () => __('Value must be a natural number.'),
-    []
-  );
+  const errorTextNatural = useCallback(() => __('Value must be a number.'), []);
 
   /* text for float inputs (rounding) */
   const warningTextRounded = useCallback(
