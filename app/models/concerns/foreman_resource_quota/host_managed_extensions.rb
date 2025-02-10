@@ -28,15 +28,15 @@ module ForemanResourceQuota
     rescue ResourceQuotaException => e
       handle_error('resource_quota_id',
         e.bare_message,
-        format('An error occured while checking the resource quota capacity: %s', e))
+        format('An error occured while checking the Resource Quota capacity: %s', e))
     rescue Foreman::Exception => e
       handle_error(:base,
         e.bare_message,
-        format('An unexpected Foreman error occured while checking the resource quota capacity: %s', e))
+        format('An unexpected Foreman error occured while checking the Resource Quota capacity: %s', e))
     rescue StandardError => e
       handle_error(:base,
         e.message,
-        format('An unknown error occured while checking the resource quota capacity: %s', e))
+        format('An unknown error occured while checking the Resource Quota capacity: %s', e))
     end
 
     def resource_quota_id
@@ -124,8 +124,8 @@ module ForemanResourceQuota
     end
 
     def formulate_quota_inconsistency_error(quota_name)
-      N_("An error occured adapting the resource quota utilization of '#{quota_name}' " \
-         "while processing host '#{name}'. The resource quota utilization values might be inconsistent.")
+      N_("An error occured adapting the Resource Quota utilization of '#{quota_name}' " \
+         "while processing host '#{name}'. The Resource Quota utilization values might be inconsistent.")
     end
 
     def early_return?(quota)

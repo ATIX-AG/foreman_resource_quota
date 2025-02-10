@@ -95,13 +95,13 @@ Foreman::Plugin.register :foreman_resource_quota do
         type: :boolean,
         default: false,
         full_name: N_('Resource Quota optional assignment'),
-        description: N_('Make the assignment of a Resource quota, during the host creation process, optional for
+        description: N_('Make the assignment of a Resource Quota, during the host creation process, optional for
                         everyone. If this is true, user-specific "optional assignment" configurations are neglected.')
       setting 'resource_quota_global_no_action',
         type: :boolean,
         default: true,
         full_name: N_('Global Resource Quota no action'),
-        description: N_('Take no action when a resource quota is exceeded.')
+        description: N_('Take no action when a Resource Quota is exceeded.')
       # Future: Overwrite quota-specific "out of resource"-action and take no ..
     end
   end

@@ -15,7 +15,7 @@ module ForemanResourceQuota
     test 'should get index' do
       get :index, session: set_session_user
       assert_response :success
-      assert_select 'title', 'Resource quotas'
+      assert_select 'title', 'Resource Quotas'
     end
 
     test 'should destroy quota' do

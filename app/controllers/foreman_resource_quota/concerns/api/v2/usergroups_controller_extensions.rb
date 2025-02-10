@@ -9,7 +9,7 @@ module ForemanResourceQuota
           update_api(:create, :update) do
             param :usergroup, Hash do
               param :resource_quota_ids, Array, of: :number, required: false,
-    desc: N_('Resource quota IDs to be associated with this user group. ')
+                desc: N_('Resource Quota IDs to be associated with this user group. ')
             end
           end
         end
