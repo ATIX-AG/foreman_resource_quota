@@ -1,12 +1,21 @@
-# foreman_resource_quota
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the foreman_resource_quota package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-# This file is distributed under the same license as foreman_resource_quota.
+# Translators:
+# Bryan Kearney <bryan.kearney@gmail.com>, 2025
+# Ewoud Kohl van Wijngaarden <ewoud+transifex@kohlvanwijngaarden.nl>, 2025
+# Amit Upadhye <aupadhye@redhat.com>, 2025
+# fe37ea014ea122db60df81cd86b163af_742ef71 <ba9f59c06b0be83ac3724b1834a4c14b_93939>, 2025
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: foreman_resource_quota 0.3.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2025-01-07 14:34+0000\n"
+"Last-Translator: fe37ea014ea122db60df81cd86b163af_742ef71 <ba9f59c06b0be83ac37"
+"24b1834a4c14b_93939>, 2025\n"
 "Language-Team: Spanish (https://app.transifex.com/foreman/teams/114/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,10 +37,10 @@ msgid "${selectedUnit.symbol}"
 msgstr ""
 
 msgid "Actions"
-msgstr ""
+msgstr "Acciones"
 
 msgid "Apply"
-msgstr ""
+msgstr "Solicitar"
 
 msgid "CPU cores"
 msgstr ""
@@ -42,32 +51,35 @@ msgstr ""
 msgid "Consumed resources"
 msgstr ""
 
-msgid "Create a resource quota"
+msgid "Create a Resource Quota"
 msgstr ""
 
 msgid "Create resource quota"
+msgstr ""
+
+msgid "Define a Resource Quota here and apply it to users to guarantee a fair share of your resources."
 msgstr ""
 
 msgid "Define the Resource Quota this host counts to."
 msgstr ""
 
 msgid "Delete %s?"
-msgstr ""
+msgstr "Borrar %s?"
 
-msgid "Delete a resource quota"
+msgid "Delete a Resource Quota"
 msgstr ""
 
 msgid "Description"
-msgstr ""
+msgstr "Descripción"
 
-msgid "Description of the resource quota"
+msgid "Description of the Resource Quota"
 msgstr ""
 
 msgid "Disk space (GB)"
 msgstr ""
 
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
 msgid "Edit Resource Quota %s"
 msgstr ""
@@ -87,11 +99,11 @@ msgstr ""
 msgid "It is optional for a user to assign a quota when creating new hosts"
 msgstr ""
 
-msgid "List all resource quotas"
+msgid "List all Resource Quotas"
 msgstr ""
 
 msgid ""
-"Make the assignment of a Resource quota, during the host creation process, optional for\n"
+"Make the assignment of a Resource Quota, during the host creation process, optional for\n"
 "                        everyone. If this is true, user-specific \"optional assignment\" configurations are neglected."
 msgstr ""
 
@@ -108,9 +120,9 @@ msgid "Memory (MB)"
 msgstr ""
 
 msgid "Name"
-msgstr ""
+msgstr "名称"
 
-msgid "Name of the resource quota"
+msgid "Name of the Resource Quota"
 msgstr ""
 
 msgid "New Resource Quota"
@@ -140,10 +152,18 @@ msgstr ""
 msgid "Quotas from user groups"
 msgstr ""
 
-msgid "Refresh resource quota utilization"
+msgid "Resource Quota"
 msgstr ""
 
-msgid "Resource Quota"
+msgid ""
+"Resource Quota ID.\n"
+"                         This field is required if the setting `resource_quota_optional_assignment` is set to false."
+msgstr ""
+
+msgid "Resource Quota IDs to be associated with this user group. "
+msgstr ""
+
+msgid "Resource Quota IDs to be associated with this user. "
 msgstr ""
 
 msgid "Resource Quota optional assignment"
@@ -152,30 +172,16 @@ msgstr ""
 msgid "Resource Quotas"
 msgstr ""
 
-msgid "Resource Quotas help admins to manage hardware resources including CPUs, memory, and disk space among users or usergroups. \\n\\rDefine a Resource Quota here and apply it to users in order to guarantee a free share of your resources."
+msgid "Resource Quotas help admins to manage resources including CPUs, memory, and disk space among users or user groups."
 msgstr ""
 
 msgid "Resource Quota|Name"
 msgstr ""
 
-msgid ""
-"Resource quota ID.\n"
-"                         This field is required if the setting `resource_quota_optional_assignment` is set to false."
+msgid "Show Resource Quota"
 msgstr ""
 
-msgid "Resource quota IDs to be associated with this user group. "
-msgstr ""
-
-msgid "Resource quota IDs to be associated with this user. "
-msgstr ""
-
-msgid "Resource quotas"
-msgstr ""
-
-msgid "Show hosts of a resource quota"
-msgstr ""
-
-msgid "Show resource quota"
+msgid "Show hosts of a Resource Quota"
 msgstr ""
 
 msgid "Show resources could not be determined when calculating utilization"
@@ -184,13 +190,13 @@ msgstr ""
 msgid "Show used resources of assigned hosts"
 msgstr ""
 
-msgid "Show usergroups of a resource quota"
+msgid "Show usergroups of a Resource Quota"
 msgstr ""
 
-msgid "Show users of a resource quota"
+msgid "Show users of a Resource Quota"
 msgstr ""
 
-msgid "Take no action when a resource quota is exceeded."
+msgid "Take no action when a Resource Quota is exceeded."
 msgstr ""
 
 msgid "The total amount of ${resourceTitle} for this quota."
@@ -205,7 +211,7 @@ msgstr ""
 msgid "Total ${resourceTitle} currently in use by all hosts assigned to this quota."
 msgstr ""
 
-msgid "Update a resource quota"
+msgid "Update a Resource Quota"
 msgstr ""
 
 msgid "Value must be a natural number."
@@ -213,5 +219,5 @@ msgstr ""
 
 msgid ""
 "When set to \"true\", it is optional for a user to assign a quota when creating new hosts.\n"
-"                         The default value is \"false\"."
+"                                   The default value is \"false\"."
 msgstr ""

@@ -1,12 +1,18 @@
-# foreman_resource_quota
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the foreman_resource_quota package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-# This file is distributed under the same license as foreman_resource_quota.
+# Translators:
+# 0868a4d1af5275b3f70b0a6dac4c99a4, 2025
+# Andi Chandler <andi@gowling.com>, 2025
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: foreman_resource_quota 0.3.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2025-01-07 14:34+0000\n"
+"Last-Translator: Andi Chandler <andi@gowling.com>, 2025\n"
 "Language-Team: English (United Kingdom) (https://app.transifex.com/foreman/tea"
 "ms/114/en_GB/)\n"
 "MIME-Version: 1.0\n"
@@ -16,202 +22,199 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid " ${response.response.data.error.full_messages}"
-msgstr ""
+msgstr " ${response.response.data.error.full_messages}"
 
 msgid "${label}"
-msgstr ""
+msgstr "${label}"
 
 msgid "${label} *"
-msgstr ""
+msgstr "${label} *"
 
 msgid "${selectedUnit.symbol}"
-msgstr ""
+msgstr "${selectedUnit.symbol}"
 
 msgid "Actions"
-msgstr ""
+msgstr "Actions"
 
 msgid "Apply"
-msgstr ""
+msgstr "Apply"
 
 msgid "CPU cores"
-msgstr ""
+msgstr "CPU cores"
 
 msgid "Click on \\\"Fetch quota utilization\\\": "
-msgstr ""
+msgstr "Click on \\\"Fetch quota utilisation\\\": "
 
 msgid "Consumed resources"
-msgstr ""
+msgstr "Consumed resources"
 
-msgid "Create a resource quota"
+msgid "Create a Resource Quota"
 msgstr ""
 
 msgid "Create resource quota"
+msgstr "Create resource quota"
+
+msgid "Define a Resource Quota here and apply it to users to guarantee a fair share of your resources."
 msgstr ""
 
 msgid "Define the Resource Quota this host counts to."
-msgstr ""
+msgstr "Define the Resource Quota this host counts to."
 
 msgid "Delete %s?"
-msgstr ""
+msgstr "Delete %s?"
 
-msgid "Delete a resource quota"
+msgid "Delete a Resource Quota"
 msgstr ""
 
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
-msgid "Description of the resource quota"
+msgid "Description of the Resource Quota"
 msgstr ""
 
 msgid "Disk space (GB)"
-msgstr ""
+msgstr "Disk space (GB)"
 
 msgid "Edit"
-msgstr ""
+msgstr "Edit"
 
 msgid "Edit Resource Quota %s"
-msgstr ""
+msgstr "Edit Resource Quota %s"
 
 msgid "Edit: ${quotaProperties[RESOURCE_IDENTIFIER_NAME]}"
-msgstr ""
+msgstr "Edit: ${quotaProperties[RESOURCE_IDENTIFIER_NAME]}"
 
 msgid "Fetch quota utilization"
-msgstr ""
+msgstr "Fetch quota utilisation"
 
 msgid "Foreman Plug-in to manage resource usage among users."
-msgstr ""
+msgstr "Foreman Plug-in to manage resource usage among users."
 
 msgid "Global Resource Quota no action"
-msgstr ""
+msgstr "Global Resource Quota no action"
 
 msgid "It is optional for a user to assign a quota when creating new hosts"
-msgstr ""
+msgstr "It is optional for a user to assign a quota when creating new hosts"
 
-msgid "List all resource quotas"
+msgid "List all Resource Quotas"
 msgstr ""
 
 msgid ""
-"Make the assignment of a Resource quota, during the host creation process, optional for\n"
+"Make the assignment of a Resource Quota, during the host creation process, optional for\n"
 "                        everyone. If this is true, user-specific \"optional assignment\" configurations are neglected."
 msgstr ""
 
 msgid "Maximum disk space in GiB"
-msgstr ""
+msgstr "Maximum disk space in GiB"
 
 msgid "Maximum memory in MiB"
-msgstr ""
+msgstr "Maximum memory in MiB"
 
 msgid "Maximum number of CPU cores"
-msgstr ""
+msgstr "Maximum number of CPU cores"
 
 msgid "Memory (MB)"
-msgstr ""
+msgstr "Memory (MB)"
 
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
-msgid "Name of the resource quota"
+msgid "Name of the Resource Quota"
 msgstr ""
 
 msgid "New Resource Quota"
-msgstr ""
+msgstr "New Resource Quota"
 
 msgid "New quota - no consumption to display."
-msgstr ""
+msgstr "New quota - no consumption to display."
 
 msgid "No consumption to display."
-msgstr ""
+msgstr "No consumption to display."
 
 msgid "No floating point for smallest unit (${units[0].symbol})."
-msgstr ""
+msgstr "No floating point for smallest unit (${units[0].symbol})."
 
 msgid "None provided"
-msgstr ""
+msgstr "None provided"
 
 msgid "Optional Assignment"
-msgstr ""
+msgstr "Optional Assignment"
 
 msgid "Properties"
-msgstr ""
+msgstr "Properties"
 
 msgid "Quota Limit"
-msgstr ""
+msgstr "Quota Limit"
 
 msgid "Quotas from user groups"
-msgstr ""
-
-msgid "Refresh resource quota utilization"
-msgstr ""
+msgstr "Quotas from user groups"
 
 msgid "Resource Quota"
-msgstr ""
-
-msgid "Resource Quota optional assignment"
-msgstr ""
-
-msgid "Resource Quotas"
-msgstr ""
-
-msgid "Resource Quotas help admins to manage hardware resources including CPUs, memory, and disk space among users or usergroups. \\n\\rDefine a Resource Quota here and apply it to users in order to guarantee a free share of your resources."
-msgstr ""
-
-msgid "Resource Quota|Name"
-msgstr ""
+msgstr "Resource Quota"
 
 msgid ""
-"Resource quota ID.\n"
+"Resource Quota ID.\n"
 "                         This field is required if the setting `resource_quota_optional_assignment` is set to false."
 msgstr ""
 
-msgid "Resource quota IDs to be associated with this user group. "
+msgid "Resource Quota IDs to be associated with this user group. "
 msgstr ""
 
-msgid "Resource quota IDs to be associated with this user. "
+msgid "Resource Quota IDs to be associated with this user. "
 msgstr ""
 
-msgid "Resource quotas"
+msgid "Resource Quota optional assignment"
+msgstr "Resource Quota optional assignment"
+
+msgid "Resource Quotas"
+msgstr "Resource Quotas"
+
+msgid "Resource Quotas help admins to manage resources including CPUs, memory, and disk space among users or user groups."
 msgstr ""
 
-msgid "Show hosts of a resource quota"
+msgid "Resource Quota|Name"
+msgstr "Resource Quota|Name"
+
+msgid "Show Resource Quota"
 msgstr ""
 
-msgid "Show resource quota"
+msgid "Show hosts of a Resource Quota"
 msgstr ""
 
 msgid "Show resources could not be determined when calculating utilization"
-msgstr ""
+msgstr "Show resources could not be determined when calculating utilisation"
 
 msgid "Show used resources of assigned hosts"
+msgstr "Show used resources of assigned hosts"
+
+msgid "Show usergroups of a Resource Quota"
 msgstr ""
 
-msgid "Show usergroups of a resource quota"
+msgid "Show users of a Resource Quota"
 msgstr ""
 
-msgid "Show users of a resource quota"
-msgstr ""
-
-msgid "Take no action when a resource quota is exceeded."
+msgid "Take no action when a Resource Quota is exceeded."
 msgstr ""
 
 msgid "The total amount of ${resourceTitle} for this quota."
-msgstr ""
+msgstr "The total amount of ${resourceTitle} for this quota."
 
 msgid "This can take some time since the resources of every host, assigned to this quota, must be requested."
-msgstr ""
+msgstr "This can take some time since the resources of every host, assigned to this quota, must be requested."
 
 msgid "This group has no quotas"
-msgstr ""
+msgstr "This group has no quotas"
 
 msgid "Total ${resourceTitle} currently in use by all hosts assigned to this quota."
-msgstr ""
+msgstr "Total ${resourceTitle} currently in use by all hosts assigned to this quota."
 
-msgid "Update a resource quota"
+msgid "Update a Resource Quota"
 msgstr ""
 
 msgid "Value must be a natural number."
-msgstr ""
+msgstr "Value must be a natural number."
 
 msgid ""
 "When set to \"true\", it is optional for a user to assign a quota when creating new hosts.\n"
-"                         The default value is \"false\"."
+"                                   The default value is \"false\"."
 msgstr ""
