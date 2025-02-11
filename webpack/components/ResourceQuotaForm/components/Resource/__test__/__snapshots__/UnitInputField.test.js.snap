@@ -1,0 +1,155 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UnitInputField should render as disabled field 1`] = `
+<FormGroup
+  fieldId="quota-limit-resource-quota-form-group"
+  helperText={
+    <FormHelperText
+      isHidden={true}
+    >
+      
+    </FormHelperText>
+  }
+  helperTextInvalid=""
+  label="Quota Limit"
+  labelIcon={
+    <LabelIcon
+      text="Descriptive title."
+    />
+  }
+  validated="default"
+>
+  <InputGroup>
+    <TextInput
+      id="reg_token_life_time_input"
+      isDisabled={true}
+      max={5}
+      min={0}
+      onChange={[Function]}
+      validated="default"
+      value={0}
+    />
+    <Dropdown
+      dropdownItems={
+        Array [
+          <DropdownItem
+            id="unit-dropdownitem-mib"
+          >
+            MiB
+          </DropdownItem>,
+          <DropdownItem
+            id="unit-dropdownitem-gib"
+          >
+            GiB
+          </DropdownItem>,
+        ]
+      }
+      isOpen={false}
+      onSelect={[Function]}
+      toggle={
+        <DropdownToggle
+          isDisabled={true}
+          onToggle={[Function]}
+        >
+          MiB
+        </DropdownToggle>
+      }
+    />
+  </InputGroup>
+</FormGroup>
+`;
+
+exports[`UnitInputField should render default 1`] = `
+<FormGroup
+  fieldId="quota-limit-resource-quota-form-group"
+  helperText={
+    <FormHelperText
+      isHidden={true}
+    >
+      
+    </FormHelperText>
+  }
+  helperTextInvalid=""
+  label="Quota Limit"
+  labelIcon={
+    <LabelIcon
+      text="Descriptive title."
+    />
+  }
+  validated="default"
+>
+  <InputGroup>
+    <TextInput
+      id="reg_token_life_time_input"
+      isDisabled={false}
+      max={5}
+      min={0}
+      onChange={[Function]}
+      validated="default"
+      value={0}
+    />
+    <Dropdown
+      dropdownItems={
+        Array [
+          <DropdownItem
+            id="unit-dropdownitem-mib"
+          >
+            MiB
+          </DropdownItem>,
+          <DropdownItem
+            id="unit-dropdownitem-gib"
+          >
+            GiB
+          </DropdownItem>,
+        ]
+      }
+      isOpen={false}
+      onSelect={[Function]}
+      toggle={
+        <DropdownToggle
+          isDisabled={false}
+          onToggle={[Function]}
+        >
+          MiB
+        </DropdownToggle>
+      }
+    />
+  </InputGroup>
+</FormGroup>
+`;
+
+exports[`UnitInputField should render without dropdown (single unit) 1`] = `
+<FormGroup
+  fieldId="quota-limit-resource-quota-form-group"
+  helperText={
+    <FormHelperText
+      isHidden={true}
+    >
+      
+    </FormHelperText>
+  }
+  helperTextInvalid=""
+  label="Quota Limit"
+  labelIcon={
+    <LabelIcon
+      text="Descriptive title."
+    />
+  }
+  validated="default"
+>
+  <InputGroup>
+    <TextInput
+      id="reg_token_life_time_input"
+      isDisabled={false}
+      max={5}
+      min={0}
+      onChange={[Function]}
+      validated="default"
+      value={0}
+    />
+    <InputGroupText>
+      cores
+    </InputGroupText>
+  </InputGroup>
+</FormGroup>
+`;
