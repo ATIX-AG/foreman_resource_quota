@@ -19,14 +19,14 @@ export const RESOURCE_NAME_DISK = 'Disk space';
 /* Resource units (order the units with increasing factor!) */
 export const RESOURCE_UNIT_CPU = [{ symbol: 'cores', factor: 1 }];
 export const RESOURCE_UNIT_MEMORY = [
-  { symbol: 'MB', factor: 1 },
-  { symbol: 'GB', factor: 1024 },
-  { symbol: 'TB', factor: 1024 * 1024 },
+  { symbol: 'MiB', factor: 1 },
+  { symbol: 'GiB', factor: 1024 },
+  { symbol: 'TiB', factor: 1024 * 1024 },
 ];
 export const RESOURCE_UNIT_DISK = [
-  { symbol: 'GB', factor: 1 },
-  { symbol: 'TB', factor: 1024 },
-  { symbol: 'PB', factor: 1024 * 1024 },
+  { symbol: 'GiB', factor: 1 },
+  { symbol: 'TiB', factor: 1024 },
+  { symbol: 'PiB', factor: 1024 * 1024 },
 ];
 
 /* Resource value bounds */
