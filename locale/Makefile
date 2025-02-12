@@ -70,4 +70,4 @@ mo-files: $(MOFILES)
 	git commit -m "i18n - pulling from tx"
 	@echo
 	@echo Changes commited!
-	echo
+	@echo

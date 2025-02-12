@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_resource_quota 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-20 15:04+0000\n"
-"PO-Revision-Date: 2025-01-20 15:04+0000\n"
+"POT-Creation-Date: 2025-02-10 20:06+0100\n"
+"PO-Revision-Date: 2025-02-10 20:06+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -19,96 +19,96 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #:
-#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:26
-msgid "List all resource quotas"
+#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:23
+msgid "List all Resource Quotas"
 msgstr ""
 
 #:
-#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:33
-msgid "Show resource quota"
+#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:30
+msgid "Show Resource Quota"
 msgstr ""
 
 #:
-#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:38
+#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:35
 msgid "Show used resources of assigned hosts"
 msgstr ""
 
 #:
-#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:46
+#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:43
 msgid "Show resources could not be determined when calculating utilization"
 msgstr ""
 
 #:
-#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:53
-msgid "Show hosts of a resource quota"
+#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:49
+msgid "Show hosts of a Resource Quota"
 msgstr ""
 
 #:
-#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:59
-msgid "Show users of a resource quota"
+#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:55
+msgid "Show users of a Resource Quota"
 msgstr ""
 
 #:
-#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:65
-msgid "Show usergroups of a resource quota"
+#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:61
+msgid "Show usergroups of a Resource Quota"
 msgstr ""
 
 #:
-#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:73
-msgid "Name of the resource quota"
+#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:69
+msgid "Name of the Resource Quota"
 msgstr ""
 
 #:
-#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:74
-msgid "Description of the resource quota"
+#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:70
+msgid "Description of the Resource Quota"
 msgstr ""
 
 #:
-#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:75
+#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:71
 msgid "Maximum number of CPU cores"
 msgstr ""
 
 #:
-#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:76
+#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:72
 msgid "Maximum memory in MiB"
 msgstr ""
 
 #:
-#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:77
+#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:73
 msgid "Maximum disk space in GiB"
 msgstr ""
 
 #:
-#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:81
-msgid "Create a resource quota"
+#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:77
+msgid "Create a Resource Quota"
 msgstr ""
 
 #:
-#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:88
-msgid "Update a resource quota"
+#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:84
+msgid "Update a Resource Quota"
 msgstr ""
 
 #:
-#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:95
-msgid "Delete a resource quota"
+#: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:91
+msgid "Delete a Resource Quota"
 msgstr ""
 
 #:
 #: ../app/controllers/foreman_resource_quota/concerns/api/v2/hosts_controller_extensions.rb:12
 msgid ""
-"Resource quota ID.\n"
+"Resource Quota ID.\n"
 "                         This field is required if the setting `resource_quota"
 "_optional_assignment` is set to false."
 msgstr ""
 
 #:
 #: ../app/controllers/foreman_resource_quota/concerns/api/v2/usergroups_controller_extensions.rb:12
-msgid "Resource quota IDs to be associated with this user group. "
+msgid "Resource Quota IDs to be associated with this user group. "
 msgstr ""
 
 #:
 #: ../app/controllers/foreman_resource_quota/concerns/api/v2/users_controller_extensions.rb:12
-msgid "Resource quota IDs to be associated with this user. "
+msgid "Resource Quota IDs to be associated with this user. "
 msgstr ""
 
 #:
@@ -116,7 +116,7 @@ msgstr ""
 msgid ""
 "When set to \"true\", it is optional for a user to assign a quota when creating "
 "new hosts.\n"
-"                         The default value is \"false\"."
+"                                   The default value is \"false\"."
 msgstr ""
 
 #: ../app/helpers/foreman_resource_quota/hosts_helper.rb:14
@@ -134,7 +134,11 @@ msgid "Edit Resource Quota %s"
 msgstr ""
 
 #: ../app/views/foreman_resource_quota/resource_quotas/index.html.erb:8
-msgid "Resource quotas"
+#: ../app/views/foreman_resource_quota/resource_quotas/welcome.html.erb:8
+#: ../app/views/users/_form_quota_tab.html.erb:13
+#: ../lib/foreman_resource_quota/register.rb:60
+#: ../webpack/components/ResourceQuotaEmptyState/index.js:54
+msgid "Resource Quotas"
 msgstr ""
 
 #: ../app/views/foreman_resource_quota/resource_quotas/index.html.erb:15
@@ -170,13 +174,6 @@ msgstr ""
 msgid "New Resource Quota"
 msgstr ""
 
-#: ../app/views/foreman_resource_quota/resource_quotas/welcome.html.erb:8
-#: ../app/views/users/_form_quota_tab.html.erb:13
-#: ../lib/foreman_resource_quota/register.rb:60
-#: ../webpack/components/ResourceQuotaEmptyState/index.js:36
-msgid "Resource Quotas"
-msgstr ""
-
 #: ../app/views/users/_form_quota_tab.html.erb:9
 msgid "Optional Assignment"
 msgstr ""
@@ -199,7 +196,7 @@ msgstr ""
 
 #: ../lib/foreman_resource_quota/register.rb:98
 msgid ""
-"Make the assignment of a Resource quota, during the host creation process, opt"
+"Make the assignment of a Resource Quota, during the host creation process, opt"
 "ional for\n"
 "                        everyone. If this is true, user-specific \"optional ass"
 "ignment\" configurations are neglected."
@@ -210,7 +207,7 @@ msgid "Global Resource Quota no action"
 msgstr ""
 
 #: ../lib/foreman_resource_quota/register.rb:104
-msgid "Take no action when a resource quota is exceeded."
+msgid "Take no action when a Resource Quota is exceeded."
 msgstr ""
 
 #: ../webpack/api_helper.js:93
@@ -219,17 +216,22 @@ msgstr ""
 
 #: ../webpack/components/CreateResourceQuotaModal.js:28
 #: ../webpack/components/CreateResourceQuotaModal.js:32
-#: ../webpack/components/ResourceQuotaEmptyState/index.js:28
-#: ../webpack/components/ResourceQuotaEmptyState/index.js:44
+#: ../webpack/components/ResourceQuotaEmptyState/index.js:29
+#: ../webpack/components/ResourceQuotaEmptyState/index.js:61
 #: ../webpack/components/ResourceQuotaForm/components/Submit.js:53
 msgid "Create resource quota"
 msgstr ""
 
-#: ../webpack/components/ResourceQuotaEmptyState/index.js:37
+#: ../webpack/components/ResourceQuotaEmptyState/index.js:35
 msgid ""
-"Resource Quotas help admins to manage hardware resources including CPUs, memor"
-"y, and disk space among users or usergroups. \\n\\rDefine a Resource Quota here "
-"and apply it to users in order to guarantee a free share of your resources."
+"Resource Quotas help admins to manage resources including CPUs, memory, and di"
+"sk space among users or user groups."
+msgstr ""
+
+#: ../webpack/components/ResourceQuotaEmptyState/index.js:39
+msgid ""
+"Define a Resource Quota here and apply it to users to guarantee a fair share o"
+"f your resources."
 msgstr ""
 
 #:
@@ -324,10 +326,6 @@ msgstr ""
 
 #: ../webpack/lib/EditableTextInput/PencilEditButton.js:9
 msgid "Edit"
-msgstr ""
-
-#: action_names.rb:2
-msgid "Refresh resource quota utilization"
 msgstr ""
 
 #: gemspec.rb:4
