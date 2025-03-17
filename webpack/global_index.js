@@ -1,4 +1,14 @@
-// Placeholder to initialize routes (compare foreman_ansible)
+import React from 'react';
+import { addGlobalFill } from 'foremanReact/components/common/Fill/GlobalFill';
+
+import { RegistrationResourceQuota } from './components/extensions/RegistrationCommands/index';
+
+addGlobalFill(
+  'registrationGeneral',
+  '[foreman_resource_quota]RegistrationResourceQuota',
+  <RegistrationResourceQuota key="foreman_resource_quota-reg-rq" />,
+  100
+);
 
 /*
 import { addGlobalFill } from 'foremanReact/components/common/Fill/GlobalFill';

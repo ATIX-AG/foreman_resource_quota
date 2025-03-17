@@ -41,6 +41,9 @@ module ForemanResourceQuota
       ::Usergroup.include ForemanResourceQuota::UsergroupExtensions
       ::Host::Managed.include ForemanResourceQuota::HostManagedExtensions
 
+      # Controller extensions
+      ::RegistrationCommandsController.prepend ForemanResourceQuota::Concerns::RegistrationCommandsControllerExtensions
+
       # Api controller extensions
       ::Api::V2::HostsController.include ForemanResourceQuota::Concerns::Api::V2::HostsControllerExtensions
       ::Api::V2::UsersController.include ForemanResourceQuota::Concerns::Api::V2::UsersControllerExtensions
