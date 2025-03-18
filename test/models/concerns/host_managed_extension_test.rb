@@ -23,6 +23,17 @@ module ForemanResourceQuota
         assert_equal host.resource_quota_id, quota.id
       end
 
+      test 'assign a resource quota to a usergroup-owned host' do
+        Setting[:resource_quota_optional_assignment] = true
+        usergroup = FactoryBot.create(:usergroup)
+        host = FactoryBot.create(:host, owner: usergroup)
+        quota = FactoryBot.create(:resource_quota)
+        host.resource_quota = quota
+        assert host.save
+        assert_equal host.resource_quota_host.resource_quota_id, quota.id
+        assert_equal host.resource_quota_id, quota.id
+      end
+
       test 'disassociate resource quota via .resource_quota' do
         Setting[:resource_quota_optional_assignment] = true
         host = FactoryBot.create(:host)
@@ -73,9 +84,20 @@ module ForemanResourceQuota
         assert FactoryBot.create(:host, :with_resource_quota)
       end
 
+      test 'usergroup-owned host should succeed with resource quota' do
+        usergroup = FactoryBot.create(:usergroup)
+        assert FactoryBot.create(:host, :with_resource_quota, owner: usergroup)
+      end
+
       test 'should succeed without resource quota and optional setting (global)' do
         Setting[:resource_quota_optional_assignment] = true
         assert FactoryBot.create(:host)
+      end
+
+      test 'usergroup-owned host should succeed without resource quota and optional setting (global)' do
+        Setting[:resource_quota_optional_assignment] = true
+        usergroup = FactoryBot.create(:usergroup)
+        assert FactoryBot.create(:host, owner: usergroup)
       end
 
       test 'should succeed without resource quota and optional setting (user)' do
@@ -92,6 +114,11 @@ module ForemanResourceQuota
 
       test 'should fail without resource quota' do
         assert_raises(ActiveRecord::RecordInvalid) { FactoryBot.create(:host) }
+      end
+
+      test 'usergroup-owned host should fail without quota' do
+        usergroup = FactoryBot.create(:usergroup)
+        assert_raises(ActiveRecord::RecordInvalid) { FactoryBot.create(:host, owner: usergroup) }
       end
     end
 

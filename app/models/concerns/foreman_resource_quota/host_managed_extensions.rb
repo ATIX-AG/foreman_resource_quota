@@ -139,7 +139,9 @@ module ForemanResourceQuota
     end
 
     def quota_assigment_optional?
-      owner.resource_quota_is_optional || Setting[:resource_quota_optional_assignment]
+      return true if Setting[:resource_quota_optional_assignment]
+      return true if owner.respond_to?(:resource_quota_is_optional) && owner.resource_quota_is_optional
+      false
     end
 
     def save_host_resources
