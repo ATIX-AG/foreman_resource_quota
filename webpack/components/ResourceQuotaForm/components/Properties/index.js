@@ -8,9 +8,9 @@ import {
   Card,
   CardBody,
   CardHeader,
-  CardActions,
   CardTitle,
-  Level,
+  Flex,
+  FlexItem,
   LabelGroup,
   Button,
   Tooltip,
@@ -70,69 +70,83 @@ const Properties = ({
     );
   };
 
+  const renderSyncButton = () => {
+    if (isNewQuota) {
+      return <></>;
+    }
+    return (
+      <Tooltip
+        content={
+          <div>
+            <b> {__('Fetch quota utilization')} </b>
+            <div>
+              {__(
+                'This can take some time since the resources of every host, assigned to this quota, must be requested.'
+              )}
+            </div>
+          </div>
+        }
+        reference={tooltipRefFetchButton}
+      >
+        <Button
+          isLoading={isFetchLoading}
+          icon={<SyncAltIcon />}
+          size="sm"
+          onClick={onClickFetch}
+          ref={tooltipRefFetchButton}
+        />
+      </Tooltip>
+    );
+  };
+
+  const renderHeaderTitle = () => {
+    if (isNewQuota) {
+      return <CardTitle>{__('Properties')}</CardTitle>;
+    }
+    return (
+      <Flex>
+        <FlexItem>
+          <CardTitle>{__('Properties')}</CardTitle>
+        </FlexItem>
+        <FlexItem>
+          <LabelGroup isCompact>
+            <StatusPropertiesLabel
+              color="blue"
+              iconChild={<ClusterIcon />}
+              statusContent={
+                statusProperties[RESOURCE_IDENTIFIER_STATUS_NUM_HOSTS]
+              }
+              linkUrl={`/hosts?search=resource_quota="${initialName}"`}
+              tooltipText="Number of assigned hosts"
+            />
+            <StatusPropertiesLabel
+              color="blue"
+              iconChild={<UserIcon />}
+              statusContent={
+                statusProperties[RESOURCE_IDENTIFIER_STATUS_NUM_USERS]
+              }
+              linkUrl={`/users?search=resource_quota="${initialName}"`}
+              tooltipText="Number of assigned users"
+            />
+            <StatusPropertiesLabel
+              color="blue"
+              iconChild={<UsersIcon />}
+              statusContent={
+                statusProperties[RESOURCE_IDENTIFIER_STATUS_NUM_USERGROUPS]
+              }
+              linkUrl={`/usergroups?search=resource_quota="${initialName}"`}
+              tooltipText="Number of assigned usergroups"
+            />
+          </LabelGroup>
+        </FlexItem>
+      </Flex>
+    );
+  };
+
   return (
     <Card>
-      <CardHeader>
-        {!isNewQuota && (
-          <CardActions>
-            <Button
-              isLoading={isFetchLoading}
-              icon={<SyncAltIcon />}
-              isSmall
-              onClick={onClickFetch}
-              ref={tooltipRefFetchButton}
-            />
-            <Tooltip
-              content={
-                <div>
-                  <b> {__('Fetch quota utilization')} </b>
-                  <div>
-                    {__(
-                      'This can take some time since the resources of every host, assigned to this quota, must be requested.'
-                    )}
-                  </div>
-                </div>
-              }
-              reference={tooltipRefFetchButton}
-            />
-          </CardActions>
-        )}
-        {isNewQuota ? (
-          <CardTitle>{__('Properties')}</CardTitle>
-        ) : (
-          <Level hasGutter>
-            <CardTitle>{__('Properties')}</CardTitle>
-            <LabelGroup isCompact>
-              <StatusPropertiesLabel
-                color="blue"
-                iconChild={<ClusterIcon />}
-                statusContent={
-                  statusProperties[RESOURCE_IDENTIFIER_STATUS_NUM_HOSTS]
-                }
-                linkUrl={`/hosts?search=resource_quota="${initialName}"`}
-                tooltipText="Number of assigned hosts"
-              />
-              <StatusPropertiesLabel
-                color="blue"
-                iconChild={<UserIcon />}
-                statusContent={
-                  statusProperties[RESOURCE_IDENTIFIER_STATUS_NUM_USERS]
-                }
-                linkUrl={`/users?search=resource_quota="${initialName}"`}
-                tooltipText="Number of assigned users"
-              />
-              <StatusPropertiesLabel
-                color="blue"
-                iconChild={<UsersIcon />}
-                statusContent={
-                  statusProperties[RESOURCE_IDENTIFIER_STATUS_NUM_USERGROUPS]
-                }
-                linkUrl={`/usergroups?search=resource_quota="${initialName}"`}
-                tooltipText="Number of assigned usergroups"
-              />
-            </LabelGroup>
-          </Level>
-        )}
+      <CardHeader actions={{ actions: renderSyncButton() }}>
+        {renderHeaderTitle()}
       </CardHeader>
       <CardBody>
         <TextContent>

@@ -34,7 +34,7 @@ const StaticDetail = ({
         {isTextArea ? (
           <TextArea
             id={id}
-            onChange={onChange}
+            onChange={(_event, val) => onChange(val)}
             value={value}
             validated={validated}
             isRequired={isRequired}
@@ -42,7 +42,7 @@ const StaticDetail = ({
         ) : (
           <TextInput
             id={id}
-            onChange={onChange}
+            onChange={(_event, val) => onChange(val)}
             value={value}
             validated={validated}
             isRequired={isRequired}

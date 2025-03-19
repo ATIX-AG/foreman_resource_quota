@@ -1,38 +1,40 @@
 /* Credits: https://github.com/Katello/katello/blob/631d5bb83dc5d87320ee9002a6de33809a281b3e/webpack/components/EditableTextInput/editableTextInput.scss */
-@import '~@theforeman/vendor/scss/variables';
+@import 'foremanReact/common/variables';
 
-.foreman-limited-text {
-  max-width: 200px;
-  margin: auto 0px;
-}
+.container-editable-text-input {
+  .foreman-limited-text {
+    max-width: 200px;
+    margin: auto 0px;
+  }
 
-.foreman-limited-editable-text {
-  max-width: 300px;
-  margin: auto 0px;
-}
+  .foreman-limited-editable-text {
+    max-width: 300px;
+    margin: auto 0px;
+  }
 
-// Edit icon isn't in line with text
-.foreman-edit-icon {
-  padding-top: 2px;
-}
+  // Edit icon isn't in line with text
+  .foreman-edit-icon {
+    padding-top: 2px;
+  }
 
-.textInput-placeholder, .textArea-placeholder {
-  color: var(--pf-global--disabled-color--100);
-}
+  .textInput-placeholder, .textArea-placeholder {
+    color: var(--pf-v5-global--disabled-color--100);
+  }
 
-textarea.pf-c-form-control {
+  textarea.pf-v5-c-form-control {
+      width: 215px;
+  }
+
+  .pf-v5-c-form-control:not(textarea) {
     width: 215px;
-}
+  }
 
-.pf-c-form-control:not(textarea) {
-  width: 215px;
-}
+  p {
+    width: 215px;
+  }
 
-p {
-  width: 215px;
-}
-
-p.textArea-placeholder, p.textArea-value {
-  width: 215px;
-  height: 50px;
+  p.textArea-placeholder, p.textArea-value {
+    width: 215px;
+    height: 50px;
+  }
 }

@@ -1,9 +1,10 @@
-@import '~@theforeman/vendor/scss/variables';
+@import 'foremanReact/common/variables';
 
-.pf-c-card__body {
+
+.pf-v5-c-card__body {
   padding-top: 1rem;
 }
 
-.pf-c-content dl {
+.pf-v5-c-content dl {
   margin-bottom: 0px;
 }

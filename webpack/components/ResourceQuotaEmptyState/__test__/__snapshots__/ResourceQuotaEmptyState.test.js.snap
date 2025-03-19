@@ -42,6 +42,7 @@ exports[`ResourceQuotaEmptyState should render 1`] = `
     onClose={[Function]}
     ouiaId="foreman-resource-quota-create-modal"
     ouiaSafe={true}
+    position="default"
     showClose={true}
     title="Create resource quota"
     titleIconVariant={null}
