@@ -7,7 +7,7 @@ import {
   ProgressMeasureLocation,
   Tooltip,
 } from '@patternfly/react-core';
-import SyncAltIcon from '@patternfly/react-icons';
+import { SyncAltIcon } from '@patternfly/react-icons';
 
 import { translate as __ } from 'foremanReact/common/I18n';
 

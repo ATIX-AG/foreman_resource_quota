@@ -3,16 +3,24 @@ import PropTypes from 'prop-types';
 import {
   FormGroup,
   FormHelperText,
+  HelperText,
+  HelperTextItem,
   TextInput,
   InputGroup,
+  InputGroupItem,
   InputGroupText,
+} from '@patternfly/react-core';
+import { ExclamationCircleIcon } from '@patternfly/react-icons';
+
+import {
   Dropdown,
   DropdownItem,
   DropdownToggle,
-} from '@patternfly/react-core';
+} from '@patternfly/react-core/deprecated';
 
 import { sprintf, translate as __ } from 'foremanReact/common/I18n';
 
+import './UnitInputField.scss';
 import { findLargestFittingUnit } from '../../../../helper';
 
 const UnitInputField = ({
@@ -67,11 +75,6 @@ const UnitInputField = ({
   const warningTextRounded = useCallback(
     roundedValue => __(`Rounding to: ${roundedValue} (${units[0].symbol}).`),
     [units]
-  );
-
-  /* warning text displayed beneath value input field (built-in is used for errors) */
-  const helperTextWarning = (text, isHidden) => (
-    <FormHelperText isHidden={isHidden}>{text}</FormHelperText>
   );
 
   /* applies the selected unit and checks the bounds */
@@ -164,41 +167,81 @@ const UnitInputField = ({
     }
 
     return (
-      <Dropdown
-        onSelect={onUnitSelect}
-        toggle={
-          <DropdownToggle isDisabled={isDisabled} onToggle={onUnitToggle}>
-            {__(`${selectedUnit.symbol}`)}
-          </DropdownToggle>
-        }
-        isOpen={isUnitOpen}
-        dropdownItems={unitDropdownItems}
-      />
+      <InputGroupItem>
+        <Dropdown
+          onSelect={onUnitSelect}
+          toggle={
+            <DropdownToggle
+              isDisabled={isDisabled}
+              onToggle={(_event, _val) => onUnitToggle()}
+            >
+              {__(`${selectedUnit.symbol}`)}
+            </DropdownToggle>
+          }
+          isOpen={isUnitOpen}
+          dropdownItems={unitDropdownItems}
+        />
+      </InputGroupItem>
     );
   };
 
+  const renderFormHelperText = () => {
+    if (validated === 'error') {
+      return (
+        <FormHelperText>
+          <HelperText>
+            <HelperTextItem
+              icon={<ExclamationCircleIcon />}
+              variant={validated}
+            >
+              {errorText}
+            </HelperTextItem>
+          </HelperText>
+        </FormHelperText>
+      );
+    }
+    if (validated === 'warning') {
+      return (
+        <FormHelperText>
+          <HelperText>
+            <HelperTextItem
+              icon={<ExclamationCircleIcon />}
+              variant={validated}
+            >
+              {errorText}
+            </HelperTextItem>
+          </HelperText>
+        </FormHelperText>
+      );
+    }
+    return <></>;
+  };
+
   return (
-    <FormGroup
-      label={__('Quota Limit')}
-      validated={validated}
-      helperTextInvalid={errorText}
-      helperText={helperTextWarning(errorText, validated !== 'warning')}
-      fieldId="quota-limit-resource-quota-form-group"
-      labelIcon={labelIcon || {}}
-    >
-      <InputGroup>
-        <TextInput
-          isDisabled={isDisabled}
-          value={inputValue}
-          min={minValue}
-          max={maxValue}
-          validated={validated}
-          id="reg_token_life_time_input"
-          onChange={setInputValue}
-        />
-        {unitView()}
-      </InputGroup>
-    </FormGroup>
+    <div className="container-unit-input-field">
+      <FormGroup
+        label={__('Quota Limit')}
+        validated={validated}
+        fieldId="quota-limit-resource-quota-form-group"
+        labelIcon={labelIcon || {}}
+      >
+        <InputGroup>
+          <InputGroupItem>
+            <TextInput
+              isDisabled={isDisabled}
+              value={inputValue}
+              min={minValue}
+              max={maxValue}
+              validated={validated}
+              id="reg_token_life_time_input"
+              onChange={(_event, val) => setInputValue(val)}
+            />
+          </InputGroupItem>
+          {unitView()}
+        </InputGroup>
+        {renderFormHelperText()}
+      </FormGroup>
+    </div>
   );
 };
 

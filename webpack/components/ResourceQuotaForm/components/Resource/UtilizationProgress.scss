@@ -1,10 +1,10 @@
 .progress-disabled {
   background-color: transparent;
-  .pf-c-progress .pf-c-progress__bar::before {
-    background-color: var(--pf-global--disabled-color--100);
+  .pf-v5-c-progress .pf-v5-c-progress__bar::before {
+    background-color: var(--pf-v5-global--disabled-color--100);
   }
 }
 
-.progress-disabled .pf-c-progress.pf-m-inside .pf-c-progress__indicator {
-  background-color: var(--pf-global--palette--black-500);
+.progress-disabled .pf-v5-c-progress.pf-v5-m-inside .pf-v5-c-progress__indicator {
+  background-color: var(--pf-v5-global--palette--black-500);
 }
