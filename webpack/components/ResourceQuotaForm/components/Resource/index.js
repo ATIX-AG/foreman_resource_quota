@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import {
   Button,
   Card,
-  CardActions,
   CardExpandableContent,
   CardHeader,
   CardTitle,
@@ -132,19 +131,41 @@ const Resource = ({
     onChange,
   ]);
 
+  const renderApplyButton = () => {
+    if (isNewQuota) {
+      return <></>;
+    }
+    return (
+      <Button
+        isDisabled={!isUpdateApplicable}
+        size="sm"
+        isActive={isApplyLoading}
+        variant="primary"
+        onClick={onClickApply}
+        isLoading={isApplyLoading}
+      >
+        {__('Apply')}
+      </Button>
+    );
+  };
+
   return (
     <Card
       isExpanded={isExpanded}
       isDisabledRaised={!isEnabled}
       id={`resource-card-${cardId}`}
     >
-      <CardHeader onExpand={onExpand} isToggleRightAligned={false}>
+      <CardHeader
+        actions={{ actions: renderApplyButton() }}
+        onExpand={onExpand}
+        isToggleRightAligned={false}
+      >
         <Flex>
           <FlexItem>
             <Switch
               id={`switch-${cardId}`}
               aria-label={`switch-${cardId}`}
-              onChange={onChangeEnabled}
+              onChange={(_event, val) => onChangeEnabled(val)}
               isChecked={isEnabled}
             />
           </FlexItem>
@@ -152,20 +173,6 @@ const Resource = ({
             <CardTitle>{resourceTitle}</CardTitle>
           </FlexItem>
         </Flex>
-        {!isNewQuota && (
-          <CardActions>
-            <Button
-              isDisabled={!isUpdateApplicable}
-              isSmall
-              isActive={isApplyLoading}
-              variant="primary"
-              onClick={onClickApply}
-              isLoading={isApplyLoading}
-            >
-              {__('Apply')}
-            </Button>
-          </CardActions>
-        )}
       </CardHeader>
       <CardExpandableContent>
         <CardBody>

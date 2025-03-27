@@ -89,87 +89,91 @@ const EditableTextInput = ({
     onKeyUp,
     component,
     value: inputValue || '',
-    onChange: setInputValue,
+    onChange: (_event, val) => setInputValue(val),
     validated: valid,
   };
 
-  return editing ? (
-    <Split>
-      <SplitItem>
-        {textArea ? (
-          <TextArea {...inputProps} aria-label={`${attribute} text area`} />
-        ) : (
-          <TextInput
-            {...inputProps}
-            type={isPassword && !showPassword ? 'password' : 'text'}
-            aria-label={`${attribute} text input`}
-            ouiaId={ouiaId}
-          />
-        )}
-      </SplitItem>
-      <SplitItem>
-        <Button
-          ouiaId={`submit-button-${attribute}`}
-          aria-label={`submit ${attribute}`}
-          variant="plain"
-          onClick={onSubmit}
-        >
-          <CheckIcon />
-        </Button>
-      </SplitItem>
-      <SplitItem>
-        <Button
-          ouiaId={`clear-button-${attribute}`}
-          aria-label={`clear ${attribute}`}
-          variant="plain"
-          onClick={onClear}
-        >
-          <TimesIcon />
-        </Button>
-      </SplitItem>
-      {isPassword ? (
-        <SplitItem>
-          <Button
-            ouiaId={`show-button-${attribute}`}
-            aria-label={`show-password ${attribute}`}
-            variant="plain"
-            isDisabled={!inputValue?.length}
-            onClick={toggleShowPassword}
-          >
-            {showPassword ? <EyeSlashIcon /> : <EyeIcon />}
-          </Button>
-        </SplitItem>
-      ) : null}
-    </Split>
-  ) : (
-    <Split>
-      <SplitItem>
-        {inputValue ? (
-          <Text
-            className={`text${textArea ? 'Area' : 'Input'}-value`}
-            ouiaId={`${attribute}-text-value`}
-            aria-label={`${attribute} text value`}
-            component={component}
-          >
-            {editing ? inputValue : passwordPlaceholder || inputValue}
-          </Text>
-        ) : (
-          <Text
-            className={`text${textArea ? 'Area' : 'Input'}-placeholder`}
-            ouiaId={`${attribute}-text-value`}
-            aria-label={`${attribute} text value`}
-            component={component}
-          >
-            {passwordPlaceholder || placeholder}
-          </Text>
-        )}
-      </SplitItem>
-      {!disabled && (
-        <SplitItem>
-          <PencilEditButton {...{ attribute, onEditClick }} />
-        </SplitItem>
+  return (
+    <div className="container-editable-text-input">
+      {editing ? (
+        <Split>
+          <SplitItem>
+            {textArea ? (
+              <TextArea {...inputProps} aria-label={`${attribute} text area`} />
+            ) : (
+              <TextInput
+                {...inputProps}
+                type={isPassword && !showPassword ? 'password' : 'text'}
+                aria-label={`${attribute} text input`}
+                ouiaId={ouiaId}
+              />
+            )}
+          </SplitItem>
+          <SplitItem>
+            <Button
+              ouiaId={`submit-button-${attribute}`}
+              aria-label={`submit ${attribute}`}
+              variant="plain"
+              onClick={onSubmit}
+            >
+              <CheckIcon />
+            </Button>
+          </SplitItem>
+          <SplitItem>
+            <Button
+              ouiaId={`clear-button-${attribute}`}
+              aria-label={`clear ${attribute}`}
+              variant="plain"
+              onClick={onClear}
+            >
+              <TimesIcon />
+            </Button>
+          </SplitItem>
+          {isPassword ? (
+            <SplitItem>
+              <Button
+                ouiaId={`show-button-${attribute}`}
+                aria-label={`show-password ${attribute}`}
+                variant="plain"
+                isDisabled={!inputValue?.length}
+                onClick={toggleShowPassword}
+              >
+                {showPassword ? <EyeSlashIcon /> : <EyeIcon />}
+              </Button>
+            </SplitItem>
+          ) : null}
+        </Split>
+      ) : (
+        <Split>
+          <SplitItem>
+            {inputValue ? (
+              <Text
+                className={`text${textArea ? 'Area' : 'Input'}-value`}
+                ouiaId={`${attribute}-text-value`}
+                aria-label={`${attribute} text value`}
+                component={component}
+              >
+                {editing ? inputValue : passwordPlaceholder || inputValue}
+              </Text>
+            ) : (
+              <Text
+                className={`text${textArea ? 'Area' : 'Input'}-placeholder`}
+                ouiaId={`${attribute}-text-value`}
+                aria-label={`${attribute} text value`}
+                component={component}
+              >
+                {passwordPlaceholder || placeholder}
+              </Text>
+            )}
+          </SplitItem>
+          {!disabled && (
+            <SplitItem>
+              <PencilEditButton {...{ attribute, onEditClick }} />
+            </SplitItem>
+          )}
+        </Split>
       )}
-    </Split>
+    </div>
   );
 };
 
