@@ -4,11 +4,10 @@ require 'rake/testtask'
 
 # Tasks
 namespace :foreman_resource_quota do
-  namespace :example do
-    desc 'Example Task'
-    task task: :environment do
-      # Task goes here
-    end
+  desc 'EXPERIMENTAL: Revert all database migrations of this plugin, preparing plugin uninstall'
+  task revert_db_migrations: :environment do
+    plugin = Foreman::Plugin.find ForemanResourceQuota.name.underscore
+    ActiveRecord::MigrationContext.new(plugin.migrations_paths, ActiveRecord::SchemaMigration).down
   end
 end
 
