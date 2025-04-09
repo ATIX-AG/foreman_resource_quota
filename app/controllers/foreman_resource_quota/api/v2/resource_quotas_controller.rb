@@ -40,7 +40,7 @@ module ForemanResourceQuota
         end
 
         api :GET, '/resource_quotas/:id/missing_hosts',
-          N_('Show resources could not be determined when calculating utilization')
+          N_("Show hosts' resources that could not be determined when calculating the quota utilization")
         param :id, :identifier, required: true
         def missing_hosts
           process_response @resource_quota
