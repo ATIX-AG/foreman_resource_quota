@@ -17,6 +17,7 @@ import {
 } from '@patternfly/react-core';
 
 import {
+  ExclamationCircleIcon,
   UserIcon,
   UsersIcon,
   ClusterIcon,
@@ -42,6 +43,8 @@ const Properties = ({
   initialName,
   initialDescription,
   initialStatus,
+  unassigned,
+  showAssignmentWarning,
   handleInputValidation,
   onChange,
   onApply,
@@ -111,32 +114,48 @@ const Properties = ({
         <FlexItem>
           <LabelGroup isCompact>
             <StatusPropertiesLabel
-              color="blue"
-              iconChild={<ClusterIcon />}
+              color={showAssignmentWarning ? 'red' : 'blue'}
+              iconChild={
+                showAssignmentWarning ? (
+                  <ExclamationCircleIcon />
+                ) : (
+                  <ClusterIcon />
+                )
+              }
               statusContent={
                 statusProperties[RESOURCE_IDENTIFIER_STATUS_NUM_HOSTS]
               }
               linkUrl={`/hosts?search=resource_quota="${initialName}"`}
-              tooltipText="Number of assigned hosts"
-            />
-            <StatusPropertiesLabel
-              color="blue"
-              iconChild={<UserIcon />}
-              statusContent={
-                statusProperties[RESOURCE_IDENTIFIER_STATUS_NUM_USERS]
+              tooltipText={
+                showAssignmentWarning
+                  ? __(
+                      "The setting 'resource_quota_optional_assignment' is set to 'No' but there are hosts with no quota assignment. Please check your hosts' quota assignments!"
+                    )
+                  : __('Number of assigned hosts')
               }
-              linkUrl={`/users?search=resource_quota="${initialName}"`}
-              tooltipText="Number of assigned users"
             />
-            <StatusPropertiesLabel
-              color="blue"
-              iconChild={<UsersIcon />}
-              statusContent={
-                statusProperties[RESOURCE_IDENTIFIER_STATUS_NUM_USERGROUPS]
-              }
-              linkUrl={`/usergroups?search=resource_quota="${initialName}"`}
-              tooltipText="Number of assigned usergroups"
-            />
+            {!unassigned && (
+              <StatusPropertiesLabel
+                color="blue"
+                iconChild={<UserIcon />}
+                statusContent={
+                  statusProperties[RESOURCE_IDENTIFIER_STATUS_NUM_USERS]
+                }
+                linkUrl={`/users?search=resource_quota="${initialName}"`}
+                tooltipText="Number of assigned users"
+              />
+            )}
+            {!unassigned && (
+              <StatusPropertiesLabel
+                color="blue"
+                iconChild={<UsersIcon />}
+                statusContent={
+                  statusProperties[RESOURCE_IDENTIFIER_STATUS_NUM_USERGROUPS]
+                }
+                linkUrl={`/usergroups?search=resource_quota="${initialName}"`}
+                tooltipText="Number of assigned usergroups"
+              />
+            )}
           </LabelGroup>
         </FlexItem>
       </Flex>
@@ -161,6 +180,7 @@ const Properties = ({
               onChange={onChange}
               isRestrictInputValidation
               isRequired
+              isDisabled={unassigned}
             />
             <TextInputField
               initialValue={initialDescription}
@@ -171,6 +191,7 @@ const Properties = ({
               onApply={onApply}
               onChange={onChange}
               isTextArea
+              isDisabled={unassigned}
             />
           </TextList>
         </TextContent>
@@ -187,6 +208,8 @@ Properties.defaultProps = {
     [RESOURCE_IDENTIFIER_STATUS_NUM_USERS]: null,
     [RESOURCE_IDENTIFIER_STATUS_NUM_USERGROUPS]: null,
   },
+  unassigned: false,
+  showAssignmentWarning: false,
 };
 
 Properties.propTypes = {
@@ -198,6 +221,8 @@ Properties.propTypes = {
     [RESOURCE_IDENTIFIER_STATUS_NUM_USERS]: PropTypes.number,
     [RESOURCE_IDENTIFIER_STATUS_NUM_USERGROUPS]: PropTypes.number,
   }),
+  unassigned: PropTypes.bool,
+  showAssignmentWarning: PropTypes.bool,
   handleInputValidation: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   onApply: PropTypes.func.isRequired,

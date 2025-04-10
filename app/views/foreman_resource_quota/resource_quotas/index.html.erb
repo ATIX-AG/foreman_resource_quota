@@ -6,6 +6,9 @@
 <% end %>
 
 <% title _('Resource Quotas') %>
+  <%  if User.current.show_unassigned_hosts_warning? %>
+  <%= alert :class => 'alert-warning', :header => _('You have unassigned hosts!'), text: "The setting 'resource_quota_optional_assignment' is set to 'No' but there are hosts without quota assignment. Please check your hosts' quota assignments! " %>
+<% end %>
 
 <%= title_actions react_component('CreateResourceQuotaModal') %>
 
@@ -22,8 +25,10 @@
   </thead>
   <tbody>
     <% @resource_quotas.each do |quota|
+      showAssignmentWarning = quota.unassigned? && User.current.show_unassigned_hosts_warning?
          react_data = {
            "isNewQuota": false,
+           "showAssignmentWarning": showAssignmentWarning,
            "initialProperties": {
              "id": quota.id,
              "name": quota.name,
@@ -31,6 +36,7 @@
              "cpu_cores": quota.cpu_cores,
              "memory_mb": quota.memory_mb,
              "disk_gb": quota.disk_gb,
+             "unassigned": quota.unassigned?,
            },
          }
     %>
@@ -43,9 +49,11 @@
         <td><%= h(quota.memory_mb) %></td>
         <td><%= h(quota.disk_gb) %></td>
         <td>
+          <% unless quota.unassigned? %>
           <%= action_buttons(
                 display_delete_if_authorized(hash_for_foreman_resource_quota_resource_quota_path(id: quota), data: { confirm: _("Delete %s?") % quota.name})
-              ) %>
+          ) %>
+          <% end %>
         </td>
       </tr>
     <% end %>

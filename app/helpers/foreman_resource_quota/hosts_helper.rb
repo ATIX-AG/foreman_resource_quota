@@ -2,17 +2,28 @@
 
 module ForemanResourceQuota
   module HostsHelper
-    def resource_quota_select(form, user_quotas)
-      blank_opt = { include_blank: true }
-      select_items = user_quotas.order(:name)
+    def resource_quota_select(form, user_quotas, selected, assignment_optional, host_quota)
+      select_opts = { include_blank: false,
+                      selected: selected }
+      html_opts = { label: _('Resource Quota'),
+                    required: !assignment_optional,
+                    help_inline: if assignment_optional
+                                   _('Define the Resource Quota this host counts to.')
+                                 elsif host_quota.nil? ||
+                                       host_quota == ForemanResourceQuota::ResourceQuota.unassigned.id
+                                   format(_("Quota required! Choosing '%s' by default, change here if needed!"),
+                                     user_quotas.find(selected))
+                                 else
+                                   _('Resource quota assignment required!')
+                                 end }
+
       select_f form,
         :resource_quota_id,
-        select_items,
+        user_quotas,
         :id,
         :to_label,
-        blank_opt,
-        label: _('Resource Quota'),
-        help_inline: _('Define the Resource Quota this host counts to.')
+        select_opts,
+        html_opts
     end
   end
 end

@@ -10,7 +10,7 @@
     :label_help => _("It is optional for a user to assign a quota when creating new hosts") %>
 <% end %>
 
-<%= multiple_checkboxes(form, :resource_quotas, resource, ForemanResourceQuota::ResourceQuota, :label => _("Resource Quotas")) %>
+<%= multiple_checkboxes(form, :resource_quotas, resource, ForemanResourceQuota::ResourceQuota.assignable, :label => _("Resource Quotas")) %>
 
 <% if resource_type == :user %>
   <% usergroups = @user.cached_usergroups.includes(:resource_quotas).distinct %>
@@ -34,7 +34,7 @@
             <% unless usergroup.resource_quotas.map(&:name).any? %>
                 <li data-id="<%= usergroup.id %>" class="list-group-item"><%= _('This group has no quotas') %></li>
             <%end %>
-            <% usergroup.resource_quotas.map(&:name).each do |quota_name| %>
+            <% usergroup.assignable_resource_quotas.map(&:name).each do |quota_name| %>
               <li data-id="<%= usergroup.id %>" class="list-group-item"><%= quota_name %></li>
             <% end %>
           <% end %>

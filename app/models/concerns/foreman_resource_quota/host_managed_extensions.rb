@@ -128,19 +128,18 @@ module ForemanResourceQuota
          "while processing host '#{name}'. The Resource Quota utilization values might be inconsistent.")
     end
 
-    def early_return?(quota)
-      if quota.nil?
-        return true if quota_assigment_optional?
-        raise HostResourceQuotaEmptyException, 'must be given.'
+    def early_return?(quota) # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity
+      if quota.nil? || quota.unassigned?
+        self.resource_quota = ResourceQuota.unassigned
+        return true if owner.quota_assignment_optional?
+        if ResourceQuota.assignable.empty? || (!owner.admin? && owner.resource_quotas.assignable.empty?)
+          raise HostResourceQuotaEmptyException,
+            'must be given.'
+        end
+        return true
       end
       return true if quota.active_resources.empty?
       return true if Setting[:resource_quota_global_no_action] # quota is assigned, but not supposed to be checked
-      false
-    end
-
-    def quota_assigment_optional?
-      return true if Setting[:resource_quota_optional_assignment]
-      return true if owner.respond_to?(:resource_quota_is_optional) && owner.resource_quota_is_optional
       false
     end
 

@@ -20,7 +20,11 @@ import {
   RESOURCE_IDENTIFIER_STATUS_UTILIZATION,
 } from './ResourceQuotaForm/ResourceQuotaFormConstants';
 
-const UpdateResourceQuotaModal = ({ initialProperties, initialStatus }) => {
+const UpdateResourceQuotaModal = ({
+  initialProperties,
+  initialStatus,
+  showAssignmentWarning,
+}) => {
   const staticId = `${MODAL_ID_UPDATE_RESOURCE_QUOTA}-${initialProperties[RESOURCE_IDENTIFIER_ID]}`;
   const [isOpen, setIsOpen] = useState(false);
   const [quotaProperties, setQuotaProperties] = useState(initialProperties);
@@ -52,6 +56,7 @@ const UpdateResourceQuotaModal = ({ initialProperties, initialStatus }) => {
       >
         <ResourceQuotaForm
           isNewQuota={false}
+          showAssignmentWarning={showAssignmentWarning}
           initialProperties={quotaProperties}
           initialStatus={quotaStatus}
           quotaChangesCallback={onQuotaChangesCallback}
@@ -138,6 +143,7 @@ UpdateResourceQuotaModal.propTypes = {
       ]),
     }),
   }),
+  showAssignmentWarning: PropTypes.bool.isRequired,
 };
 
 export default UpdateResourceQuotaModal;

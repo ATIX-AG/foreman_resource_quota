@@ -57,6 +57,7 @@ exports[`ResourceQuotaEmptyState should render 1`] = `
           "disk_gb": null,
           "memory_mb": null,
           "name": "",
+          "unassigned": false,
         }
       }
       initialStatus={
@@ -75,6 +76,7 @@ exports[`ResourceQuotaEmptyState should render 1`] = `
       isNewQuota={true}
       onSubmit={[Function]}
       quotaChangesCallback={null}
+      showAssignmentWarning={false}
     />
   </Modal>
 </div>

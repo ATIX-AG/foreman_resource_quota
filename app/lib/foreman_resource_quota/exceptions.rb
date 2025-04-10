@@ -8,5 +8,6 @@ module ForemanResourceQuota
     class HostResourcesException < ResourceQuotaException; end
     class ResourceQuotaUtilizationException < ResourceQuotaException; end
     class HostNotFoundException < ResourceQuotaException; end
+    class UnassignedQuotaDeletionException < ResourceQuotaException; end
   end
 end

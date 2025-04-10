@@ -1,4 +1,16 @@
 <%
-  user_quotas = User.current&.admin? ? ForemanResourceQuota::ResourceQuota.all : User.current.resource_quotas
+  user_quotas = User.current&.admin? ? ForemanResourceQuota::ResourceQuota.all : User.current.resource_quotas.distinct
+  user_quotas = user_quotas.assignable if !User.current.quota_assignment_optional?
+  user_quotas = user_quotas.order(:name)
+  selected = @host.resource_quota_id
+  # show Unassigned as default when assignment is optional
+  # show first selectable quota when assignment is mandatory
+  if selected.nil? || selected == ForemanResourceQuota::ResourceQuota.unassigned.id
+    if User.current.quota_assignment_optional?
+      selected = ForemanResourceQuota::ResourceQuota.unassigned.id
+    else
+      selected = user_quotas&.first&.id
+    end
+  end
 %>
-<%= resource_quota_select form, user_quotas %>
+<%= resource_quota_select form, user_quotas, selected, User.current.quota_assignment_optional?, @host.resource_quota_id %>

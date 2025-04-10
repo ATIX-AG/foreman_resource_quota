@@ -11,6 +11,11 @@ module ForemanResourceQuota
       Setting[:resource_quota_global_no_action] = false
       Setting[:resource_quota_optional_assignment] = false
       User.current.resource_quota_is_optional = false
+      @unassigned = ForemanResourceQuota::ResourceQuota.where(
+        name: 'Unassigned',
+        unassigned: true,
+        description: 'Here, you can see all hosts without a dedicated quota.'
+      ).first_or_create
     end
 
     describe 'assign resource quota' do
@@ -21,6 +26,15 @@ module ForemanResourceQuota
         host.resource_quota = quota
         assert_equal host.resource_quota_host.resource_quota_id, quota.id
         assert_equal host.resource_quota_id, quota.id
+      end
+
+      test 'saving a host with unassigned quota should fail' do
+        Setting[:resource_quota_optional_assignment] = true
+        host = FactoryBot.create(:host, resource_quota: @unassigned)
+        Setting[:resource_quota_optional_assignment] = false
+        assert_raises ActiveRecord::RecordInvalid do
+          host.save!
+        end
       end
 
       test 'assign a resource quota to a usergroup-owned host' do
@@ -81,28 +95,33 @@ module ForemanResourceQuota
       end
 
       test 'should succeed with resource quota' do
-        assert FactoryBot.create(:host, :with_resource_quota)
+        host = FactoryBot.create(:host, :with_resource_quota)
+        assert_not_equal host.resource_quota, @unassigned
       end
 
       test 'usergroup-owned host should succeed with resource quota' do
         usergroup = FactoryBot.create(:usergroup)
-        assert FactoryBot.create(:host, :with_resource_quota, owner: usergroup)
+        host = FactoryBot.create(:host, :with_resource_quota, owner: usergroup)
+        assert_not_equal host.resource_quota, @unassigned
       end
 
       test 'should succeed without resource quota and optional setting (global)' do
         Setting[:resource_quota_optional_assignment] = true
-        assert FactoryBot.create(:host)
+        host = FactoryBot.create(:host)
+        assert_equal host.resource_quota, @unassigned
       end
 
       test 'usergroup-owned host should succeed without resource quota and optional setting (global)' do
         Setting[:resource_quota_optional_assignment] = true
         usergroup = FactoryBot.create(:usergroup)
-        assert FactoryBot.create(:host, owner: usergroup)
+        host = FactoryBot.create(:host, owner: usergroup)
+        assert_equal host.resource_quota, @unassigned
       end
 
       test 'should succeed without resource quota and optional setting (user)' do
         User.current.resource_quota_is_optional = true
-        assert FactoryBot.create(:host)
+        host = FactoryBot.create(:host)
+        assert_equal host.resource_quota, @unassigned
       end
 
       test 'should have a default host_resources attribute' do
@@ -159,8 +178,8 @@ module ForemanResourceQuota
           host_b.name => [:memory_mb],
         }
         quota = FactoryBot.create(:resource_quota, cpu_cores: 10, memory_mb: 10)
-        quota.hosts << [host_a, host_b]
-        quota.save
+        host_a.resource_quota = quota
+        host_b.resource_quota = quota
 
         quota.stub(:call_utilization_helper, [host_utilization, host_missing_resources]) do
           quota.determine_utilization
