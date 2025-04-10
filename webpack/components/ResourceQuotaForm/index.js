@@ -16,6 +16,7 @@ import {
   RESOURCE_IDENTIFIER_CPU,
   RESOURCE_IDENTIFIER_MEMORY,
   RESOURCE_IDENTIFIER_DISK,
+  RESOURCE_IDENTIFIER_UNASSIGNED,
   RESOURCE_IDENTIFIER_STATUS_NUM_HOSTS,
   RESOURCE_IDENTIFIER_STATUS_NUM_USERS,
   RESOURCE_IDENTIFIER_STATUS_NUM_USERGROUPS,
@@ -25,6 +26,7 @@ import {
 
 const ResourceQuotaForm = ({
   isNewQuota,
+  showAssignmentWarning,
   initialProperties,
   initialStatus,
   onSubmit,
@@ -72,6 +74,10 @@ const ResourceQuotaForm = ({
                   RESOURCE_IDENTIFIER_DESCRIPTION
                 )}
                 initialStatus={modelState.getQuotaStatus()}
+                unassigned={modelState.getQuotaProperties(
+                  RESOURCE_IDENTIFIER_UNASSIGNED
+                )}
+                showAssignmentWarning={showAssignmentWarning}
                 handleInputValidation={modelState.handleInputValidation}
                 onChange={modelState.onChange}
                 onApply={modelState.onApply}
@@ -80,25 +86,29 @@ const ResourceQuotaForm = ({
             )}
           </SkeletonLoader>
         </GalleryItem>
-        <GalleryItem key="edit-resource-quota-resources-item">
-          <SkeletonLoader
-            skeletonProps={{ width: 400 }}
-            status={isNewQuota || !isLoading ? STATUS.RESOLVED : STATUS.PENDING}
-          >
-            {(!isLoading || isNewQuota) && (
-              <Resources
-                isNewQuota={isNewQuota}
-                initialProperties={modelState.getQuotaProperties()}
-                initialStatus={modelState.getQuotaStatus(
-                  RESOURCE_IDENTIFIER_STATUS_UTILIZATION
-                )}
-                handleInputValidation={modelState.handleInputValidation}
-                onChange={modelState.onChange}
-                onApply={modelState.onApply}
-              />
-            )}
-          </SkeletonLoader>
-        </GalleryItem>
+        {!modelState.getQuotaProperties(RESOURCE_IDENTIFIER_UNASSIGNED) && (
+          <GalleryItem key="edit-resource-quota-resources-item">
+            <SkeletonLoader
+              skeletonProps={{ width: 400 }}
+              status={
+                isNewQuota || !isLoading ? STATUS.RESOLVED : STATUS.PENDING
+              }
+            >
+              {(!isLoading || isNewQuota) && (
+                <Resources
+                  isNewQuota={isNewQuota}
+                  initialProperties={modelState.getQuotaProperties()}
+                  initialStatus={modelState.getQuotaStatus(
+                    RESOURCE_IDENTIFIER_STATUS_UTILIZATION
+                  )}
+                  handleInputValidation={modelState.handleInputValidation}
+                  onChange={modelState.onChange}
+                  onApply={modelState.onApply}
+                />
+              )}
+            </SkeletonLoader>
+          </GalleryItem>
+        )}
         {isNewQuota && (
           <GalleryItem key="edit-resource-quota-submit-item">
             <Submit
@@ -114,6 +124,7 @@ const ResourceQuotaForm = ({
 };
 
 ResourceQuotaForm.defaultProps = {
+  showAssignmentWarning: false,
   onSubmit: null,
   quotaChangesCallback: null,
   initialProperties: {
@@ -122,6 +133,7 @@ ResourceQuotaForm.defaultProps = {
     [RESOURCE_IDENTIFIER_CPU]: null,
     [RESOURCE_IDENTIFIER_MEMORY]: null,
     [RESOURCE_IDENTIFIER_DISK]: null,
+    [RESOURCE_IDENTIFIER_UNASSIGNED]: false,
   },
   initialStatus: {
     [RESOURCE_IDENTIFIER_STATUS_NUM_HOSTS]: null,
@@ -138,6 +150,7 @@ ResourceQuotaForm.defaultProps = {
 
 ResourceQuotaForm.propTypes = {
   isNewQuota: PropTypes.bool.isRequired,
+  showAssignmentWarning: PropTypes.bool,
   onSubmit: PropTypes.func,
   quotaChangesCallback: PropTypes.func,
   initialProperties: PropTypes.shape({
@@ -147,6 +160,7 @@ ResourceQuotaForm.propTypes = {
     [RESOURCE_IDENTIFIER_CPU]: PropTypes.number,
     [RESOURCE_IDENTIFIER_MEMORY]: PropTypes.number,
     [RESOURCE_IDENTIFIER_DISK]: PropTypes.number,
+    [RESOURCE_IDENTIFIER_UNASSIGNED]: PropTypes.bool,
   }),
   initialStatus: PropTypes.shape({
     [RESOURCE_IDENTIFIER_STATUS_NUM_HOSTS]: PropTypes.oneOfType([

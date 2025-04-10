@@ -10,7 +10,13 @@ module ForemanResourceQuota
         def setup
           User.current = User.find_by login: 'admin'
           @quota = FactoryBot.create :resource_quota
+          @unassigned = ForemanResourceQuota::ResourceQuota.where(
+            name: 'Unassigned',
+            unassigned: true,
+            description: 'Here, you can see all hosts without a dedicated quota.'
+          ).first_or_create
           as_admin { @quota.save! }
+          as_admin { @unassigned.save! }
         end
 
         test 'should get index with quotas' do

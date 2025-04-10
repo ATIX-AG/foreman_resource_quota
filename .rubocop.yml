@@ -7,6 +7,10 @@ inherit_mode:
   merge:
     - Exclude
 
+Rails/LexicallyScopedActionFilter:
+  Exclude:
+    - 'app/controllers/foreman_resource_quota/concerns/api/v2/hosts_controller_extensions.rb'
+
 Layout/ArgumentAlignment:
   EnforcedStyle: with_fixed_indentation
   IndentationWidth: 2

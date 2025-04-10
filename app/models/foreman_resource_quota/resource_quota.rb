@@ -23,11 +23,24 @@ module ForemanResourceQuota
 
     validates :name, presence: true, uniqueness: true
 
+    before_destroy :do_not_destroy_unassigned_quota, prepend: true
+    before_destroy :assign_unassigned_quota, prepend: true
+
     scoped_search on: :name, complete_value: true
     scoped_search on: :id, complete_enabled: false, only_explicit: true, validator: ScopedSearch::Validators::INTEGER
 
+    scope :assignable, -> { where(unassigned: false) }
+
+    def self.unassigned
+      find_by(unassigned: true)
+    end
+
     def self.permission_name
       'resource_quotas'
+    end
+
+    def unassigned?
+      unassigned
     end
 
     def number_of_hosts
@@ -150,6 +163,16 @@ module ForemanResourceQuota
     end
 
     private
+
+    def do_not_destroy_unassigned_quota
+      return unless id == ResourceQuota.unassigned.id
+      raise UnassignedQuotaDeletionException,
+        "You cannot delete the 'Unassigned' quota."
+    end
+
+    def assign_unassigned_quota
+      hosts.update(resource_quota: ResourceQuota.unassigned)
+    end
 
     # Wrap into a function for easier testing
     def call_utilization_helper(quota_hosts)

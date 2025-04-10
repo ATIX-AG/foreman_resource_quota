@@ -19,6 +19,7 @@ const TextInputField = ({
   isRequired,
   isTextArea,
   isNewQuota,
+  isDisabled,
 }) => {
   const dispatch = useDispatch();
   const [currentAttribute, setCurrentAttribute] = useState();
@@ -100,7 +101,7 @@ const TextInputField = ({
       loading={isLoading && currentAttribute === attribute}
       onEdit={onEdit}
       value={value}
-      disabled={false}
+      disabled={isDisabled}
       textArea={isTextArea}
       validated={validated}
       {...{ currentAttribute, setCurrentAttribute }}
@@ -114,6 +115,7 @@ TextInputField.defaultProps = {
   isRequired: false,
   isRestrictInputValidation: false,
   isNewQuota: false,
+  isDisabled: false,
 };
 
 TextInputField.propTypes = {
@@ -127,6 +129,7 @@ TextInputField.propTypes = {
   isTextArea: PropTypes.bool,
   isRequired: PropTypes.bool,
   isNewQuota: PropTypes.bool,
+  isDisabled: PropTypes.bool,
 };
 
 export default TextInputField;

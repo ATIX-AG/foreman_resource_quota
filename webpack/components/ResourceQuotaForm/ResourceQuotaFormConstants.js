@@ -2,6 +2,7 @@
 export const RESOURCE_IDENTIFIER_ID = 'id';
 export const RESOURCE_IDENTIFIER_NAME = 'name';
 export const RESOURCE_IDENTIFIER_DESCRIPTION = 'description';
+export const RESOURCE_IDENTIFIER_UNASSIGNED = 'unassigned';
 export const RESOURCE_IDENTIFIER_CPU = 'cpu_cores';
 export const RESOURCE_IDENTIFIER_MEMORY = 'memory_mb';
 export const RESOURCE_IDENTIFIER_DISK = 'disk_gb';

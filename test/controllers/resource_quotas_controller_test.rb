@@ -7,6 +7,11 @@ module ForemanResourceQuota
     tests ForemanResourceQuota::ResourceQuotasController
 
     setup do
+      @unassigned = ForemanResourceQuota::ResourceQuota.where(
+        name: 'Unassigned',
+        unassigned: true,
+        description: 'Here, you can see all hosts without a dedicated quota.'
+      ).first_or_create
       @quota = FactoryBot.create :resource_quota
       User.current = User.find_by login: 'admin'
       as_admin { @quota.save! }
