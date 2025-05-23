@@ -9,8 +9,8 @@ module ForemanResourceQuota
                     required: !assignment_optional,
                     help_inline: if assignment_optional
                                    _('Define the Resource Quota this host counts to.')
-                                 elsif host_quota.nil? ||
-                                       host_quota == ForemanResourceQuota::ResourceQuota.unassigned.id
+                                 elsif !selected.nil? && (host_quota.nil? ||
+                                       host_quota == ForemanResourceQuota::ResourceQuota.unassigned.id)
                                    format(_("Quota required! Choosing '%s' by default, change here if needed!"),
                                      user_quotas.find(selected))
                                  else

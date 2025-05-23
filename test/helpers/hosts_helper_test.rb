@@ -55,6 +55,23 @@ module ForemanResourceQuota
         assert_nil form[@unassigned.name]
         assert form['Resource quota assignment required!']
       end
+
+      test 'No quota selectable if no quota is given' do
+        as_admin { @quotas.each(&:destroy) }
+        Setting[:resource_quota_optional_assignment] = false
+        @host.reload.resource_quota_id
+        assert_equal @host.resource_quota_id, @unassigned.id
+        form = ''
+        as_admin do
+          form = form_for(@host) do |f|
+            # def resource_quota_select(form, user_quotas, selected, assignment_optional, host_quota)
+            resource_quota_select(f, ResourceQuota.assignable, nil, false, @host.resource_quota_id)
+          end
+        end
+
+        assert_nil form[@unassigned.name]
+        assert form['Resource quota assignment required!']
+      end
     end
   end
 end
