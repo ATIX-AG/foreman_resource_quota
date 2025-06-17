@@ -15,6 +15,10 @@ ForemanResourceQuota::ResourceQuota.without_auditing do # rubocop:disable Metric
         user.resource_quotas << unassigned
         user.save!
       end
+    rescue ActiveRecord::RecordInvalid
+      user.mail_enabled = false
+      user.resource_quotas << unassigned
+      user.save!
     end
   end
 
