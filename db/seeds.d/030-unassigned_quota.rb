@@ -10,15 +10,11 @@ ForemanResourceQuota::ResourceQuota.without_auditing do # rubocop:disable Metric
 
   # Add default quota to all users and usergroups
   User.without_auditing do
-    User.all.each do |user|
+    User.all.except_hidden.each do |user|
       unless user.resource_quotas.include?(unassigned)
         user.resource_quotas << unassigned
-        user.save!
+        user.save!(validate: false)
       end
-    rescue ActiveRecord::RecordInvalid
-      user.mail_enabled = false
-      user.resource_quotas << unassigned
-      user.save!
     end
   end
 
