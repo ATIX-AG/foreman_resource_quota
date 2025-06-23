@@ -22,7 +22,7 @@ ForemanResourceQuota::ResourceQuota.without_auditing do # rubocop:disable Metric
     Usergroup.all.each do |usergroup|
       unless usergroup.resource_quotas.include?(unassigned)
         usergroup.resource_quotas << unassigned
-        usergroup.save!
+        usergroup.save!(validate: false)
       end
     end
   end
