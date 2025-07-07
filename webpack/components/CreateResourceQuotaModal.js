@@ -20,6 +20,7 @@ const CreateResourceQuotaModal = () => {
     <div>
       <Button
         id="foreman-resource-quota-create-modal-button"
+        ouiaId="foreman-resource-quota-create-modal-button"
         variant="primary"
         onClick={() => {
           setIsOpen(true);
