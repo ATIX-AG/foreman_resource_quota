@@ -7,6 +7,7 @@ exports[`ResourceQuotaEmptyState should render 1`] = `
       <Button
         id="foreman-resource-quota-welcome-create-modal-button"
         onClick={[Function]}
+        ouiaId="foreman-resource-quota-welcome-create-modal-button"
         variant="primary"
       >
         Create resource quota

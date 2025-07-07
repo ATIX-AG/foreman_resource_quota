@@ -17,11 +17,12 @@ exports[`UnitInputField should render as disabled field 1`] = `
     <InputGroup>
       <InputGroupItem>
         <TextInput
-          id="reg_token_life_time_input"
+          id="resource-quota-reg-token-life-time-input"
           isDisabled={true}
           max={5}
           min={0}
           onChange={[Function]}
+          ouiaId="resource-quota-reg-token-life-time-input"
           validated="default"
           value={0}
         />
@@ -32,11 +33,13 @@ exports[`UnitInputField should render as disabled field 1`] = `
             Array [
               <DropdownItem
                 id="unit-dropdownitem-mib"
+                ouiaId="unit-dropdownitem-mib"
               >
                 MiB
               </DropdownItem>,
               <DropdownItem
                 id="unit-dropdownitem-gib"
+                ouiaId="unit-dropdownitem-gib"
               >
                 GiB
               </DropdownItem>,
@@ -44,10 +47,12 @@ exports[`UnitInputField should render as disabled field 1`] = `
           }
           isOpen={false}
           onSelect={[Function]}
+          ouiaId="resource-quota-unit-input-field-input-group-item-dropdown"
           toggle={
             <DropdownToggle
               isDisabled={true}
               onToggle={[Function]}
+              ouiaId="resource-quota-unit-input-field-input-group-item-dropdowni-toggle"
             >
               MiB
             </DropdownToggle>
@@ -76,11 +81,12 @@ exports[`UnitInputField should render default 1`] = `
     <InputGroup>
       <InputGroupItem>
         <TextInput
-          id="reg_token_life_time_input"
+          id="resource-quota-reg-token-life-time-input"
           isDisabled={false}
           max={5}
           min={0}
           onChange={[Function]}
+          ouiaId="resource-quota-reg-token-life-time-input"
           validated="default"
           value={0}
         />
@@ -91,11 +97,13 @@ exports[`UnitInputField should render default 1`] = `
             Array [
               <DropdownItem
                 id="unit-dropdownitem-mib"
+                ouiaId="unit-dropdownitem-mib"
               >
                 MiB
               </DropdownItem>,
               <DropdownItem
                 id="unit-dropdownitem-gib"
+                ouiaId="unit-dropdownitem-gib"
               >
                 GiB
               </DropdownItem>,
@@ -103,10 +111,12 @@ exports[`UnitInputField should render default 1`] = `
           }
           isOpen={false}
           onSelect={[Function]}
+          ouiaId="resource-quota-unit-input-field-input-group-item-dropdown"
           toggle={
             <DropdownToggle
               isDisabled={false}
               onToggle={[Function]}
+              ouiaId="resource-quota-unit-input-field-input-group-item-dropdowni-toggle"
             >
               MiB
             </DropdownToggle>
@@ -135,11 +145,12 @@ exports[`UnitInputField should render without dropdown (single unit) 1`] = `
     <InputGroup>
       <InputGroupItem>
         <TextInput
-          id="reg_token_life_time_input"
+          id="resource-quota-reg-token-life-time-input"
           isDisabled={false}
           max={5}
           min={0}
           onChange={[Function]}
+          ouiaId="resource-quota-reg-token-life-time-input"
           validated="default"
           value={0}
         />
