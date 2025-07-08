@@ -2,7 +2,7 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
 
-import { testComponentSnapshotsWithFixtures } from '@theforeman/test';
+import { testComponentSnapshotsWithFixtures } from 'foremanReact/common/testHelpers';
 import LabelIcon from 'foremanReact/components/common/LabelIcon';
 
 import UnitInputField from '../UnitInputField';
