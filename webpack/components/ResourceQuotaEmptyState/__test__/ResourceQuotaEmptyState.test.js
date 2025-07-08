@@ -1,7 +1,9 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 
-import { mount, testComponentSnapshotsWithFixtures } from '@theforeman/test';
+import { mount } from 'enzyme';
+import { testComponentSnapshotsWithFixtures } from 'foremanReact/common/testHelpers';
+
 // Notice: (not) importing Modal affects the snapshot test since it fills
 // the components data dynamically in snapshots as soon as it can find the component.
 import { Modal } from '@patternfly/react-core';
