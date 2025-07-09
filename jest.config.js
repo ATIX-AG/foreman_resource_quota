@@ -11,7 +11,6 @@ const foremanReactFull = foremanRelativePath(foremanReactRelative);
 // Find correct path to foremanReact so we do not have to mock it in tests
 tfmConfig.moduleNameMapper['^foremanReact(.*)$'] = `${foremanReactFull}/$1`;
 
-tfmConfig.setupFiles = ['./webpack/test_setup.js'];
 tfmConfig.setupFilesAfterEnv = [
   './webpack/global_test_setup.js',
   '@testing-library/jest-dom',
