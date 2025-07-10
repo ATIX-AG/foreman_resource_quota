@@ -105,19 +105,20 @@ const UtilizationProgress = ({
       <Tooltip
         content={resourceUtilizationTooltipText}
         reference={tooltipRefUtilization}
-      />
-      <div
-        className={isEnabled ? '' : 'progress-disabled'}
-        ref={tooltipRefUtilization}
       >
-        <Progress
-          aria-label={`resource-card-${cardId}-progress`}
-          value={resourceUtilizationPercent}
-          measureLocation={ProgressMeasureLocation.inside}
-          size={ProgressSize.lg}
-          variant={resourceProgressVariant()}
-        />
-      </div>
+        <div
+          className={isEnabled ? '' : 'progress-disabled'}
+          ref={tooltipRefUtilization}
+        >
+          <Progress
+            aria-label={`resource-card-${cardId}-progress`}
+            value={resourceUtilizationPercent}
+            measureLocation={ProgressMeasureLocation.inside}
+            size={ProgressSize.lg}
+            variant={resourceProgressVariant()}
+          />
+        </div>
+      </Tooltip>
     </div>
   );
 };
