@@ -48,7 +48,8 @@ const Submit = ({ isValid, onCreate, onSubmit }) => {
           onClick={handleOnSubmit}
           isLoading={isSubmitLoading}
           variant="primary"
-          id="submit-button"
+          id="resource-quota-submit-button"
+          ouiaId="resource-quota-submit-button"
         >
           {__('Create resource quota')}
         </Button>

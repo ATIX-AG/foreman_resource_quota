@@ -42,6 +42,7 @@ const StaticDetail = ({
         ) : (
           <TextInput
             id={id}
+            ouiaId={id}
             onChange={(_event, val) => onChange(val)}
             value={value}
             validated={validated}

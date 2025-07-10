@@ -21,6 +21,7 @@ const ResourceQuotaEmptyState = () => {
   const ActionButton = (
     <Button
       id="foreman-resource-quota-welcome-create-modal-button"
+      ouiaId="foreman-resource-quota-welcome-create-modal-button"
       variant="primary"
       onClick={() => {
         setIsOpen(true);

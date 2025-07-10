@@ -143,6 +143,8 @@ const Resource = ({
         variant="primary"
         onClick={onClickApply}
         isLoading={isApplyLoading}
+        id="resource-quota-resource-index-button-apply"
+        ouiaId="resource-quota-resource-index-button-apply"
       >
         {__('Apply')}
       </Button>
@@ -154,6 +156,7 @@ const Resource = ({
       isExpanded={isExpanded}
       isDisabledRaised={!isEnabled}
       id={`resource-card-${cardId}`}
+      ouiaId={`resource-card-${cardId}`}
     >
       <CardHeader
         actions={{ actions: renderApplyButton() }}
@@ -164,6 +167,7 @@ const Resource = ({
           <FlexItem>
             <Switch
               id={`switch-${cardId}`}
+              ouiaId={`switch-${cardId}`}
               aria-label={`switch-${cardId}`}
               onChange={(_event, val) => onChangeEnabled(val)}
               isChecked={isEnabled}

@@ -92,6 +92,8 @@ const Properties = ({
         reference={tooltipRefFetchButton}
       >
         <Button
+          id="resource-quota-index-button"
+          ouiaId="resource-quota-index-button"
           isLoading={isFetchLoading}
           icon={<SyncAltIcon />}
           size="sm"
@@ -163,7 +165,7 @@ const Properties = ({
   };
 
   return (
-    <Card>
+    <Card id="resource-quota-index-card" ouiaId="resource-quota-index-card">
       <CardHeader actions={{ actions: renderSyncButton() }}>
         {renderHeaderTitle()}
       </CardHeader>

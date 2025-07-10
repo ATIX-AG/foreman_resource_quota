@@ -49,6 +49,7 @@ const UnitInputField = ({
     unitDropdownItems = units.map(unit => (
       <DropdownItem
         id={`unit-dropdownitem-${unit.symbol.toLowerCase()}`}
+        ouiaId={`unit-dropdownitem-${unit.symbol.toLowerCase()}`}
         key={unit.symbol.toLowerCase()}
       >
         {unit.symbol}
@@ -169,10 +170,12 @@ const UnitInputField = ({
     return (
       <InputGroupItem>
         <Dropdown
+          ouiaId="resource-quota-unit-input-field-input-group-item-dropdown"
           onSelect={onUnitSelect}
           toggle={
             <DropdownToggle
               isDisabled={isDisabled}
+              ouiaId="resource-quota-unit-input-field-input-group-item-dropdowni-toggle"
               onToggle={(_event, _val) => onUnitToggle()}
             >
               {__(`${selectedUnit.symbol}`)}
@@ -233,7 +236,8 @@ const UnitInputField = ({
               min={minValue}
               max={maxValue}
               validated={validated}
-              id="reg_token_life_time_input"
+              id="resource-quota-reg-token-life-time-input"
+              ouiaId="resource-quota-reg-token-life-time-input"
               onChange={(_event, val) => setInputValue(val)}
             />
           </InputGroupItem>
