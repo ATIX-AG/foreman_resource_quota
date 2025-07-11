@@ -105,5 +105,13 @@ Foreman::Plugin.register :foreman_resource_quota do
       # Future: Overwrite quota-specific "out of resource"-action and take no ..
     end
   end
+  extend_page 'hosts/_list' do |context|
+    context.with_profile :resource_quota, _('Resource Quota'), default: true do
+      add_pagelet :hosts_table_column_header, key: :resource_quota_id, label: s_('Resource Quota'),
+        sortable: true, width: '10%', class: 'hidden-xs'
+      add_pagelet :hosts_table_column_content, key: :resource_quota_id,
+        callback: ->(host) { host.resource_quota.name }, class: 'hidden-xs ellipsis'
+    end
+  end
 end
 # rubocop: enable Metrics/BlockLength
