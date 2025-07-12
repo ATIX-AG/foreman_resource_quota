@@ -110,7 +110,7 @@ Foreman::Plugin.register :foreman_resource_quota do
       add_pagelet :hosts_table_column_header, key: :resource_quota_id, label: s_('Resource Quota'),
         sortable: true, width: '10%', class: 'hidden-xs'
       add_pagelet :hosts_table_column_content, key: :resource_quota_id,
-        callback: ->(host) { host.resource_quota.name }, class: 'hidden-xs ellipsis'
+        callback: ->(host) { host.resource_quota&.name || _('Not available') }, class: 'hidden-xs ellipsis'
     end
   end
 end
