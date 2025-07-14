@@ -1,5 +1,5 @@
 <%
-  user_quotas = User.current&.admin? ? ForemanResourceQuota::ResourceQuota.all : User.current.resource_quotas.distinct
+  user_quotas = User.current&.admin? ? ForemanResourceQuota::ResourceQuota.all : User.current.quotas_with_usergroups
   user_quotas = user_quotas.assignable if !User.current.quota_assignment_optional?
   user_quotas = user_quotas.order(:name)
   selected = @host.resource_quota_id
