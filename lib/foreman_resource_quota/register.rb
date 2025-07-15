@@ -107,9 +107,9 @@ Foreman::Plugin.register :foreman_resource_quota do
   end
   extend_page 'hosts/_list' do |context|
     context.with_profile :resource_quota, _('Resource Quota'), default: true do
-      add_pagelet :hosts_table_column_header, key: :resource_quota_id, label: s_('Resource Quota'),
+      add_pagelet :hosts_table_column_header, key: :resource_quota, label: s_('Resource Quota'),
         sortable: true, width: '10%', class: 'hidden-xs'
-      add_pagelet :hosts_table_column_content, key: :resource_quota_id,
+      add_pagelet :hosts_table_column_content, key: :resource_quota,
         callback: ->(host) { host.resource_quota&.name || _('Not available') }, class: 'hidden-xs ellipsis'
     end
   end
