@@ -168,14 +168,18 @@ const UnitInputField = ({
     }
 
     return (
-      <InputGroupItem>
+      <InputGroupItem
+        id="resource-quota-unit-input-field-input-group-item"
+        ouiaId="resource-quota-unit-input-field-input-group-item"
+      >
         <Dropdown
           ouiaId="resource-quota-unit-input-field-input-group-item-dropdown"
           onSelect={onUnitSelect}
           toggle={
             <DropdownToggle
+              id="resource-quota-unit-input-field-input-group-item-dropdowni-toggle"
+              ouiaId="resource-quota-unit-input-field-input-group-item-dropdown-toggle"
               isDisabled={isDisabled}
-              ouiaId="resource-quota-unit-input-field-input-group-item-dropdowni-toggle"
               onToggle={(_event, _val) => onUnitToggle()}
             >
               {__(`${selectedUnit.symbol}`)}
@@ -226,6 +230,8 @@ const UnitInputField = ({
         label={__('Quota Limit')}
         validated={validated}
         fieldId="quota-limit-resource-quota-form-group"
+        id="quota-limit-resource-quota-form-group"
+        ouiaId="quota-limit-resource-quota-form-group"
         labelIcon={labelIcon || {}}
       >
         <InputGroup>

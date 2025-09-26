@@ -1,6 +1,6 @@
 /* eslint-disable promise/prefer-await-to-then */
 // Configure Enzyme
-import { mount } from '@theforeman/test';
+import { mount } from 'enzyme';
 import React from 'react';
 import { Provider } from 'react-redux';
 import store from 'foremanReact/redux';
