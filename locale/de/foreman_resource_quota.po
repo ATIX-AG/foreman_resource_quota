@@ -4,19 +4,19 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 # Translators:
-# Ettore Atalan <atalanttore@googlemail.com>, 2025
 # pdolinic, 2025
 # simon11 <transifex@stieger.co>, 2025
 # Hannes Schaller <admin@cyberkov.at>, 2025
 # Bryan Kearney <bryan.kearney@gmail.com>, 2025
 # Wiederoder <stefanwiederoder@googlemail.com>, 2025
+# Ettore Atalan <atalanttore@googlemail.com>, 2025
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_resource_quota 0.3.1\n"
+"Project-Id-Version: foreman_resource_quota 0.6.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2025-01-07 14:34+0000\n"
-"Last-Translator: Wiederoder <stefanwiederoder@googlemail.com>, 2025\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>, 2025\n"
 "Language-Team: German (https://app.transifex.com/foreman/teams/114/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,10 +28,10 @@ msgid " ${response.response.data.error.full_messages}"
 msgstr ""
 
 msgid "${label}"
-msgstr ""
+msgstr "${label}"
 
 msgid "${label} *"
-msgstr ""
+msgstr "${label} *"
 
 msgid "${selectedUnit.symbol}"
 msgstr ""
@@ -43,7 +43,7 @@ msgid "Apply"
 msgstr "Anwenden"
 
 msgid "CPU cores"
-msgstr ""
+msgstr "CPU-Kerne"
 
 msgid "Click on \\\"Fetch quota utilization\\\": "
 msgstr ""
@@ -52,10 +52,10 @@ msgid "Consumed resources"
 msgstr ""
 
 msgid "Create a Resource Quota"
-msgstr ""
+msgstr "Ressourcenkontingent erstellen"
 
 msgid "Create resource quota"
-msgstr ""
+msgstr "Ressourcenkontingent erstellen"
 
 msgid "Define a Resource Quota here and apply it to users to guarantee a fair share of your resources."
 msgstr ""
@@ -67,22 +67,22 @@ msgid "Delete %s?"
 msgstr "%s löschen?"
 
 msgid "Delete a Resource Quota"
-msgstr ""
+msgstr "Ressourcenkontingent löschen"
 
 msgid "Description"
 msgstr "Beschreibung"
 
 msgid "Description of the Resource Quota"
-msgstr ""
+msgstr "Beschreibung des Ressourcenkontingents"
 
 msgid "Disk space (GB)"
-msgstr ""
+msgstr "Festplattenplatz (GB)"
 
 msgid "Edit"
 msgstr "Bearbeiten"
 
 msgid "Edit Resource Quota %s"
-msgstr ""
+msgstr "Ressourcenkontingent %s bearbeiten"
 
 msgid "Edit: ${quotaProperties[RESOURCE_IDENTIFIER_NAME]}"
 msgstr ""
@@ -100,7 +100,7 @@ msgid "It is optional for a user to assign a quota when creating new hosts"
 msgstr ""
 
 msgid "List all Resource Quotas"
-msgstr ""
+msgstr "Alle Ressourcenkontingente auflisten"
 
 msgid ""
 "Make the assignment of a Resource Quota, during the host creation process, optional for\n"
@@ -108,25 +108,25 @@ msgid ""
 msgstr ""
 
 msgid "Maximum disk space in GiB"
-msgstr ""
+msgstr "Maximaler Festplattenplatz in GiB"
 
 msgid "Maximum memory in MiB"
-msgstr ""
+msgstr "Maximaler Speicher in MiB"
 
 msgid "Maximum number of CPU cores"
-msgstr ""
+msgstr "Maximale Anzahl an CPU-Kernen"
 
 msgid "Memory (MB)"
-msgstr ""
+msgstr "Speicher (MB)"
 
 msgid "Name"
 msgstr "Name"
 
 msgid "Name of the Resource Quota"
-msgstr ""
+msgstr "Name des Ressourcenkontingents"
 
 msgid "New Resource Quota"
-msgstr ""
+msgstr "Neues Ressourcenkontingent"
 
 msgid "New quota - no consumption to display."
 msgstr ""
@@ -134,26 +134,32 @@ msgstr ""
 msgid "No consumption to display."
 msgstr ""
 
-msgid "No floating point for smallest unit (${units[0].symbol})."
+msgid "None provided"
+msgstr "Keine angegeben"
+
+msgid "Not available"
 msgstr ""
 
-msgid "None provided"
+msgid "Number of assigned hosts"
 msgstr ""
 
 msgid "Optional Assignment"
 msgstr ""
 
 msgid "Properties"
-msgstr ""
+msgstr "Eigenschaften"
 
 msgid "Quota Limit"
+msgstr "Kontingentbegrenzung"
+
+msgid "Quota required! Choosing '%s' by default, change here if needed!"
 msgstr ""
 
 msgid "Quotas from user groups"
-msgstr ""
+msgstr "Kontingente von Benutzergruppen"
 
 msgid "Resource Quota"
-msgstr ""
+msgstr "Ressourcenkontingent"
 
 msgid ""
 "Resource Quota ID.\n"
@@ -170,33 +176,42 @@ msgid "Resource Quota optional assignment"
 msgstr ""
 
 msgid "Resource Quotas"
-msgstr ""
+msgstr "Ressourcenkontingente"
 
 msgid "Resource Quotas help admins to manage resources including CPUs, memory, and disk space among users or user groups."
 msgstr ""
 
 msgid "Resource Quota|Name"
+msgstr "Ressourcenkontingent|Name"
+
+msgid "Resource quota assignment required!"
+msgstr ""
+
+msgid "Rounding to: ${roundedValue} (${units[0].symbol})."
 msgstr ""
 
 msgid "Show Resource Quota"
-msgstr ""
+msgstr "Ressourcenkontingent anzeigen"
 
 msgid "Show hosts of a Resource Quota"
-msgstr ""
+msgstr "Hosts eines Ressourcenkontingents anzeigen"
 
-msgid "Show resources could not be determined when calculating utilization"
+msgid "Show hosts' resources that could not be determined when calculating the quota utilization"
 msgstr ""
 
 msgid "Show used resources of assigned hosts"
-msgstr ""
+msgstr "Belegte Ressourcen von zugewiesenen Hosts anzeigen"
 
 msgid "Show usergroups of a Resource Quota"
-msgstr ""
+msgstr "Benutzergruppen eines Ressourcenkontingents anzeigen"
 
 msgid "Show users of a Resource Quota"
-msgstr ""
+msgstr "Benutzer eines Ressourcenkontingents anzeigen"
 
 msgid "Take no action when a Resource Quota is exceeded."
+msgstr ""
+
+msgid "The setting 'resource_quota_optional_assignment' is set to 'No' but there are hosts with no quota assignment. Please check your hosts' quota assignments!"
 msgstr ""
 
 msgid "The total amount of ${resourceTitle} for this quota."
@@ -206,18 +221,21 @@ msgid "This can take some time since the resources of every host, assigned to th
 msgstr ""
 
 msgid "This group has no quotas"
-msgstr ""
+msgstr "Diese Gruppe hat keine Kontingente"
 
 msgid "Total ${resourceTitle} currently in use by all hosts assigned to this quota."
 msgstr ""
 
 msgid "Update a Resource Quota"
-msgstr ""
+msgstr "Ressourcenkontingent hochladen"
 
-msgid "Value must be a natural number."
+msgid "Value must be a number."
 msgstr ""
 
 msgid ""
 "When set to \"true\", it is optional for a user to assign a quota when creating new hosts.\n"
 "                                   The default value is \"false\"."
+msgstr ""
+
+msgid "You have unassigned hosts!"
 msgstr ""

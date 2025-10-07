@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_resource_quota 0.3.1\n"
+"Project-Id-Version: foreman_resource_quota 0.6.1\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2025-01-07 14:34+0000\n"
 "Language-Team: English (United States) (https://app.transifex.com/foreman/team"
@@ -126,10 +126,13 @@ msgstr ""
 msgid "No consumption to display."
 msgstr ""
 
-msgid "No floating point for smallest unit (${units[0].symbol})."
+msgid "None provided"
 msgstr ""
 
-msgid "None provided"
+msgid "Not available"
+msgstr ""
+
+msgid "Number of assigned hosts"
 msgstr ""
 
 msgid "Optional Assignment"
@@ -139,6 +142,9 @@ msgid "Properties"
 msgstr ""
 
 msgid "Quota Limit"
+msgstr ""
+
+msgid "Quota required! Choosing '%s' by default, change here if needed!"
 msgstr ""
 
 msgid "Quotas from user groups"
@@ -170,13 +176,19 @@ msgstr ""
 msgid "Resource Quota|Name"
 msgstr ""
 
+msgid "Resource quota assignment required!"
+msgstr ""
+
+msgid "Rounding to: ${roundedValue} (${units[0].symbol})."
+msgstr ""
+
 msgid "Show Resource Quota"
 msgstr ""
 
 msgid "Show hosts of a Resource Quota"
 msgstr ""
 
-msgid "Show resources could not be determined when calculating utilization"
+msgid "Show hosts' resources that could not be determined when calculating the quota utilization"
 msgstr ""
 
 msgid "Show used resources of assigned hosts"
@@ -189,6 +201,9 @@ msgid "Show users of a Resource Quota"
 msgstr ""
 
 msgid "Take no action when a Resource Quota is exceeded."
+msgstr ""
+
+msgid "The setting 'resource_quota_optional_assignment' is set to 'No' but there are hosts with no quota assignment. Please check your hosts' quota assignments!"
 msgstr ""
 
 msgid "The total amount of ${resourceTitle} for this quota."
@@ -206,10 +221,13 @@ msgstr ""
 msgid "Update a Resource Quota"
 msgstr ""
 
-msgid "Value must be a natural number."
+msgid "Value must be a number."
 msgstr ""
 
 msgid ""
 "When set to \"true\", it is optional for a user to assign a quota when creating new hosts.\n"
 "                                   The default value is \"false\"."
+msgstr ""
+
+msgid "You have unassigned hosts!"
 msgstr ""

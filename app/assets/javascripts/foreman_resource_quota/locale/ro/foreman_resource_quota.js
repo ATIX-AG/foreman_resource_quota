@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_resource_quota": {
       "": {
-        "Project-Id-Version": "foreman_resource_quota 0.3.1",
+        "Project-Id-Version": "foreman_resource_quota 0.6.1",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2025-01-07 14:34+0000",
         "Language-Team": "Romanian (https://app.transifex.com/foreman/teams/114/ro/)",
@@ -124,10 +124,13 @@
       "No consumption to display.": [
         ""
       ],
-      "No floating point for smallest unit (${units[0].symbol}).": [
+      "None provided": [
         ""
       ],
-      "None provided": [
+      "Not available": [
+        ""
+      ],
+      "Number of assigned hosts": [
         ""
       ],
       "Optional Assignment": [
@@ -137,6 +140,9 @@
         ""
       ],
       "Quota Limit": [
+        ""
+      ],
+      "Quota required! Choosing '%s' by default, change here if needed!": [
         ""
       ],
       "Quotas from user groups": [
@@ -166,13 +172,19 @@
       "Resource Quota|Name": [
         ""
       ],
+      "Resource quota assignment required!": [
+        ""
+      ],
+      "Rounding to: ${roundedValue} (${units[0].symbol}).": [
+        ""
+      ],
       "Show Resource Quota": [
         ""
       ],
       "Show hosts of a Resource Quota": [
         ""
       ],
-      "Show resources could not be determined when calculating utilization": [
+      "Show hosts' resources that could not be determined when calculating the quota utilization": [
         ""
       ],
       "Show used resources of assigned hosts": [
@@ -185,6 +197,9 @@
         ""
       ],
       "Take no action when a Resource Quota is exceeded.": [
+        ""
+      ],
+      "The setting 'resource_quota_optional_assignment' is set to 'No' but there are hosts with no quota assignment. Please check your hosts' quota assignments!": [
         ""
       ],
       "The total amount of ${resourceTitle} for this quota.": [
@@ -202,10 +217,13 @@
       "Update a Resource Quota": [
         ""
       ],
-      "Value must be a natural number.": [
+      "Value must be a number.": [
         ""
       ],
       "When set to \\\"true\\\", it is optional for a user to assign a quota when creating new hosts.\\n                                   The default value is \\\"false\\\".": [
+        ""
+      ],
+      "You have unassigned hosts!": [
         ""
       ]
     }
