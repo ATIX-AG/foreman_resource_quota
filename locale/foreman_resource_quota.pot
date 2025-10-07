@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: foreman_resource_quota 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-10 20:06+0100\n"
-"PO-Revision-Date: 2025-02-10 20:06+0100\n"
+"POT-Creation-Date: 2025-10-07 14:22+0200\n"
+"PO-Revision-Date: 2025-10-07 14:22+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -35,7 +35,9 @@ msgstr ""
 
 #:
 #: ../app/controllers/foreman_resource_quota/api/v2/resource_quotas_controller.rb:43
-msgid "Show resources could not be determined when calculating utilization"
+msgid ""
+"Show hosts' resources that could not be determined when calculating the quota "
+"utilization"
 msgstr ""
 
 #:
@@ -94,7 +96,7 @@ msgid "Delete a Resource Quota"
 msgstr ""
 
 #:
-#: ../app/controllers/foreman_resource_quota/concerns/api/v2/hosts_controller_extensions.rb:12
+#: ../app/controllers/foreman_resource_quota/concerns/api/v2/hosts_controller_extensions.rb:19
 msgid ""
 "Resource Quota ID.\n"
 "                         This field is required if the setting `resource_quota"
@@ -119,14 +121,24 @@ msgid ""
 "                                   The default value is \"false\"."
 msgstr ""
 
-#: ../app/helpers/foreman_resource_quota/hosts_helper.rb:14
+#: ../app/helpers/foreman_resource_quota/hosts_helper.rb:8
 #: ../lib/foreman_resource_quota/register.rb:73
 #: ../lib/foreman_resource_quota/register.rb:80
+#: ../lib/foreman_resource_quota/register.rb:109
+#: ../lib/foreman_resource_quota/register.rb:110
 msgid "Resource Quota"
 msgstr ""
 
-#: ../app/helpers/foreman_resource_quota/hosts_helper.rb:15
+#: ../app/helpers/foreman_resource_quota/hosts_helper.rb:11
 msgid "Define the Resource Quota this host counts to."
+msgstr ""
+
+#: ../app/helpers/foreman_resource_quota/hosts_helper.rb:14
+msgid "Quota required! Choosing '%s' by default, change here if needed!"
+msgstr ""
+
+#: ../app/helpers/foreman_resource_quota/hosts_helper.rb:17
+msgid "Resource quota assignment required!"
 msgstr ""
 
 #: ../app/views/foreman_resource_quota/resource_quotas/edit.html.erb:1
@@ -137,36 +149,40 @@ msgstr ""
 #: ../app/views/foreman_resource_quota/resource_quotas/welcome.html.erb:8
 #: ../app/views/users/_form_quota_tab.html.erb:13
 #: ../lib/foreman_resource_quota/register.rb:60
-#: ../webpack/components/ResourceQuotaEmptyState/index.js:54
+#: ../webpack/components/ResourceQuotaEmptyState/index.js:55
 msgid "Resource Quotas"
 msgstr ""
 
-#: ../app/views/foreman_resource_quota/resource_quotas/index.html.erb:15
-msgid "Resource Quota|Name"
-msgstr ""
-
-#: ../app/views/foreman_resource_quota/resource_quotas/index.html.erb:16
-#: ../webpack/components/ResourceQuotaForm/components/Properties/index.js:154
-msgid "Description"
-msgstr ""
-
-#: ../app/views/foreman_resource_quota/resource_quotas/index.html.erb:17
-msgid "CPU cores"
+#: ../app/views/foreman_resource_quota/resource_quotas/index.html.erb:10
+msgid "You have unassigned hosts!"
 msgstr ""
 
 #: ../app/views/foreman_resource_quota/resource_quotas/index.html.erb:18
-msgid "Memory (MB)"
+msgid "Resource Quota|Name"
 msgstr ""
 
 #: ../app/views/foreman_resource_quota/resource_quotas/index.html.erb:19
-msgid "Disk space (GB)"
+#: ../webpack/components/ResourceQuotaForm/components/Properties/index.js:190
+msgid "Description"
 msgstr ""
 
 #: ../app/views/foreman_resource_quota/resource_quotas/index.html.erb:20
+msgid "CPU cores"
+msgstr ""
+
+#: ../app/views/foreman_resource_quota/resource_quotas/index.html.erb:21
+msgid "Memory (MB)"
+msgstr ""
+
+#: ../app/views/foreman_resource_quota/resource_quotas/index.html.erb:22
+msgid "Disk space (GB)"
+msgstr ""
+
+#: ../app/views/foreman_resource_quota/resource_quotas/index.html.erb:23
 msgid "Actions"
 msgstr ""
 
-#: ../app/views/foreman_resource_quota/resource_quotas/index.html.erb:47
+#: ../app/views/foreman_resource_quota/resource_quotas/index.html.erb:54
 msgid "Delete %s?"
 msgstr ""
 
@@ -210,25 +226,29 @@ msgstr ""
 msgid "Take no action when a Resource Quota is exceeded."
 msgstr ""
 
+#: ../lib/foreman_resource_quota/register.rb:113
+msgid "Not available"
+msgstr ""
+
 #: ../webpack/api_helper.js:93
 msgid " ${response.response.data.error.full_messages}"
 msgstr ""
 
-#: ../webpack/components/CreateResourceQuotaModal.js:28
-#: ../webpack/components/CreateResourceQuotaModal.js:32
-#: ../webpack/components/ResourceQuotaEmptyState/index.js:29
-#: ../webpack/components/ResourceQuotaEmptyState/index.js:61
-#: ../webpack/components/ResourceQuotaForm/components/Submit.js:53
+#: ../webpack/components/CreateResourceQuotaModal.js:29
+#: ../webpack/components/CreateResourceQuotaModal.js:33
+#: ../webpack/components/ResourceQuotaEmptyState/index.js:30
+#: ../webpack/components/ResourceQuotaEmptyState/index.js:62
+#: ../webpack/components/ResourceQuotaForm/components/Submit.js:54
 msgid "Create resource quota"
 msgstr ""
 
-#: ../webpack/components/ResourceQuotaEmptyState/index.js:35
+#: ../webpack/components/ResourceQuotaEmptyState/index.js:36
 msgid ""
 "Resource Quotas help admins to manage resources including CPUs, memory, and di"
 "sk space among users or user groups."
 msgstr ""
 
-#: ../webpack/components/ResourceQuotaEmptyState/index.js:39
+#: ../webpack/components/ResourceQuotaEmptyState/index.js:40
 msgid ""
 "Define a Resource Quota here and apply it to users to guarantee a fair share o"
 "f your resources."
@@ -236,52 +256,62 @@ msgstr ""
 
 #:
 #: ../webpack/components/ResourceQuotaForm/components/Properties/StaticDetail.js:23
-#: ../webpack/components/ResourceQuotaForm/components/Properties/TextInputField.js:98
+#: ../webpack/components/ResourceQuotaForm/components/Properties/TextInputField.js:99
 msgid "${label} *"
 msgstr ""
 
 #:
 #: ../webpack/components/ResourceQuotaForm/components/Properties/StaticDetail.js:23
-#: ../webpack/components/ResourceQuotaForm/components/Properties/TextInputField.js:98
+#: ../webpack/components/ResourceQuotaForm/components/Properties/TextInputField.js:99
 msgid "${label}"
 msgstr ""
 
-#: ../webpack/components/ResourceQuotaForm/components/Properties/index.js:88
+#: ../webpack/components/ResourceQuotaForm/components/Properties/index.js:84
 msgid "Fetch quota utilization"
 msgstr ""
 
-#: ../webpack/components/ResourceQuotaForm/components/Properties/index.js:90
+#: ../webpack/components/ResourceQuotaForm/components/Properties/index.js:86
 msgid ""
 "This can take some time since the resources of every host, assigned to this qu"
 "ota, must be requested."
 msgstr ""
 
-#: ../webpack/components/ResourceQuotaForm/components/Properties/index.js:101
-#: ../webpack/components/ResourceQuotaForm/components/Properties/index.js:104
+#: ../webpack/components/ResourceQuotaForm/components/Properties/index.js:109
+#: ../webpack/components/ResourceQuotaForm/components/Properties/index.js:114
 msgid "Properties"
 msgstr ""
 
-#: ../webpack/components/ResourceQuotaForm/components/Properties/index.js:143
+#: ../webpack/components/ResourceQuotaForm/components/Properties/index.js:133
+msgid ""
+"The setting 'resource_quota_optional_assignment' is set to 'No' but there are "
+"hosts with no quota assignment. Please check your hosts' quota assignments!"
+msgstr ""
+
+#: ../webpack/components/ResourceQuotaForm/components/Properties/index.js:136
+msgid "Number of assigned hosts"
+msgstr ""
+
+#: ../webpack/components/ResourceQuotaForm/components/Properties/index.js:178
 msgid "Name"
 msgstr ""
 
 #:
-#: ../webpack/components/ResourceQuotaForm/components/Resource/UnitInputField.js:64
-msgid "Value must be a natural number."
+#: ../webpack/components/ResourceQuotaForm/components/Resource/UnitInputField.js:73
+msgid "Value must be a number."
 msgstr ""
 
 #:
-#: ../webpack/components/ResourceQuotaForm/components/Resource/UnitInputField.js:70
-msgid "No floating point for smallest unit (${units[0].symbol})."
+#: ../webpack/components/ResourceQuotaForm/components/Resource/UnitInputField.js:77
+msgid "Rounding to: ${roundedValue} (${units[0].symbol})."
 msgstr ""
 
 #:
-#: ../webpack/components/ResourceQuotaForm/components/Resource/UnitInputField.js:162
+#: ../webpack/components/ResourceQuotaForm/components/Resource/UnitInputField.js:167
 msgid "${selectedUnit.symbol}"
 msgstr ""
 
 #:
-#: ../webpack/components/ResourceQuotaForm/components/Resource/UnitInputField.js:181
+#: ../webpack/components/ResourceQuotaForm/components/Resource/UnitInputField.js:226
 msgid "Quota Limit"
 msgstr ""
 
@@ -300,27 +330,27 @@ msgstr ""
 msgid "Click on \\\"Fetch quota utilization\\\": "
 msgstr ""
 
-#: ../webpack/components/ResourceQuotaForm/components/Resource/index.js:165
+#: ../webpack/components/ResourceQuotaForm/components/Resource/index.js:149
 msgid "Apply"
 msgstr ""
 
-#: ../webpack/components/ResourceQuotaForm/components/Resource/index.js:184
+#: ../webpack/components/ResourceQuotaForm/components/Resource/index.js:195
 msgid "The total amount of ${resourceTitle} for this quota."
 msgstr ""
 
-#: ../webpack/components/ResourceQuotaForm/components/Resource/index.js:193
+#: ../webpack/components/ResourceQuotaForm/components/Resource/index.js:204
 msgid "Consumed resources"
 msgstr ""
 
-#: ../webpack/components/ResourceQuotaForm/components/Resource/index.js:197
+#: ../webpack/components/ResourceQuotaForm/components/Resource/index.js:208
 msgid "Total ${resourceTitle} currently in use by all hosts assigned to this quota."
 msgstr ""
 
-#: ../webpack/components/UpdateResourceQuotaModal.js:45
+#: ../webpack/components/UpdateResourceQuotaModal.js:49
 msgid "Edit: ${quotaProperties[RESOURCE_IDENTIFIER_NAME]}"
 msgstr ""
 
-#: ../webpack/lib/EditableTextInput/EditableTextInput.js:194
+#: ../webpack/lib/EditableTextInput/EditableTextInput.js:198
 msgid "None provided"
 msgstr ""
 
