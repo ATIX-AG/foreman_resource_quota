@@ -61,6 +61,9 @@ Foreman::Plugin.register :foreman_resource_quota do
     parent: :configure_menu,
     after: :common_parameters
 
+  # add React/webpack extensions via global_index.js
+  register_global_js_file 'global'
+
   # add API extension
   extend_rabl_template 'api/v2/hosts/main', 'foreman_resource_quota/api/v2/hosts/resource_quota'
   extend_rabl_template 'api/v2/users/main', 'foreman_resource_quota/api/v2/users/resource_quota'
