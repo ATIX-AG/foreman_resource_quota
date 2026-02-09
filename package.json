@@ -34,7 +34,7 @@
     "@theforeman/test": ">= 15.0.0",
     "@theforeman/vendor-dev": ">= 15.0.0",
     "babel-eslint": "^10.0.3",
-    "eslint": "^6.7.2",
+    "eslint": "^10.0.0",
     "prettier": "^1.19.1",
     "stylelint": "^17.0.0",
     "stylelint-config-standard": "^40.0.0"
