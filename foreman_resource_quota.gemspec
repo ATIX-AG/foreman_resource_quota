@@ -10,9 +10,9 @@ Gem::Specification.new do |s|
   s.authors     = ['Bastian Schmidt']
   s.email       = ['schmidt@atix.de']
   s.homepage    = 'https://github.com/ATIX-AG/foreman_resource_quota'
-  s.summary     = 'Foreman Plug-in for resource quota'
+  s.summary     = 'Foreman plugin for resource quota'
   # also update locale/gemspec.rb
-  s.description = 'Foreman Plug-in to manage resource usage among users.'
+  s.description = 'Foreman plugin to manage resource usage among users.'
 
   s.files = Dir['{app,config,db,lib,locale,webpack}/**/*'] + ['LICENSE', 'Rakefile', 'README.md', 'package.json']
 
