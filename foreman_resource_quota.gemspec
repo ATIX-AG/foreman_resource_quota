@@ -7,8 +7,8 @@ Gem::Specification.new do |s|
   s.version     = ForemanResourceQuota::VERSION
   s.metadata    = { 'is_foreman_plugin' => 'true' }
   s.license     = 'GPL-3.0'
-  s.authors     = ['Bastian Schmidt']
-  s.email       = ['schmidt@atix.de']
+  s.authors     = ['ATIX AG']
+  s.email       = ['info@atix.de']
   s.homepage    = 'https://github.com/ATIX-AG/foreman_resource_quota'
   s.summary     = 'Foreman plugin for resource quota'
   # also update locale/gemspec.rb
