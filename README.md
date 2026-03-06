@@ -14,6 +14,7 @@ For more information, see [Limiting host resources](https://docs.theforeman.org/
 
 | Foreman Version | Plugin Version |
 | --------------- | -------------- |
+| 3.18+           | ~> 0.6.0       |
 | 3.15            |    0.5.0       |
 | 3.14            |    0.4.0       |
 | 3.13            | ~> 0.3.0       |
@@ -42,7 +43,7 @@ Fork and send a Pull Request. Thanks!
 
 ## Copyright
 
-Copyright (c) 2025 ATIX AG - https://atix.de
+Copyright (c) 2026 ATIX AG - https://atix.de
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
