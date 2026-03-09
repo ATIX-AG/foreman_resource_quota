@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the foreman_resource_quota package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_resource_quota 1.0.0\n"
+"Project-Id-Version: foreman_resource_quota 0.6.2\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-10-07 14:22+0200\n"
+"PO-Revision-Date: 2026-03-09 12:50+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -83,7 +82,7 @@ msgstr ""
 msgid "Fetch quota utilization"
 msgstr ""
 
-msgid "Foreman Plug-in to manage resource usage among users."
+msgid "Foreman plugin to manage resource usage among users."
 msgstr ""
 
 msgid "Global Resource Quota no action"
@@ -149,6 +148,9 @@ msgid "Quota required! Choosing '%s' by default, change here if needed!"
 msgstr ""
 
 msgid "Quotas from user groups"
+msgstr ""
+
+msgid "Refresh resource quota utilization"
 msgstr ""
 
 msgid "Resource Quota"
