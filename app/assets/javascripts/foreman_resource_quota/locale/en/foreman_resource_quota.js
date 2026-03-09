@@ -3,9 +3,9 @@
   "locale_data": {
     "foreman_resource_quota": {
       "": {
-        "Project-Id-Version": "foreman_resource_quota 1.0.0",
+        "Project-Id-Version": "foreman_resource_quota 0.6.2",
         "Report-Msgid-Bugs-To": "",
-        "PO-Revision-Date": "2025-10-07 14:22+0200",
+        "PO-Revision-Date": "2026-03-09 12:50+0000",
         "Last-Translator": "FULL NAME <EMAIL@ADDRESS>",
         "Language-Team": "LANGUAGE <LL@li.org>",
         "Language": "",
@@ -83,7 +83,7 @@
       "Fetch quota utilization": [
         ""
       ],
-      "Foreman Plug-in to manage resource usage among users.": [
+      "Foreman plugin to manage resource usage among users.": [
         ""
       ],
       "Global Resource Quota no action": [
@@ -147,6 +147,9 @@
         ""
       ],
       "Quotas from user groups": [
+        ""
+      ],
+      "Refresh resource quota utilization": [
         ""
       ],
       "Resource Quota": [

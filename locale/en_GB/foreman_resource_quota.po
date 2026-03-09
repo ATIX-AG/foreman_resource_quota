@@ -9,7 +9,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: foreman_resource_quota 0.6.1\n"
+"Project-Id-Version: foreman_resource_quota 0.6.2\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2025-01-07 14:34+0000\n"
 "Last-Translator: Andi Chandler <andi@gowling.com>, 2025\n"
@@ -87,8 +87,8 @@ msgstr "Edit: ${quotaProperties[RESOURCE_IDENTIFIER_NAME]}"
 msgid "Fetch quota utilization"
 msgstr "Fetch quota utilisation"
 
-msgid "Foreman Plug-in to manage resource usage among users."
-msgstr "Foreman Plug-in to manage resource usage among users."
+msgid "Foreman plugin to manage resource usage among users."
+msgstr ""
 
 msgid "Global Resource Quota no action"
 msgstr "Global Resource Quota no action"
@@ -156,6 +156,9 @@ msgstr ""
 
 msgid "Quotas from user groups"
 msgstr "Quotas from user groups"
+
+msgid "Refresh resource quota utilization"
+msgstr ""
 
 msgid "Resource Quota"
 msgstr "Resource Quota"

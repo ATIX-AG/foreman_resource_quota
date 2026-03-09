@@ -3,7 +3,7 @@
   "locale_data": {
     "foreman_resource_quota": {
       "": {
-        "Project-Id-Version": "foreman_resource_quota 0.6.1",
+        "Project-Id-Version": "foreman_resource_quota 0.6.2",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2025-01-07 14:34+0000",
         "Language-Team": "Vietnamese (https://app.transifex.com/foreman/teams/114/vi/)",
@@ -82,7 +82,7 @@
       "Fetch quota utilization": [
         ""
       ],
-      "Foreman Plug-in to manage resource usage among users.": [
+      "Foreman plugin to manage resource usage among users.": [
         ""
       ],
       "Global Resource Quota no action": [
@@ -146,6 +146,9 @@
         ""
       ],
       "Quotas from user groups": [
+        ""
+      ],
+      "Refresh resource quota utilization": [
         ""
       ],
       "Resource Quota": [

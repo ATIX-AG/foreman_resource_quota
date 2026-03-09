@@ -3,10 +3,10 @@
   "locale_data": {
     "foreman_resource_quota": {
       "": {
-        "Project-Id-Version": "foreman_resource_quota 0.6.1",
+        "Project-Id-Version": "foreman_resource_quota 0.6.2",
         "Report-Msgid-Bugs-To": "",
         "PO-Revision-Date": "2025-01-07 14:34+0000",
-        "Last-Translator": "Efstathios Iosifidis <iefstathios@gmail.com>, 2025",
+        "Last-Translator": "Efstathios Iosifidis <eiosifidis@gmail.com>, 2025",
         "Language-Team": "Greek (https://app.transifex.com/foreman/teams/114/el/)",
         "MIME-Version": "1.0",
         "Content-Type": "text/plain; charset=UTF-8",
@@ -83,7 +83,7 @@
       "Fetch quota utilization": [
         ""
       ],
-      "Foreman Plug-in to manage resource usage among users.": [
+      "Foreman plugin to manage resource usage among users.": [
         ""
       ],
       "Global Resource Quota no action": [
@@ -147,6 +147,9 @@
         ""
       ],
       "Quotas from user groups": [
+        ""
+      ],
+      "Refresh resource quota utilization": [
         ""
       ],
       "Resource Quota": [
