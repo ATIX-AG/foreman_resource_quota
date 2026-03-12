@@ -85,7 +85,8 @@ Foreman::Plugin.register :foreman_resource_quota do
     cx.add_pagelet :main_tab_fields,
       id: :quota_hosts_tab_fields,
       resource_type: :host,
-      partial: 'hosts/form_quota_fields'
+      partial: 'hosts/form_quota_fields',
+      priority: 90
   end
 
   # Add global Foreman settings
