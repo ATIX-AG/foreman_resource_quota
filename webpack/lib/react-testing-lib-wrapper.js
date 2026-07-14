@@ -7,7 +7,6 @@ import thunk from 'redux-thunk';
 import Immutable from 'seamless-immutable';
 import { APIMiddleware, reducers as apiReducer } from 'foremanReact/redux/API';
 import { reducers as fillReducers } from 'foremanReact/components/common/Fill';
-import { reducers as foremanModalReducer } from 'foremanReact/components/ForemanModal';
 import { STATUS } from 'foremanReact/constants';
 import {
   render,
@@ -36,7 +35,6 @@ function renderWithRedux(
   // Adding the reducer in the expected namespaced format
   const combinedReducers = combineReducers({
     ...apiReducer,
-    ...foremanModalReducer,
     ...fillReducers,
   });
 
