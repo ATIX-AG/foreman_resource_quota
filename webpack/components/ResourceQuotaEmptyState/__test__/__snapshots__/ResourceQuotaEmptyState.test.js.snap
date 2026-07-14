@@ -30,6 +30,7 @@ exports[`ResourceQuotaEmptyState should render 1`] = `
     icon="pficon pficon-cluster"
     iconType="pf"
     secondaryActions={Array []}
+    variant="xl"
   />
   <Modal
     actions={Array []}
