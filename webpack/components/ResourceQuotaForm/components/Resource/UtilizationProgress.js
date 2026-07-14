@@ -14,6 +14,10 @@ import { translate as __ } from 'foremanReact/common/I18n';
 import './UtilizationProgress.scss';
 import { findLargestFittingUnit } from '../../../../helper';
 
+const UTILIZATION_DANGER_THRESHOLD = 80;
+const UTILIZATION_MAX_VALUE = 100;
+const UTILIZATION_MIN_VALUE = 0;
+
 const UtilizationProgress = ({
   cardId,
   resourceValue,
@@ -33,8 +37,9 @@ const UtilizationProgress = ({
 
   /* resource utilization bar */
   const resourceProgressVariant = () => {
-    if (resourceUtilizationPercent < 80) return null;
-    else if (resourceUtilizationPercent < 100) return ProgressVariant.warning;
+    if (resourceUtilizationPercent < UTILIZATION_DANGER_THRESHOLD) return null;
+    else if (resourceUtilizationPercent < UTILIZATION_MAX_VALUE)
+      return ProgressVariant.warning;
     return ProgressVariant.danger;
   };
 
@@ -50,7 +55,7 @@ const UtilizationProgress = ({
         </div>
       );
     } else if (resourceUtilization == null) {
-      newPercent = 0;
+      newPercent = UTILIZATION_MIN_VALUE;
       newTooltipText = (
         <div>
           <div>{__('No consumption to display.')}</div>
@@ -68,7 +73,7 @@ const UtilizationProgress = ({
       );
       const utilizationInUnit = resourceUtilization / utilizationUnit.factor;
       const valueInUnit = resourceValue / valueUnit.factor;
-      newPercent = 100;
+      newPercent = UTILIZATION_MAX_VALUE;
       newTooltipText = (
         <div>
           {`${utilizationInUnit} ${utilizationUnit.symbol} / ${valueInUnit} ${valueUnit.symbol}`}
@@ -82,7 +87,8 @@ const UtilizationProgress = ({
       );
       const utilizationInUnit = resourceUtilization / utilizationUnit.factor;
       const valueInUnit = resourceValue / valueUnit.factor;
-      const percent = (100 * resourceUtilization) / resourceValue;
+      const percent =
+        (UTILIZATION_MAX_VALUE * resourceUtilization) / resourceValue;
       if (Number.isFinite(percent)) newPercent = percent;
       else newPercent = 0;
       newTooltipText = (
