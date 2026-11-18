@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Modal, ModalVariant } from '@patternfly/react-core';
+import { ClusterIcon } from '@patternfly/react-icons';
 
 import { translate as __ } from 'foremanReact/common/I18n';
 import { getDocsURL } from 'foremanReact/common/helpers';
@@ -50,8 +51,7 @@ const ResourceQuotaEmptyState = () => {
   return (
     <div>
       <EmptyStatePattern
-        icon="pficon pficon-cluster"
-        iconType="pf"
+        icon={<ClusterIcon />}
         header={__('Resource Quotas')}
         description={description}
         action={ActionButton}

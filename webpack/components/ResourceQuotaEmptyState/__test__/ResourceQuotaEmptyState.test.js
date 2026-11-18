@@ -1,35 +1,34 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 
-import { mount, testComponentSnapshotsWithFixtures } from '@theforeman/test';
-// Notice: (not) importing Modal affects the snapshot test since it fills
-// the components data dynamically in snapshots as soon as it can find the component.
-import { Modal } from '@patternfly/react-core';
+import { render, screen, fireEvent, within } from '@testing-library/react';
 
 import { withMockedProvider, withRedux } from '../../../test_helper';
-import ResourceQuotaForm from '../../ResourceQuotaForm';
 import ResourceQuotaEmptyState from '../index';
 
 const TestComponent = withRedux(withMockedProvider(ResourceQuotaEmptyState));
 
 describe('ResourceQuotaEmptyState', () => {
-  testComponentSnapshotsWithFixtures(ResourceQuotaEmptyState, {
-    'should render': {}, // component has no props
+  test('renders the create button without an open modal', () => {
+    render(<TestComponent />);
+
+    expect(
+      screen.getByRole('button', { name: 'Create resource quota' })
+    ).toBeInTheDocument();
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   });
 
   test('opens the modal on clicking "Create resource quota" button', () => {
-    const wrapper = mount(<TestComponent />);
+    render(<TestComponent />);
 
-    expect(wrapper.find(Modal).prop('isOpen')).toBe(false); // check we provide the correct input to Modal
-    expect(wrapper.find(ResourceQuotaForm).exists()).toBe(false);
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Create resource quota' })
+    );
 
-    wrapper
-      .find('button')
-      .filterWhere(button => button.text() === 'Create resource quota')
-      .simulate('click');
-    wrapper.update();
-
-    expect(wrapper.find(Modal).prop('isOpen')).toBe(true);
-    expect(wrapper.find(ResourceQuotaForm).exists()).toBe(true);
+    const dialog = screen.getByRole('dialog');
+    expect(dialog).toBeInTheDocument();
+    expect(within(dialog).getByText('Properties')).toBeInTheDocument();
+    expect(within(dialog).getByText('Name *')).toBeInTheDocument();
+    expect(within(dialog).getByText('Description')).toBeInTheDocument();
   });
 });

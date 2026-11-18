@@ -2,7 +2,6 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
 
-import { testComponentSnapshotsWithFixtures } from '@theforeman/test';
 import LabelIcon from 'foremanReact/components/common/LabelIcon';
 
 import UnitInputField from '../UnitInputField';
@@ -21,30 +20,29 @@ const getDefaultProps = () => ({
   maxValue: 5,
 });
 
-const fixtureDefault = {
-  'should render default': {
-    ...getDefaultProps(),
-  },
-};
-
-const fixtureSingleUnit = {
-  'should render without dropdown (single unit)': {
-    ...getDefaultProps(),
-    units: [{ symbol: 'cores', factor: 1 }],
-  },
-};
-
-const fixtureDisabled = {
-  'should render as disabled field': {
-    ...getDefaultProps(),
-    isDisabled: true,
-  },
-};
-
 describe('UnitInputField', () => {
-  testComponentSnapshotsWithFixtures(UnitInputField, fixtureDefault);
-  testComponentSnapshotsWithFixtures(UnitInputField, fixtureSingleUnit);
-  testComponentSnapshotsWithFixtures(UnitInputField, fixtureDisabled);
+  it('renders the input with the initial value and unit dropdown', () => {
+    render(<UnitInputField {...getDefaultProps()} />);
+    expect(screen.getByRole('textbox')).toHaveValue('0');
+    expect(screen.getByRole('textbox')).toBeEnabled();
+    expect(screen.getByText('MiB')).toBeInTheDocument();
+  });
+
+  it('renders without dropdown for a single unit', () => {
+    render(
+      <UnitInputField
+        {...getDefaultProps()}
+        units={[{ symbol: 'cores', factor: 1 }]}
+      />
+    );
+    expect(screen.getByText('cores')).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /cores/i })).toBeNull();
+  });
+
+  it('renders as disabled field', () => {
+    render(<UnitInputField {...getDefaultProps()} isDisabled />);
+    expect(screen.getByRole('textbox')).toBeDisabled();
+  });
 
   it('triggers handleInputValidation on unit change', async () => {
     const props = getDefaultProps();
